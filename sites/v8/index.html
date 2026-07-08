@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>\\ ourvice // — IAAH v8 resurrected</title>
+<meta name="description" content="iamalwayshungry v8 (ourvice) — Flash site resurrected via Ruffle.">
+<style>
+	html, body { height: 100%; margin: 0; padding: 0; background: #ffffff; }
+	/* original used swffit('website', 970, 700): fill window, never below min */
+	#website { width: 100%; height: 100%; min-width: 970px; min-height: 700px; }
+	#website ruffle-player { width: 100%; height: 100%; display: block; }
+</style>
+</head>
+<body>
+	<div id="website"></div>
+	<script src="../../ruffle/ruffle.js"></script>
+	<script>
+		window.RufflePlayer = window.RufflePlayer || {};
+		window.RufflePlayer.config = {
+			autoplay: "on",
+			unmuteOverlay: "hidden",
+			splashScreen: false,
+			backgroundColor: "#FFFFFF",
+			contextMenu: "rightClickOnly",
+			allowScriptAccess: true,
+			allowFullscreen: true,
+			openUrlMode: "confirm",
+			logLevel: "warn"
+		};
+		window.addEventListener("DOMContentLoaded", () => {
+			const ruffle = window.RufflePlayer.newest();
+			const player = ruffle.createPlayer();
+			document.getElementById("website").appendChild(player);
+			const api = player.ruffle ? player.ruffle() : player;
+			api.load({ url: "dragable.swf" });
+		});
+	</script>
+</body>
+</html>

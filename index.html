@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IAAH™ — The Flash Years, Resurrected</title>
+<style>
+	:root { --bg: #161616; --ink: #eaeaea; --dim: #8a8a8a; --line: #2e2e2e; --accent: #ffe600; }
+	* { box-sizing: border-box; }
+	html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+	body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+	main { max-width: 780px; margin: 0 auto; padding: 9vh 24px 6vh; width: 100%; flex: 1; }
+	h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+	h1 .tm { font-size: 0.4em; vertical-align: super; }
+	p.lede { color: var(--dim); font-size: 15px; line-height: 1.6; margin: 0 0 56px; max-width: 52ch; }
+	p.lede a { color: var(--ink); }
+	ul.gens { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+	ul.gens li { border-bottom: 1px solid var(--line); }
+	ul.gens a { display: flex; align-items: baseline; gap: 20px; padding: 22px 4px; text-decoration: none; color: var(--ink); transition: background 0.15s ease, padding-left 0.2s ease; }
+	ul.gens a:hover { background: #1d1d1d; padding-left: 14px; }
+	ul.gens a:hover .num { color: var(--accent); }
+	.num { font-family: "SF Mono", Menlo, monospace; font-size: 13px; color: var(--dim); width: 3ch; flex: none; transition: color 0.15s ease; }
+	.name { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+	.meta { margin-left: auto; font-family: "SF Mono", Menlo, monospace; font-size: 11px; color: var(--dim); text-align: right; flex: none; }
+	footer { padding: 20px 24px; color: var(--dim); font-family: "SF Mono", Menlo, monospace; font-size: 11px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+	footer span b { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+	<main>
+		<h1>iamalwayshungry<span class="tm">™</span></h1>
+		<p class="lede">The Flash years — four generations of the studio site, recovered
+		from the archive and running again in a modern browser via
+		<a href="https://ruffle.rs" target="_blank" rel="noopener">Ruffle</a>.
+		No plugins, no 2006 required.</p>
+		<ul class="gens">
+			<li><a href="sites/v5/">
+				<span class="num">05</span>
+				<span class="name">IAAH v5</span>
+				<span class="meta">Flash 8 &middot; AS2 &middot; fullscreen&nbsp;noscale</span>
+			</a></li>
+			<li><a href="sites/v6/">
+				<span class="num">06</span>
+				<span class="name">IAAH v6</span>
+				<span class="meta">Flash 8 &middot; AS2 &middot; fullscreen&nbsp;noscale</span>
+			</a></li>
+			<li><a href="sites/v7/">
+				<span class="num">07</span>
+				<span class="name">IAAH v7</span>
+				<span class="meta">Flash 9 &middot; draggable&nbsp;canvas &middot; swfaddress</span>
+			</a></li>
+			<li><a href="sites/v8/">
+				<span class="num">08</span>
+				<span class="name">\\ ourvice // &nbsp;v8</span>
+				<span class="meta">Flash 10 &middot; AS3 &middot; swffit</span>
+			</a></li>
+		</ul>
+	</main>
+	<footer>
+		<span>source: <b>~/Desktop/IAAH-ARCHIVED-SITES</b> (untouched)</span>
+		<span>player: <b>ruffle</b> self-hosted</span>
+	</footer>
+</body>
+</html>

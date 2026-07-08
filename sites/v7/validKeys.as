@@ -1,0 +1,1 @@
+﻿package {	import flash.display.*	import flash.events.*;			public class validKeys extends MovieClip	{				public var myvalidKeys:Array;				public function validKeys()		{			myvalidKeys = ["forward"];							}			}		}
