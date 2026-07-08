@@ -1,0 +1,663 @@
+<?xml version="1.0"?>
+<mediaGroup>
+    <amgVersion version="1.3"></amgVersion>
+    <groupInfo>
+        <author></author>
+        <authorApplication>Adobe Lightroom 1.0 Beta 4</authorApplication>
+        <creationDate>12/23/08, 12:29:21 PM</creationDate>
+        <galleryMaker name="Adobe Flash Gallery" version="1.3"></galleryMaker>
+        <groupData groupID="" groupName=""></groupData>
+        <authorID></authorID>
+        <custom>
+            <groupTitle></groupTitle>
+            <groupDescription></groupDescription>
+            <siteTitle>FRAMES</siteTitle>
+            <contactName></contactName>
+            <contactEmail>http://www.leecrum.com</contactEmail>
+        </custom>
+    </groupInfo>
+    <sizes>
+        <imageSize size="thumb" maxwidth="96" maxheight="96"></imageSize>
+        <imageSize size="small" maxwidth="1040" maxheight="520"></imageSize>
+        <imageSize size="medium" maxwidth="1150" maxheight="650"></imageSize>
+        <imageSize size="large" maxwidth="1275" maxheight="850"></imageSize>
+    </sizes>
+    <media totalGallerySize="53">
+        <item>
+            <title>frames_042</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="0051EDAA-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_042.jpg" height="849" width="677"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_042.jpg" height="650" width="517"></rendition>
+                <rendition size="small" src="bin/images/small/frames_042.jpg" height="520" width="414"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_042.jpg" height="96" width="76"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_043</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="0057E5E8-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_043.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_043.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_043.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_043.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_044</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="005C16D6-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_044.jpg" height="850" width="822"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_044.jpg" height="650" width="628"></rendition>
+                <rendition size="small" src="bin/images/small/frames_044.jpg" height="520" width="502"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_044.jpg" height="96" width="92"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_045</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="00606F92-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_045.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_045.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_045.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_045.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_046</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="019C37B0-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_046.jpg" height="850" width="738"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_046.jpg" height="650" width="564"></rendition>
+                <rendition size="small" src="bin/images/small/frames_046.jpg" height="520" width="451"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_046.jpg" height="96" width="83"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_047</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="019FE34C-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_047.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_047.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_047.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_047.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_049</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01A30D10-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_049.jpg" height="850" width="1132"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_049.jpg" height="650" width="865"></rendition>
+                <rendition size="small" src="bin/images/small/frames_049.jpg" height="520" width="692"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_049.jpg" height="72" width="96"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_050</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01A633E6-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_050.jpg" height="850" width="1132"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_050.jpg" height="650" width="866"></rendition>
+                <rendition size="small" src="bin/images/small/frames_050.jpg" height="520" width="693"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_050.jpg" height="72" width="96"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_052</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01A9243E-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_052.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_052.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_052.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_052.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_053</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01AC565E-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_053.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_053.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_053.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_053.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_055</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01AF66A0-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_055.jpg" height="850" width="933"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_055.jpg" height="650" width="713"></rendition>
+                <rendition size="small" src="bin/images/small/frames_055.jpg" height="520" width="571"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_055.jpg" height="87" width="96"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_057</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01B2AB80-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_057.jpg" height="850" width="1132"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_057.jpg" height="650" width="866"></rendition>
+                <rendition size="small" src="bin/images/small/frames_057.jpg" height="520" width="692"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_057.jpg" height="72" width="95"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_058</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01B5CD9C-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_058.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_058.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_058.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_058.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_060</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01B92262-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_060.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_060.jpg" height="650" width="488"></rendition>
+                <rendition size="small" src="bin/images/small/frames_060.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_060.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_061</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01BC771E-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_061.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_061.jpg" height="650" width="488"></rendition>
+                <rendition size="small" src="bin/images/small/frames_061.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_061.jpg" height="95" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_077</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01C2D4BA-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_077.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_077.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_077.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_077.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_007</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="FEDEF418-D119-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_007.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_007.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_007.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_007.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_008</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="FF47D226-D119-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_008.jpg" height="850" width="583"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_008.jpg" height="650" width="445"></rendition>
+                <rendition size="small" src="bin/images/small/frames_008.jpg" height="520" width="356"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_008.jpg" height="96" width="65"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_010</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="FF4C71B4-D119-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_010.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_010.jpg" height="650" width="488"></rendition>
+                <rendition size="small" src="bin/images/small/frames_010.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_010.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_012</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="FF503452-D119-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_012.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_012.jpg" height="650" width="488"></rendition>
+                <rendition size="small" src="bin/images/small/frames_012.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_012.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_013</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="FF544240-D119-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_013.jpg" height="850" width="694"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_013.jpg" height="650" width="531"></rendition>
+                <rendition size="small" src="bin/images/small/frames_013.jpg" height="520" width="425"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_013.jpg" height="96" width="78"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_014</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="004D8D78-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_014.jpg" height="849" width="663"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_014.jpg" height="650" width="507"></rendition>
+                <rendition size="small" src="bin/images/small/frames_014.jpg" height="520" width="405"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_014.jpg" height="96" width="74"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_090</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="01C991BA-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_090.jpg" height="850" width="736"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_090.jpg" height="650" width="562"></rendition>
+                <rendition size="small" src="bin/images/small/frames_090.jpg" height="520" width="450"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_090.jpg" height="96" width="83"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_093</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="04FD554C-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_093.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_093.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_093.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_093.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_095</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="05010B6A-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_095.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_095.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_095.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_095.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_096</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="0504A8C4-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_096.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_096.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_096.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_096.jpg" height="95" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_098</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="0507FB82-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_098.jpg" height="849" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_098.jpg" height="650" width="488"></rendition>
+                <rendition size="small" src="bin/images/small/frames_098.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_098.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_100</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="050B7AB4-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_100.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_100.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_100.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_100.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_102</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="050F0742-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_102.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_102.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_102.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_102.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_104</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="0512AE06-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_104.jpg" height="850" width="1132"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_104.jpg" height="650" width="865"></rendition>
+                <rendition size="small" src="bin/images/small/frames_104.jpg" height="520" width="692"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_104.jpg" height="72" width="96"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_106</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="05162E46-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_106.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_106.jpg" height="650" width="488"></rendition>
+                <rendition size="small" src="bin/images/small/frames_106.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_106.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_107</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="051A16B4-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_107.jpg" height="850" width="1132"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_107.jpg" height="650" width="866"></rendition>
+                <rendition size="small" src="bin/images/small/frames_107.jpg" height="520" width="693"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_107.jpg" height="72" width="96"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_108</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="051DBA76-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_108.jpg" height="850" width="743"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_108.jpg" height="650" width="568"></rendition>
+                <rendition size="small" src="bin/images/small/frames_108.jpg" height="520" width="455"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_108.jpg" height="96" width="84"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_109</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="05212E7C-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_109.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_109.jpg" height="650" width="488"></rendition>
+                <rendition size="small" src="bin/images/small/frames_109.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_109.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_111</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="0524E2EC-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_111.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_111.jpg" height="650" width="488"></rendition>
+                <rendition size="small" src="bin/images/small/frames_111.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_111.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_112</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="052871F0-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_112.jpg" height="850" width="704"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_112.jpg" height="650" width="538"></rendition>
+                <rendition size="small" src="bin/images/small/frames_112.jpg" height="520" width="431"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_112.jpg" height="96" width="79"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_114</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="052C1440-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_114.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_114.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_114.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_114.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_115</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="052FA79A-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_115.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_115.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_115.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_115.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_116</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="053326E0-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_116.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_116.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_116.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_116.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_117</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="0536DA92-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_117.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_117.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_117.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_117.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_120</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="053A9394-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_120.jpg" height="850" width="1132"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_120.jpg" height="650" width="866"></rendition>
+                <rendition size="small" src="bin/images/small/frames_120.jpg" height="520" width="693"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_120.jpg" height="72" width="96"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_121</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="053E6406-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_121.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_121.jpg" height="650" width="488"></rendition>
+                <rendition size="small" src="bin/images/small/frames_121.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_121.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_122</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="05421E70-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_122.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_122.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_122.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_122.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_123</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="0545C3FE-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_123.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_123.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_123.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_123.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_124</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="05499934-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_124.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_124.jpg" height="650" width="488"></rendition>
+                <rendition size="small" src="bin/images/small/frames_124.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_124.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_125</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="054D4E12-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_125.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_125.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_125.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_125.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_126</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="05510412-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_126.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_126.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_126.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_126.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_129</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="068A1A30-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_129.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_129.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_129.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_129.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_130</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="068F4190-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_130.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_130.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_130.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_130.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_131</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="06935226-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_131.jpg" height="850" width="638"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_131.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_131.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_131.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_132</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="06971668-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_132.jpg" height="849" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_132.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_132.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_132.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_133</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="069A8852-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_133.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_133.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_133.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_133.jpg" height="95" width="72"></rendition>
+            </renditions>
+        </item>
+        <item>
+            <title>frames_134</title>
+            <description></description>
+            <imageID dbtype="Adobe Lightroom 1.0" dbname="db1234" id="069E6580-D11A-11DD-ADB9-001451038138"></imageID>
+            <mediaType category="image" format="jpeg"></mediaType>
+            <renditions>
+                <rendition size="large" src="bin/images/large/frames_134.jpg" height="850" width="637"></rendition>
+                <rendition size="medium" src="bin/images/medium/frames_134.jpg" height="650" width="487"></rendition>
+                <rendition size="small" src="bin/images/small/frames_134.jpg" height="520" width="390"></rendition>
+                <rendition size="thumb" src="bin/images/thumb/frames_134.jpg" height="96" width="72"></rendition>
+            </renditions>
+        </item>
+    </media>
+</mediaGroup>

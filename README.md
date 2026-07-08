@@ -33,6 +33,18 @@ they live on in git history.)
 | 2005 | [SITE.UPDATE 9.27.05](https://archive.iamalwayshungry.com/sites/2005-fall/) — Katrina-era front | `…/SITE.UPDATE.9.27.05/nessDelivery/latest` |
 | 2005 | [New Orleans piece](https://archive.iamalwayshungry.com/sites/2005-nola/) — 47-page photo essay | `…/CURRENT-IAAH-9.4.06/NEW-ORLEANS-PIECE/HTML` |
 
+## The client files
+
+| Year | Site | Source |
+|------|------|--------|
+| 2007 | [Lee Crum](https://archive.iamalwayshungry.com/sites/leecrum/) — New Orleans photographer, studio-engine site (main.swf/app.swf/gallery.xml, 12 galleries · 306 photos as SWFs) | `~/Desktop/LEE_CRUM_WORKING_SITE` |
+
+Lee Crum notes: expect a long dark intro (~30s) before the LEE ⊙ RUM masthead
+and the AUTO PLAY / ENTER gate appear. The working folder's `portraitgallery/`
+subfolder is an unrelated HTML gallery export that shipped without its image
+renditions — kept as-is, not linked. The `welcome.html` GoDaddy placeholder is
+kept too.
+
 Reconstruction notes: the 2005 front page (`index.html`) was reunited with its
 site body (`nessDelivery/latest/`); its `includes/` came from the same
 snapshot's `NEW/` section, and the katrina page's PDFs/movies were mirrored

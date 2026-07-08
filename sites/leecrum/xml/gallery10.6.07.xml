@@ -1,0 +1,1168 @@
+<site>
+	<allgalleries>
+
+	<!-- Temporary Disable
+
+		<gallery name="p-h-o-t-o-g-r-a-p-h-i-c" type="project"  outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="photographic/">
+
+			<photo x="410" y="142" scale="50" rotation="-93" pan="true" >
+				<file>5.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="0" scale="70" rotation="2" pan="true" >
+				<file>2.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="100" y="150" scale="70" rotation="-3" pan="true" >
+				<file>3.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="8" y="-230" scale="53" rotation="2" pan="true" >
+				<file>1.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="110" y="360" scale="57" rotation="-3" pan="true" >
+				<file>4.swf</file>
+				<txt></txt>
+			</photo>
+
+		</gallery>	
+		
+	-->
+	
+	
+		<gallery name="Exposicion Desnudas" type="project"  outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="NUDE/">
+			
+			<photo x="0" y="0" scale="90" rotation="0" pan="true" >
+				<file>0.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="20" y="-460" scale="23" rotation="0" pan="true" >
+				<file>1.swf</file>
+				<txt></txt> 
+			</photo>			
+
+			<photo x="250" y="-400" scale="23" rotation="0" pan="true" >
+				<file>2.swf</file>
+				<txt></txt>
+			</photo>	
+			
+			<photo x="420" y="-210" scale="20" rotation="0" pan="true" >
+				<file>3.swf</file>
+				<txt></txt>
+			</photo>	
+
+			<photo x="445" y="20" scale="20" rotation="0" pan="true" >
+				<file>4.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="400" y="230" scale="23" rotation="0" pan="true" >
+				<file>5.swf</file>
+				<txt></txt>
+			</photo>				
+
+			<photo x="230" y="400" scale="21" rotation="0" pan="true" >
+				<file>6.swf</file>
+				<txt></txt>
+			</photo>	
+
+			<photo x="0" y="455" scale="23" rotation="0" pan="true" >
+				<file>7.swf</file>
+				<txt></txt>
+			</photo>	
+
+			<photo x="-220" y="390" scale="22" rotation="0" pan="true" >
+				<file>8.swf</file>
+				<txt></txt>
+			</photo>				
+
+			<photo x="-410" y="225" scale="21" rotation="0" pan="true" >
+				<file>9.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="-455" y="-15" scale="26" rotation="0" pan="true" >
+				<file>10.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="-380" y="-325" scale="30" rotation="0" pan="true" >
+				<file>11.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="-180" y="-420" scale="20" rotation="0" pan="true" >
+				<file>12.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="160" y="-725" scale="28" rotation="0" pan="true" >
+				<file>13.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="400" y="-640" scale="28" rotation="0" pan="true" >
+				<file>14.swf</file>
+				<txt></txt>
+			</photo>				
+			
+			<photo x="600" y="-435" scale="31" rotation="0" pan="true" >
+				<file>15.swf</file>
+				<txt></txt>
+			</photo>				
+
+			<photo x="680" y="-160" scale="28" rotation="0" pan="true" >
+				<file>16.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="710" y="85" scale="27" rotation="0" pan="true" >
+				<file>17.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="620" y="350" scale="28" rotation="0" pan="true" >
+				<file>18.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="400" y="565" scale="26" rotation="0" pan="true" >
+				<file>19.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="135" y="670" scale="24" rotation="0" pan="true" >
+				<file>20.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="-160" y="660" scale="25" rotation="0" pan="true" >
+				<file>21.swf</file>
+				<txt></txt>
+			</photo>							
+
+			<photo x="-460" y="530" scale="30" rotation="0" pan="true" >
+				<file>22.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="-680" y="235" scale="35" rotation="0" pan="true" >
+				<file>23.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-690" y="-120" scale="30" rotation="0" pan="true" >
+				<file>24.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="-630" y="-420" scale="27" rotation="0" pan="true" >
+				<file>25.swf</file>
+				<txt></txt>
+			</photo>	
+
+			<photo x="-390" y="-640" scale="26" rotation="0" pan="true" >
+				<file>26.swf</file>
+				<txt></txt>
+			</photo>				
+
+			<photo x="-120" y="-735" scale="31" rotation="0" pan="true" >
+				<file>27.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="-950" y="-60" scale="29" rotation="0" pan="true" >
+				<file>28.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="960" y="-60" scale="29" rotation="0" pan="true" >
+				<file>29.swf</file>
+				<txt></txt>
+			</photo>
+
+						
+		</gallery>
+		
+		<gallery name="Portrait Gallery" type="project"  outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="NEW/">
+			
+			<photo x="0" y="0" scale="70" rotation="0" pan="true" >
+				<file>1-PORKCHOP.swf</file>
+				<txt>The Tap Man</txt>
+			</photo>
+
+			<photo x="-400" y="-240" scale="25" rotation="0" pan="true" >
+				<file>16-SEAN.swf</file>
+				<txt>Sean Connery</txt> 
+			</photo>			
+
+			<photo x="-400" y="-20" scale="21" rotation="0" pan="true" >
+				<file>34-TURAG.swf</file>
+				<txt>Tuareg Tribesman</txt>
+			</photo>	
+			
+			<photo x="-422" y="220" scale="31" rotation="0" pan="true" >
+				<file>3-HEATHER2.swf</file>
+				<txt>Don't Drink the Water</txt>
+			</photo>	
+
+			<photo x="473" y="-780" scale="23" rotation="0" pan="true" >
+				<file>37.MCGRAW.swf</file>
+				<txt>Tim McGraw</txt>
+			</photo>
+			
+			<photo x="-350" y="-490" scale="35" rotation="0" pan="true" >
+				<file>8-CALLACOUCH.swf</file>
+				<txt>Daydream</txt>
+			</photo>				
+
+			<photo x="-710" y="220" scale="33" rotation="0" pan="true" >
+				<file>20-COUPLE.swf</file>
+				<txt>Au Naturel at the Colony</txt>
+			</photo>	
+
+			<photo x="-700" y="-95" scale="40" rotation="0" pan="true" >
+				<file>6-CALLATABLE.swf</file>
+				<txt>Dining Alone</txt>
+			</photo>	
+			
+			<photo x="-1000" y="-95" scale="25" rotation="0" pan="true" >
+				<file>pirates.swf</file>
+				<txt>Pirate's Life</txt>
+			</photo>
+			
+			<photo x="-942" y="220" scale="25" rotation="0" pan="true" >
+				<file>38-JUKE.swf</file>
+				<txt>Back of the Club</txt>
+			</photo>	
+
+			<photo x="-730" y="-470" scale="55" rotation="0" pan="true" >
+				<file>28-CLOWN.swf</file>
+				<txt>Pacified Clowns</txt>
+			</photo>				
+
+			<photo x="-350" y="-750" scale="32" rotation="0" pan="true" >
+				<file>30-SADIE.swf</file>
+				<txt>Gilbert and George</txt>
+			</photo>
+
+			<photo x="-360" y="450" scale="27" rotation="0" pan="true" >
+				<file>7-CALLALIZARD.swf</file>
+				<txt>Discovering the Dinosaurs</txt>
+			</photo>			
+
+			<photo x="-700" y="600" scale="50" rotation="0" pan="true" >
+				<file>29-PATRICIA.swf</file>
+				<txt>Patricia Clarkson</txt>
+			</photo>			
+
+			<photo x="-320" y="680" scale="40" rotation="0" pan="true" >
+				<file>11-COAL.swf</file>
+				<txt>Hard Coal Truth</txt>
+			</photo>			
+
+			<photo x="475" y="-565" scale="26" rotation="0" pan="true" >
+				<file>25-MOODY.swf</file>
+				<txt>Moody</txt>
+			</photo>
+			
+			<photo x="-100" y="-370" scale="18" rotation="0" pan="true" >
+				<file>17-GRILLS2.swf</file>
+				<txt>Diamonds on the Grill</txt>
+			</photo>				
+			
+			<photo x="70" y="-370" scale="20" rotation="0" pan="true" >
+				<file>18-ALVIN.swf</file>
+				<txt>Barfly Romance</txt>
+			</photo>				
+
+			<photo x="-15" y="-640" scale="45" rotation="0" pan="true" >
+				<file>24-JUSTIN.swf</file>
+				<txt>Mexican Nude</txt>
+			</photo>
+			
+			<photo x="260" y="-420" scale="26" rotation="0" pan="true" >
+				<file>33-CO.swf</file>
+				<txt>Rhymin' Time</txt>
+			</photo>
+
+			<photo x="260" y="-825" scale="21" rotation="0" pan="true" >
+				<file>TRIBESMAN.swf</file>
+				<txt>Tribal Anger</txt>
+			</photo>
+			
+			<photo x="260" y="-630" scale="24" rotation="0" pan="true" >
+				<file>12-DEACON.swf</file>
+				<txt>Deacon Playing "The Saints"</txt>
+			</photo>
+			
+			<photo x="370" y="-200" scale="24" rotation="0" pan="true" >
+				<file>31-SAM+MABEL.swf</file>
+				<txt>Sal and Mabel Facing Life</txt>
+			</photo>			
+
+			<photo x="380" y="5" scale="28" rotation="0" pan="true" >
+				<file>15-ASIAN.swf</file>
+				<txt>Mr. Jimmy</txt>
+			</photo>			
+
+			<photo x="370" y="210" scale="20" rotation="0" pan="true" >
+				<file>36-VIETNAMESE.swf</file>
+				<txt>Memories of War</txt>
+			</photo>							
+
+			<photo x="-15" y="430" scale="32" rotation="0" pan="true" >
+				<file>blue2.swf</file>
+				<txt>Blue Man</txt>
+			</photo>
+
+			<photo x="-10" y="670" scale="31" rotation="0" pan="true" >
+				<file>23-ELVIS.swf</file>
+				<txt>What's Left of Elvis</txt>
+			</photo>
+			
+			<photo x="288" y="660" scale="35" rotation="0" pan="true" >
+				<file>22-MUERTO.swf</file>
+				<txt>Dio Los Muerto</txt>
+			</photo>			
+
+			<photo x="315" y="420" scale="25" rotation="0" pan="true" >
+				<file>26-VERLE.swf</file>
+				<txt>Get A Rope</txt>
+			</photo>	
+
+			<photo x="800" y="-640" scale="45" rotation="0" pan="true" >
+				<file>32-SAMWATERSON.swf</file>
+				<txt>Sam Waterson</txt>
+			</photo>				
+
+			<photo x="445" y="-380" scale="16" rotation="0" pan="true" >
+				<file>4-SARDI.swf</file>
+				<txt>Grandmother's Disappointment</txt>
+			</photo>
+
+			<photo x="570" y="-340" scale="8" rotation="0" pan="true" >
+				<file>SPORT.swf</file>
+				<txt>Hustler's Break</txt>
+			</photo>
+			
+			<photo x="570" y="-410" scale="8" rotation="0" pan="true" >
+				<file>amish.swf</file>
+				<txt>Fear of the Camera</txt>
+			</photo>
+			
+			<photo x="550" y="-220" scale="13" rotation="0" pan="true" >
+				<file>Moody2.swf</file>
+				<txt>Mapplethorpe's Favorite</txt>
+			</photo>
+
+			<photo x="760" y="-320" scale="35" rotation="0" pan="true" >
+				<file>14-NUDES.swf</file>
+				<txt>Glasnacht Nude</txt>
+			</photo>
+
+			<photo x="590" y="-53" scale="20" rotation="0" pan="true" >
+				<file>19-HEATHER.swf</file>
+				<txt>A Pond Gaze</txt>
+			</photo>
+
+			<photo x="580" y="130" scale="20" rotation="0" pan="true" >
+				<file>5-CALLA-DOOR.swf</file>
+				<txt>A Porch Veil</txt>
+			</photo>
+			
+			<photo x="570" y="330" scale="24" rotation="0" pan="true" >
+				<file>21-SMOKING.swf</file>
+				<txt>Hollow Eyes</txt>
+			</photo>			
+
+			<photo x="570" y="560" scale="29" rotation="0" pan="true" >
+				<file>27-RAY.swf</file>
+				<txt>Give Me My Cancer</txt>
+			</photo>
+			
+			<photo x="570" y="760" scale="19" rotation="0" pan="true" >
+				<file>35-CIRCUS.swf</file>
+				<txt>The Elephant Man</txt>
+			</photo>			
+
+			<photo x="870" y="-55" scale="40" rotation="0" pan="true" >
+				<file>13-MANNING.swf</file>
+				<txt>Eli & Peyton Manning</txt>
+			</photo>
+
+			<photo x="850" y="240" scale="35" rotation="0" pan="true" >
+				<file>10-MABELINE.swf</file>
+				<txt>Maybelline Eyes</txt>
+			</photo>
+			
+			<photo x="880" y="530" scale="43" rotation="0" pan="true" >
+				<file>2-ALI.swf</file>
+				<txt>Ali Larter</txt>
+			</photo>			
+
+			<photo x="-650" y="-820" scale="35" rotation="0" pan="true" >
+				<file>whiz.swf</file>
+				<txt>Whiz</txt>
+			</photo>
+			
+		</gallery>
+
+		
+		<gallery name="Retratos de Hombres" type="project"  outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="MEX01/">
+			
+			<photo x="-1400" y="600" scale="62" rotation="0" pan="true" >
+				<file>01.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-1400" y="150" scale="43" rotation="0" pan="true" >
+				<file>02.swf</file>
+				<txt></txt>
+			</photo>				
+
+			<photo x="-1400" y="-310" scale="63" rotation="0" pan="true" >
+				<file>03.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-1030" y="635" scale="44" rotation="0" pan="true" >
+				<file>04.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-1010" y="260" scale="33" rotation="0" pan="true" >
+				<file>05.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-1010" y="-115" scale="47" rotation="0" pan="true" >
+				<file>06.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="-980" y="-640" scale="77" rotation="0" pan="true" >
+				<file>07.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-710" y="635" scale="42" rotation="0" pan="true" >
+				<file>08.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-415" y="650" scale="38" rotation="0" pan="true" >
+				<file>09.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-610" y="180" scale="59" rotation="0" pan="true" >
+				<file>10.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-600" y="-350" scale="70" rotation="0" pan="true" >
+				<file>11.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="675" scale="58" rotation="0" pan="true" >
+				<file>12.swf</file>
+				<txt></txt> 
+			</photo>
+			
+			<photo x="0" y="0" scale="120" rotation="0" pan="true" >
+				<file>13.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-310" y="-575" scale="23" rotation="0" pan="true" >
+				<file>14.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="-765" scale="80" rotation="0" pan="true" >
+				<file>15.swf</file>
+				<txt></txt>
+			</photo>	
+
+			<photo x="310" y="-575" scale="23" rotation="0" pan="true" >
+				<file>16.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="415" y="650" scale="38" rotation="0" pan="true" >
+				<file>17.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="710" y="635" scale="42" rotation="0" pan="true" >
+				<file>18.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="620" y="180" scale="60" rotation="0" pan="true" >
+				<file>19.swf</file>
+				<txt></txt>
+			</photo>				
+			
+			<photo x="600" y="-350" scale="70" rotation="0" pan="true" >
+				<file>20.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="1030" y="635" scale="44" rotation="0" pan="true" >
+				<file>21.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="1010" y="215" scale="47" rotation="0" pan="true" >
+				<file>22.swf</file>
+				<txt></txt>
+			</photo>			
+			
+			<photo x="1010" y="-165" scale="39" rotation="0" pan="true" >
+				<file>23.swf</file>
+				<txt></txt>
+			</photo>							
+			
+			<photo x="980" y="-640" scale="77" rotation="0" pan="true" >
+				<file>24.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="1400" y="600" scale="62" rotation="0" pan="true" >
+				<file>25.swf</file>
+				<txt></txt>
+			</photo>	
+			
+			<photo x="1400" y="150" scale="47" rotation="0" pan="true" >
+				<file>26.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="1400" y="-310" scale="63" rotation="0" pan="true" >
+				<file>27.swf</file>
+				<txt></txt>
+			</photo>
+			
+		</gallery>
+		
+		<gallery name="Retratos de Mujeres" type="project"  outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="MEX02/">
+			
+			<photo x="-1045" y="-565" scale="70" rotation="0" pan="true" >
+				<file>01.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-1100" y="10" scale="65" rotation="0" pan="true" >
+				<file>02.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-1040" y="650" scale="85" rotation="0" pan="true" >
+				<file>03.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-507" y="820" scale="55" rotation="0" pan="true" >
+				<file>04.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-580" y="425" scale="33" rotation="0" pan="true" >
+				<file>05.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-710" y="80" scale="36" rotation="0" pan="true" >
+				<file>06.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-650" y="-290" scale="34" rotation="0" pan="true" >
+				<file>07.swf</file>
+				<txt></txt> 
+			</photo>
+			
+			<photo x="-515" y="-710" scale="55" rotation="0" pan="true" >
+				<file>08.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="-875" scale="80" rotation="0" pan="true" >
+				<file>09.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="0" scale="140" rotation="0" pan="true" >
+				<file>10.swf</file>
+				<txt></txt>
+			</photo>	
+			
+			<photo x="0" y="875" scale="80" rotation="0" pan="true" >
+				<file>11.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="507" y="820" scale="55" rotation="0" pan="true" >
+				<file>12.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="580" y="425" scale="33" rotation="0" pan="true" >
+				<file>13.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="710" y="80" scale="36" rotation="0" pan="true" >
+				<file>14.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="650" y="-290" scale="34" rotation="0" pan="true" >
+				<file>15.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="515" y="-710" scale="55" rotation="0" pan="true" >
+				<file>16.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="1045" y="-565" scale="70" rotation="0" pan="true" >
+				<file>17.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="1100" y="10" scale="65" rotation="0" pan="true" >
+				<file>18.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="1040" y="650" scale="90" rotation="0" pan="true" >
+				<file>19.swf</file>
+				<txt></txt>
+			</photo>				
+			
+		</gallery>
+		
+		<gallery name="Musicians" type="project"  outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="MUS/">
+			
+			<photo x="-710" y="-650" scale="20" rotation="0" pan="true" >
+				<file>21.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-710" y="-480" scale="20" rotation="0" pan="true" >
+				<file>10.swf</file>
+				<txt></txt>
+			</photo>				
+
+			<photo x="-452" y="-565" scale="43" rotation="0" pan="true" >
+				<file>15.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-142" y="-564" scale="41" rotation="0" pan="true" >
+				<file>18.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="172" y="-565" scale="43" rotation="0" pan="true" >
+				<file>22.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="580" y="-565" scale="45" rotation="0" pan="true" >
+				<file>13.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="-540" y="-206" scale="50" rotation="0" pan="true" >
+				<file>09.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-198" y="-308" scale="20" rotation="0" pan="true" >
+				<file>08.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-28" y="-308" scale="20" rotation="0" pan="true" >
+				<file>16.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-670" y="145" scale="38" rotation="0" pan="true" >
+				<file>12.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-410" y="145" scale="38" rotation="0" pan="true" >
+				<file>07.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-111" y="-50" scale="43" rotation="0" pan="true" >
+				<file>06.swf</file>
+				<txt></txt> 
+			</photo>
+			
+			<photo x="-730" y="390" scale="19" rotation="0" pan="true" >
+				<file>24.swf</file>
+				<txt></txt> 
+			</photo>
+			
+			<photo x="-560" y="390" scale="20" rotation="0" pan="true" >
+				<file>23.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-373" y="390" scale="20" rotation="0" pan="true" >
+				<file>01.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-111" y="300" scale="43" rotation="0" pan="true" >
+				<file>14.swf</file>
+				<txt></txt>
+			</photo>	
+
+			<photo x="255" y="-231" scale="41" rotation="0" pan="true" >
+				<file>05.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="630" y="-222" scale="44" rotation="0" pan="true" >
+				<file>11.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="165" y="38" scale="25" rotation="0" pan="true" >
+				<file>20.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="362" y="38" scale="24" rotation="0" pan="true" >
+				<file>03.swf</file>
+				<txt></txt>
+			</photo>				
+			
+			<photo x="255" y="308" scale="41" rotation="0" pan="true" >
+				<file>02.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="630" y="128" scale="44" rotation="0" pan="true" >
+				<file>17.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="539" y="392" scale="19" rotation="0" pan="true" >
+				<file>04.swf</file>
+				<txt></txt>
+			</photo>			
+			
+			<photo x="717" y="392" scale="19" rotation="0" pan="true" >
+				<file>19.swf</file>
+				<txt></txt>
+			</photo>							
+			
+									
+		</gallery>
+		
+		<gallery name="Commissioned Work" type="project"  outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="comm2/">
+			
+			<photo x="0" y="-200" scale="70" rotation="0" pan="true" >
+				<file>00.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="-600" scale="56" rotation="0" pan="true" >
+				<file>01.swf</file>
+				<txt></txt>
+			</photo>				
+
+			<photo x="-415" y="-510" scale="35" rotation="0" pan="true" >
+				<file>02.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-620" y="-700" scale="18" rotation="0" pan="true" >
+				<file>03.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-655" y="-500" scale="25" rotation="0" pan="true" >
+				<file>003.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-655" y="-278" scale="26" rotation="0" pan="true" >
+				<file>04.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-415" y="-220" scale="35" rotation="0" pan="true" >
+				<file>05.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-695" y="-49" scale="24" rotation="0" pan="true" >
+				<file>06.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-695" y="175" scale="24" rotation="0" pan="true" >
+				<file>07.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-450" y="112" scale="38" rotation="0" pan="true" >
+				<file>08.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="-622" y="470" scale="38" rotation="0" pan="true" >
+				<file>09.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-405" y="375" scale="18" rotation="0" pan="true" >
+				<file>10.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-405" y="540" scale="18" rotation="0" pan="true" >
+				<file>11.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-405" y="710" scale="18" rotation="0" pan="true" >
+				<file>12.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-160" y="508" scale="45" rotation="0" pan="true" >
+				<file>13.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-235" y="200" scale="22" rotation="0" pan="true" >
+				<file>14.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-78" y="200" scale="22" rotation="0" pan="true" >
+				<file>15.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="78" y="200" scale="22" rotation="0" pan="true" >
+				<file>16.swf</file>
+				<txt></txt> 
+			</photo>
+			
+			<photo x="235" y="200" scale="22" rotation="0" pan="true" >
+				<file>17.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="160" y="525" scale="50" rotation="0" pan="true" >
+				<file>18.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="545" y="520" scale="42" rotation="0" pan="true" >
+				<file>19.swf</file>
+				<txt></txt>
+			</photo>	
+
+			<photo x="390" y="325" scale="18" rotation="0" pan="true" >
+				<file>20.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="515" y="325" scale="16" rotation="0" pan="true" >
+				<file>21.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="445" y="85" scale="36" rotation="0" pan="true" >
+				<file>22.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="634" y="325" scale="18" rotation="0" pan="true" >
+				<file>23.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="755" y="325" scale="16" rotation="0" pan="true" >
+				<file>24.swf</file>
+				<txt></txt>
+			</photo>				
+			
+			<photo x="668" y="85" scale="31" rotation="0" pan="true" >
+				<file>25.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="435" y="-275" scale="36" rotation="0" pan="true" >
+				<file>26.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="690" y="-180" scale="23" rotation="0" pan="true" >
+				<file>27.swf</file>
+				<txt></txt>
+			</photo>			
+			
+			<photo x="690" y="-265" scale="23" rotation="0" pan="true" >
+				<file>28.swf</file>
+				<txt></txt>
+			</photo>							
+			
+			<photo x="690" y="-335" scale="23" rotation="0" pan="true" >
+				<file>29.swf</file>
+				<txt></txt>
+			</photo>
+
+			
+			<photo x="450" y="-625" scale="39" rotation="0" pan="true" >
+				<file>30.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="690" y="-445" scale="13" rotation="0" pan="true" >
+				<file>31.swf</file>
+				<txt></txt>
+			</photo>	
+			
+			<photo x="690" y="-555" scale="13" rotation="0" pan="true" >
+				<file>32.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="690" y="-665" scale="13" rotation="0" pan="true" >
+				<file>33.swf</file>
+				<txt></txt>
+			</photo>
+			
+		</gallery>
+		
+		<gallery name="State of LA Campaign" type="project"  outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="comm/">
+			
+			<photo x="-715" y="-157" scale="35" rotation="0" pan="true" >
+				<file>02.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-715" y="157" scale="35" rotation="0" pan="true" >
+				<file>03.swf</file>
+				<txt></txt>
+			</photo>				
+
+			<photo x="-355" y="0" scale="73" rotation="0" pan="true" >
+				<file>01.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="-157" scale="35" rotation="0" pan="true" >
+				<file>06.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="157" scale="35" rotation="0" pan="true" >
+				<file>09.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="370" y="0" scale="75" rotation="0" pan="true" >
+				<file>05.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="730" y="-157" scale="35" rotation="0" pan="true" >
+				<file>07.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="730" y="157" scale="35" rotation="0" pan="true" >
+				<file>04.swf</file>
+				<txt></txt>
+			</photo>
+			
+			</gallery>
+			
+			<gallery name="What's Goin' On" type="project"  outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="wgo/">
+			
+			<photo x="-740" y="-435" scale="58" rotation="0" pan="true" >
+				<file>00.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-370" y="-325" scale="35" rotation="0" pan="true" >
+				<file>01.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="-325" scale="35" rotation="0" pan="true" >
+				<file>02.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="370" y="-325" scale="35" rotation="0" pan="true" >
+				<file>03.swf</file>
+				<txt></txt>
+			</photo>				
+
+			<photo x="740" y="-325" scale="35" rotation="0" pan="true" >
+				<file>04.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-740" y="0" scale="35" rotation="0" pan="true" >
+				<file>05.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-370" y="0" scale="35" rotation="0" pan="true" >
+				<file>06.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="0" scale="35" rotation="0" pan="true" >
+				<file>07.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="370" y="0" scale="35" rotation="0" pan="true" >
+				<file>08.swf</file>
+				<txt></txt>
+			</photo>				
+
+			<photo x="740" y="0" scale="35" rotation="0" pan="true" >
+				<file>09.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-740" y="325" scale="35" rotation="0" pan="true" >
+				<file>10.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-370" y="325" scale="35" rotation="0" pan="true" >
+				<file>11.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="0" y="325" scale="35" rotation="0" pan="true" >
+				<file>12.swf</file>
+				<txt></txt>
+			</photo>			
+
+			<photo x="370" y="325" scale="35" rotation="0" pan="true" >
+				<file>13.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="740" y="440" scale="58" rotation="0" pan="true" >
+				<file>14.swf</file>
+				<txt></txt>
+			</photo>			
+
+						
+						
+		</gallery>
+		
+		
+		<gallery name="contact" type="personal" outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="CONTACT/">
+
+			<photo x="1" y="-50" scale="90" rotation="0" pan="false" > 
+				<file>contact.swf</file>
+				<txt></txt>
+
+			</photo>
+				<photo x="-10" y="460" scale="30" rotation="0" pan="false" >
+				<file>contact2.swf</file>
+				<txt></txt>
+
+			</photo>
+			
+		</gallery>
+
+
+		<gallery name="about" type="personal" outColor="0xAAAAAA" overColor="0xffffff" selectColor="0xF94B07" path="ABOUT/">
+		
+			<photo x="-105" y="-250" scale="97" rotation="0" pan="false">
+				<file>about1.swf</file>
+				<txt></txt>
+			</photo>
+
+			<photo x="-110" y="230" scale="81" rotation="0" pan="false" >
+				<file>about4.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="-110" y="540" scale="72" rotation="180" pan="false" >
+				<file>about2.swf</file>
+				<txt></txt>
+			</photo>
+			
+			<photo x="355" y="20" scale="109" rotation="90" pan="false" >
+				<file>about6.swf</file>
+				<txt></txt>
+			</photo>
+			
+
+
+
+
+	
+		</gallery>
+	
+	</allgalleries>
+
+	
+	<audioplayer>
+			<audio path="music/">
+				<item title="absolute" >
+					<file>joe1.flv</file>
+				</item>	
+				<item title="amanecer" >
+					<file>joe2.flv</file>
+				</item>	
+				<item title="luz de luna" >
+					<file>joe3.flv</file>
+				</item>					
+				<item title="corriendo" >
+					<file>joe4.flv</file>
+				</item>
+				<item title="mirando arriba" >
+					<file>joe5.flv</file>
+				</item>
+				<item title="imaginando" >
+					<file>joe6.flv</file>
+				</item>
+				<item title="fence" >
+					<file>low-fence.flv</file>
+				</item>								
+				<item title="snow" >
+					<file>low-snow.flv</file>
+				</item>	
+				<item title="low-kompletezz" >
+					<file>low-kompletezz.flv</file>
+				</item>				
+			</audio>
+	</audioplayer>
+	
+	
+</site>
