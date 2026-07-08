@@ -7,12 +7,16 @@ the original archive and running again in modern browsers via
 [Ruffle](https://ruffle.rs) — a Flash Player emulator compiled to WebAssembly.
 Nothing to install; these are the original, unmodified SWFs.
 
-| Gen | Site | Era |
-|-----|------|-----|
-| 05 | [IAAH v5](https://archive.iamalwayshungry.com/sites/v5/) | Flash 8 · AS2 |
-| 06 | [IAAH v6](https://archive.iamalwayshungry.com/sites/v6/) | Flash 8 · AS2 |
-| 07 | [IAAH v7](https://archive.iamalwayshungry.com/sites/v7/) | Flash 9 · draggable canvas |
-| 08 | [\\\\ ourvice // v8](https://archive.iamalwayshungry.com/sites/v8/) | Flash 10 · AS3 |
+| Year | Site | Era |
+|------|------|-----|
+| 2005 | [IAAH v5](https://archive.iamalwayshungry.com/sites/v5/) | Flash 8 · AS2 |
+| 2007 | [IAAH v7](https://archive.iamalwayshungry.com/sites/v7/) | Flash 9 · draggable canvas (ourvice) |
+
+Two more builds are deployed but unlisted, being duplicates of the above:
+[v6](https://archive.iamalwayshungry.com/sites/v6/) is v5 with later content
+(same design, revised nav.xml), and [v8](https://archive.iamalwayshungry.com/sites/v8/)
+is the same ourvice canvas as v7 in a later Flash 10 build — the site itself
+introduces ourvice as "a seventh iteration."
 
 ## The deep archive
 
