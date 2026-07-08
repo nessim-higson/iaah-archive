@@ -1,0 +1,77 @@
+<!-- Static resurrection of index_newspop.asp (found in the archive at
+     REFRESH/new/latest/). The three news items below are the originals,
+     hardcoded in the ASP source. Cycling logic moved client-side. -->
+<html>
+<head>
+<title>IAAH&#153; / News</title>
+<style type="text/css">
+	.content{
+		font-family : Verdana;
+		font-size : 9px;
+		color : Black;
+		line-height : 18px;
+	}
+	.contentbold{
+		font-family : Verdana;
+		font-size : 9px;
+		color : Black;
+		font-weight: bold;
+		line-height : 18px;
+	}
+</style>
+<script type="text/javascript">
+	var items = {
+		1: ["12/31/03", "Everyone have a wonderful New Year and remember - every day is a new day."],
+		2: ["12/11/03", "Launch of the temp site. Full site will be up in a month or two. In the meantime, look at Shift online - www.shift.jp.org - I am proud to have work featured in the latest 2004 calendar."],
+		3: ["12/9/03", "Nothing here - look no further. . ."]
+	};
+	var n = parseInt((location.search.match(/updates=(\d+)/) || [0, 0])[1], 10) || 0;
+	if (n == 6) { n = 0; }
+</script>
+</head>
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bottommargin="0" rightmargin="0">
+	<table width="350" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td colspan="7"><img src="images/News-POP_01.jpg" width="350" height="65"></td>
+		</tr>
+		<tr>
+			<td colspan="7" height="108"><table cellspacing="0" cellpadding="0" border="0" width="362">
+			<tr>
+			    <td rowspan="2" width="12" valign="top"><img src="images/spacer.gif" width="21" height="100" alt="" border="0"></td>
+			    <td class="contentbold" valign="top"><span id="newsdate"></span>:</td>
+			</tr>
+			<tr>
+			    <td class="content" valign="top" height="90" width="320"><span id="newsbody">&nbsp;</span></td>
+			</tr>
+			</table></td>
+		</tr>
+		<tr>
+			<td colspan="7"><img src="images/News-POP_03.jpg" width="350" height="9"></td>
+		</tr>
+		<tr>
+			<td><img src="images/News-POP_04.jpg" width="20" height="17"></td>
+			<td><a id="nextlink" href="index_newspop.html?updates=1"><img src="images/News-POP_05.jpg" width="51" height="17" border="0"></a></td>
+			<td id="prevdivider">&nbsp;</td>
+			<td id="prevcell">&nbsp;</td>
+			<td><img src="images/News-POP_08.jpg" width="184" height="17"></td>
+			<td><a href="javascript: window.close();"><img src="images/News-POP_09.jpg" width="49" height="17" border="0"></a></td>
+			<td><img src="images/News-POP_10.jpg" width="11" height="17"></td>
+		</tr>
+		<tr>
+			<td colspan="7"><img src="images/News-POP_11.jpg" width="350" height="9"></td>
+		</tr>
+	</table>
+<script type="text/javascript">
+	var item = items[n];
+	if (item) {
+		document.getElementById("newsdate").innerHTML = item[0];
+		document.getElementById("newsbody").innerHTML = item[1];
+	}
+	document.getElementById("nextlink").href = "index_newspop.html?updates=" + (n + 1);
+	if (n != 0) {
+		document.getElementById("prevdivider").innerHTML = '<img src="images/News-POP_06.jpg" width="6" height="17">';
+		document.getElementById("prevcell").innerHTML = '<a href="index_newspop.html?updates=' + (n - 1) + '"><img src="images/News-POP_07.jpg" width="29" height="17" border="0"></a>';
+	}
+</script>
+</body>
+</html>

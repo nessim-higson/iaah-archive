@@ -44,9 +44,14 @@ old-work vault. `scaleBrowser.js` for the 2009 delivery was recovered from
 to the `assest/images/` paths its XML requests. A dozen 2004-era lowercase
 references to uppercase files (`news.html`→`NEWS.html`, `la1.jpg`→`LA1.jpg`…)
 are handled by `_redirects` — macOS forgives case, Cloudflare Pages doesn't,
-and a case-insensitive filesystem can't hold both spellings. Everything else
-is byte-for-byte; PSD/FLA working files were left behind in the source
-archive, which remains untouched.
+and a case-insensitive filesystem can't hold both spellings. The 2003/04
+sites' "Recent Work" gallery and News popup were classic-ASP pages
+(`recent_index.asp`, `index_newspop.asp`); the original ASP source survived in
+the archive, so both were resurrected as static pages with the three-line
+server logic moved client-side (`recent_index.html`, `index_newspop.html`) —
+same 34-section gallery, same three hardcoded December 2003 news items.
+Everything else is byte-for-byte; PSD/FLA working files were left behind in
+the source archive, which remains untouched.
 
 Best experienced on a desktop, as it was in 2006.
 

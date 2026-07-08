@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Static resurrection of recent_index.asp (found in the archive at
+     REFRESH/new/latest/). The original was three lines of classic ASP:
+     ?section=N picks the image set, clicking advances to N+1, and
+     section 35 exits to end.html. Same logic, moved client-side. -->
+<html>
+<head>
+	<title>I A A H  |  For Temporary Use Only  |  2004</title>
+	<script type="text/javascript">
+		var section = parseInt((location.search.match(/section=(\d+)/) || [0, 1])[1], 10) || 1;
+		if (section >= 35) { location.replace("end.html"); }
+	</script>
+</head>
+
+<body bgcolor="#EDEAD9" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bottommargin="0" rightmargin="0" background="images/recent/IAAH4_04.jpg">
+<table cellspacing="0" cellpadding="0" border="0" width="100%" height="100%">
+<tr>
+    <td width="691" height="684"><map name="home">
+<area alt="back home" coords="16,14,81,54" href="index.html">
+<area id="nextlink" alt="click here to change image" shape="poly" coords="0,115,98,115,98,1,483,1,483,549,0,550" href="recent_index.html?section=2">
+</map>
+<img id="mainimg" src="images/recent/IAAH1_01.jpg" width="691" height="684" border="0" usemap="#home"></td>
+    <td id="bg2" background="images/recent/IAAH1_02.jpg" width="100%">&nbsp;</td>
+</tr>
+<tr>
+    <td id="bg3" background="images/recent/IAAH1_03.jpg">&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript">
+	document.getElementById("mainimg").src = "images/recent/IAAH" + section + "_01.jpg";
+	document.getElementById("bg2").setAttribute("background", "images/recent/IAAH" + section + "_02.jpg");
+	document.getElementById("bg3").setAttribute("background", "images/recent/IAAH" + section + "_03.jpg");
+	document.getElementById("nextlink").href = "recent_index.html?section=" + (section + 1);
+</script>
+</body>
+</html>
