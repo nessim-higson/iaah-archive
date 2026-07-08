@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lee Crum — rebuilt</title>
-<meta name="description" content="Lee Crum, New Orleans photographer. The 2007 Flash site rebuilt on the open web — same photographs, same canvas, same music, driven by the original gallery.xml data.">
+<meta name="description" content="Lee Crum, New Orleans photographer. The 2007 Flash site rebuilt on the open web — engine behavior ported from the decompiled ActionScript, photographs and music from the original files.">
 <style>
 	:root {
 		--wall: #ffffff;
@@ -13,8 +13,7 @@
 		--ink: #c8c8c6;
 		--dim: #7a7a78;
 		--red: #d21e12;
-		--orange: #cc3b16;
-		--cyan: #74d6d0;
+		--accent: #0099cc;
 		--strip: 24px;
 	}
 	* { box-sizing: border-box; }
@@ -26,15 +25,51 @@
 		color: var(--ink);
 	}
 
-	/* ================= the wall ================= */
-	#stage { position: absolute; inset: 0; cursor: grab; touch-action: none; background: var(--wall); }
-	#stage.dragging { cursor: grabbing; }
-	#field { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+	/* ================= wall + cameras ================= */
+	#stage { position: absolute; inset: 0; background: var(--wall); overflow: hidden; }
+	.camera { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+	.tar { position: absolute; left: 0; top: 0; }
 	.photo {
 		position: absolute; transform-origin: center center;
 		padding: 0; border: 0; background: none; cursor: pointer;
 	}
 	.photo img { display: block; width: 100%; height: 100%; }
+
+	/* zoom-out cursor badge (follows mouse over the bare wall when zoomed in) */
+	#zoomOutBtn {
+		position: fixed; left: 0; top: 0; z-index: 44;
+		width: 26px; height: 26px; border-radius: 50%;
+		border: 1.5px solid #9a9a97; color: #9a9a97;
+		display: grid; place-items: center;
+		font: 15px/1 "Helvetica Neue", sans-serif;
+		opacity: 0; pointer-events: none;
+		background: rgba(255,255,255,0.6);
+	}
+
+	/* caption tab — slides up from the bottom center */
+	#infoTab {
+		position: fixed; left: 50%; bottom: 0; transform: translate(-50%, 100%);
+		z-index: 46;
+		background: #111; color: #ccc;
+		font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+		padding: 8px 18px 10px;
+		transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+		white-space: nowrap;
+	}
+	#infoTab.show { transform: translate(-50%, 0); }
+
+	/* resume-slideshow hint — top right, like the original */
+	#resumeTab {
+		position: fixed; top: 0; right: 100px; z-index: 46;
+		background: #111; color: #ccc;
+		font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+		padding: 8px 14px 9px;
+		transform: translateY(-110%);
+		transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+		cursor: pointer;
+	}
+	#resumeTab.show { transform: translateY(0); }
+	#resumeTab b { color: var(--accent); font-weight: 500; }
 
 	/* ================= edge strips ================= */
 	.strip {
@@ -42,18 +77,23 @@
 		background: linear-gradient(180deg, #191918, #101010 40%, #161615);
 		cursor: pointer; user-select: none;
 	}
-	.strip::after { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(116, 214, 208, 0.55); }
+	.strip::after { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(0, 153, 204, 0.5); }
 	#stripL { left: 0; } #stripL::after { right: 0; }
 	#stripR { right: 0; } #stripR::after { left: 0; }
 	.strip .lbl {
 		position: absolute; left: 50%;
-		writing-mode: vertical-rl; transform: translateX(-50%);
+		writing-mode: vertical-rl; transform: translateX(-50%) rotate(180deg);
 		font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim);
 		white-space: nowrap;
 	}
-	#stripL .lbl.top { top: 14px; transform: translateX(-50%) rotate(180deg); }
-	#stripL .lbl.bot { bottom: 14px; color: var(--cyan); transform: translateX(-50%) rotate(180deg); }
-	#stripR .lbl.top { top: 14px; }
+	.strip .lbl.top { top: 14px; }
+	#stripL .lbl.bot { bottom: 14px; color: var(--accent); }
+	#stripR .lbl.top { transform: translateX(-50%); }
+	/* slideshow countdown fill on the right strip */
+	#timerBar {
+		position: absolute; left: 0; right: 0; bottom: 0; height: 0%;
+		background: rgba(0, 153, 204, 0.35);
+	}
 
 	/* ================= navigation panel ================= */
 	#sidenav {
@@ -62,7 +102,8 @@
 			radial-gradient(1200px 500px at -20% -10%, rgba(255,255,255,0.045), transparent 60%),
 			var(--panel);
 		padding: 44px 38px;
-		transform: translateX(0); transition: transform 0.45s cubic-bezier(.6,0,.2,1);
+		transform: translateX(0);
+		transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 		overflow: hidden;
 	}
 	#sidenav.closed { transform: translateX(calc(-100% - var(--strip))); }
@@ -80,11 +121,10 @@
 		white-space: nowrap;
 	}
 	#sidenav button:hover { color: var(--over, #ffffff); }
-	#sidenav button[aria-current="true"] { color: var(--sel, var(--orange)); }
+	#sidenav button[aria-current="true"] { color: var(--sel, #f94b07); }
 	#sidenav #contactBtn { margin-bottom: 26px; color: #b9b9b6; }
 	#sidenav #contactBtn:hover { color: #fff; }
-	#sidenav #contactBtn[aria-current="true"] { color: var(--orange); }
-	/* faint empty frames on the panel, like the original */
+	#sidenav #contactBtn[aria-current="true"] { color: #f94b07; }
 	#sidenav .deco { position: absolute; border: 10px solid rgba(0,0,0,0.5); outline: 1px solid rgba(255,255,255,0.03); pointer-events: none; }
 	#sidenav .deco.d1 { width: 150px; height: 190px; left: 26px; bottom: 190px; }
 	#sidenav .deco.d2 { width: 110px; height: 88px;  left: 205px; bottom: 250px; }
@@ -92,17 +132,17 @@
 
 	/* ================= controls panel ================= */
 	#controls {
-		position: fixed; top: 0; bottom: 0; right: var(--strip); width: 230px; z-index: 45;
+		position: fixed; top: 0; bottom: 0; right: var(--strip); width: 215px; z-index: 45;
 		background: var(--panel2);
 		padding: 40px 26px;
-		transform: translateX(0); transition: transform 0.45s cubic-bezier(.6,0,.2,1);
+		transform: translateX(0);
+		transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 		font-size: 11px; letter-spacing: 0.06em; color: var(--dim);
 	}
 	#controls.closed { transform: translateX(calc(100% + var(--strip))); }
 	#controls .row { margin-bottom: 14px; }
-	#controls .lab { color: var(--dim); }
 	#controls button { all: unset; cursor: pointer; color: var(--dim); }
-	#controls button.active { color: var(--cyan); }
+	#controls button.active { color: var(--accent); }
 	#controls button:hover { color: #fff; }
 	#controls input[type="range"] {
 		-webkit-appearance: none; appearance: none;
@@ -110,16 +150,14 @@
 	}
 	#controls input[type="range"]::-webkit-slider-thumb {
 		-webkit-appearance: none; appearance: none;
-		width: 9px; height: 9px; background: var(--cyan); border-radius: 0; cursor: pointer;
+		width: 9px; height: 9px; background: var(--accent); border-radius: 0; cursor: pointer;
 	}
-	#controls .minmax { display: flex; justify-content: space-between; font-size: 9px; color: #55555_3; color: #555553; }
+	#controls .minmax { display: flex; justify-content: space-between; font-size: 9px; color: #555553; }
 	#controls .sep { height: 26px; }
 	#tracks { margin-top: 10px; }
 	#tracks button { display: block; line-height: 1.9; letter-spacing: 0.04em; }
-	#tracks button.active { color: var(--cyan); }
-	#prevnext { margin-top: 20px; margin-bottom: 4px; color: var(--dim); }
-	#prevnext button { color: var(--dim); }
-	#prevnext button:hover { color: #fff; }
+	#tracks button.active { color: var(--accent); }
+	#prevnext { margin-top: 20px; margin-bottom: 4px; }
 
 	/* ================= entry gate ================= */
 	#gate {
@@ -135,7 +173,9 @@
 		font-size: clamp(60px, 10.5vw, 150px);
 		letter-spacing: 0.06em; line-height: 1;
 		color: #37342f; user-select: none;
+		opacity: 0; transition: opacity 2s ease;
 	}
+	#gate.ready .masthead { opacity: 1; }
 	#gate .masthead .c {
 		display: inline-grid; place-items: center;
 		width: 1.34em; height: 1.34em;
@@ -150,9 +190,11 @@
 		font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
 		color: #8f8f8c;
 		display: flex; gap: 7px; align-items: baseline;
+		opacity: 0; transition: opacity 1s ease 0.6s;
 	}
-	#gate .choices button { all: unset; cursor: pointer; font-weight: 700; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #666663; }
-	#gate .choices button.picked { color: #e8e8e5; }
+	#gate.ready .choices { opacity: 1; }
+	#gate .choices button { all: unset; cursor: pointer; font-weight: 700; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #555555; }
+	#gate .choices button.picked { color: #919191; }
 	#gate #enter { color: var(--red); margin-left: 14px; }
 	#gate #enter:hover { color: #ff2f1f; }
 
@@ -164,13 +206,17 @@
 </head>
 <body>
 
-<div id="stage"><div id="field"></div></div>
+<div id="stage"></div>
+<div id="zoomOutBtn">–</div>
+<div id="infoTab"></div>
+<div id="resumeTab"><b>resume</b>&nbsp; slideshow</div>
 
 <div class="strip" id="stripL" title="Navigation">
 	<span class="lbl top">Navigation</span>
 	<span class="lbl bot" id="curGallery"></span>
 </div>
 <div class="strip" id="stripR" title="Controls">
+	<div id="timerBar"></div>
 	<span class="lbl top">Controls</span>
 </div>
 
@@ -184,24 +230,22 @@
 
 <div id="controls" class="closed">
 	<div class="row">
-		<span class="lab">Autoplay </span>
-		<button id="apOnBtn">On</button> <span>/</span> <button id="apOffBtn" class="active">Off</button>
+		Autoplay <button id="apOnBtn">On</button> / <button id="apOffBtn" class="active">Off</button>
 	</div>
 	<div class="row">
-		<span class="lab">Delay <span id="delayVal">5</span></span>
+		Delay <span id="delayVal">5</span>
 		<input type="range" id="delay" min="5" max="15" step="1" value="5">
 		<div class="minmax"><span>5</span><span>15</span></div>
 	</div>
 	<div class="sep"></div>
 	<div class="row">
-		<span class="lab">Music </span>
-		<button id="musOnBtn">On</button> <span>/</span> <button id="musOffBtn" class="active">Off</button>
+		Music <button id="musOnBtn">On</button> / <button id="musOffBtn" class="active">Off</button>
 	</div>
 	<div class="row">
-		<span class="lab">Volume</span>
-		<input type="range" id="vol" min="0" max="100" step="1" value="75">
+		Volume
+		<input type="range" id="vol" min="0" max="100" step="1" value="40">
 	</div>
-	<div id="prevnext"><button id="prevBtn">Prev</button> <span>/</span> <button id="nextBtn">Next</button></div>
+	<div id="prevnext"><button id="prevBtn">Prev</button> / <button id="nextBtn">Next</button></div>
 	<div id="tracks"></div>
 </div>
 
@@ -219,204 +263,314 @@
 </div>
 
 <audio id="player"></audio>
+<audio id="uiOpen" src="audio/ui-open.mp3"></audio>
+<audio id="uiClose" src="audio/ui-close.mp3"></audio>
 
 <script>
 (async () => {
 	const man = await (await fetch("manifest.json")).json();
 	const galleries = man.galleries.filter(g => g.photos.some(p => p.src) && g.slug !== "contact");
 	const contact = man.galleries.find(g => g.slug === "contact");
+	const all = contact ? [...galleries, contact] : galleries;
 
 	const $ = id => document.getElementById(id);
-	const field = $("field"), stage = $("stage"), player = $("player");
+	const stage = $("stage"), player = $("player");
 	const css = c => c ? "#" + c.replace(/^0x/i, "") : null;
+	const cx = () => innerWidth / 2, cy = () => innerHeight / 2;
 
-	/* ============ camera ============ */
-	const vp = () => ({
-		w: Math.max(innerWidth, document.documentElement.clientWidth, 320),
-		h: Math.max(innerHeight, document.documentElement.clientHeight, 240)
-	});
-	const cam = { x: 0, y: 0, z: 1 };
-	let tween = null;
-	const apply = () => field.style.transform = `translate(${cam.x}px, ${cam.y}px) scale(${cam.z})`;
-	const camFor = (px, py, z) => { const v = vp(); return { x: v.w / 2 - px * z, y: v.h / 2 - py * z, z }; };
-	const easeInOut = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-	function glideTo(target, ms = 1150) {
-		if (tween) cancelAnimationFrame(tween.raf);
-		const from = { ...cam }, t0 = performance.now();
-		return new Promise(done => {
-			tween = { raf: 0 };
-			const step = now => {
-				const k = Math.min(1, (now - t0) / ms), e = easeInOut(k);
-				cam.x = from.x + (target.x - from.x) * e;
-				cam.y = from.y + (target.y - from.y) * e;
-				cam.z = from.z + (target.z - from.z) * e;
-				apply();
-				if (k < 1) tween.raf = requestAnimationFrame(step);
-				else { tween = null; done(); }
-			};
-			tween.raf = requestAnimationFrame(step);
-		});
-	}
-	function extents(p) {
-		const w = p.w * p.scale / 100, h = p.h * p.scale / 100;
-		const r = Math.abs(p.rotation % 180) * Math.PI / 180;
-		return { w: Math.abs(w * Math.cos(r)) + Math.abs(h * Math.sin(r)),
-		         h: Math.abs(w * Math.sin(r)) + Math.abs(h * Math.cos(r)) };
-	}
-	function frameTarget(p) {
-		const e = extents(p), v = vp();
-		const z = Math.min(v.w / e.w, v.h / e.h) * 0.8;
-		return camFor(p.x, p.y, Math.min(z, 100 / p.scale));
-	}
-	function overviewTarget(g) {
-		let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
-		for (const p of g.photos) {
-			if (!p.src) continue;
-			const e = extents(p);
-			x0 = Math.min(x0, p.x - e.w / 2); x1 = Math.max(x1, p.x + e.w / 2);
-			y0 = Math.min(y0, p.y - e.h / 2); y1 = Math.max(y1, p.y + e.h / 2);
-		}
-		const v = vp();
-		const z = Math.min(v.w / (x1 - x0), v.h / (y1 - y0)) * 0.86;
-		return camFor((x0 + x1) / 2, (y0 + y1) / 2, z);
-	}
-
-	/* ============ galleries ============ */
-	let current = null, focused = -1;
-	function render(g) {
-		current = g; focused = -1;
-		$("curGallery").textContent = g.slug === "contact" ? "Contact" : g.name;
-		field.innerHTML = "";
-		g.photos.forEach((p, i) => {
-			if (!p.src) return;
-			const w = p.w * p.scale / 100, h = p.h * p.scale / 100;
-			const el = document.createElement("button");
-			el.className = "photo";
-			el.style.cssText = `width:${w}px;height:${h}px;left:${p.x - w / 2}px;top:${p.y - h / 2}px;transform:rotate(${p.rotation}deg)`;
-			const img = document.createElement("img");
-			img.src = p.src; img.alt = p.txt || g.name; img.loading = "lazy"; img.draggable = false;
-			el.appendChild(img);
-			el.addEventListener("click", () => {
-				if (movedFar) return;
-				if (focused === i) toOverview(); else focusPhoto(i, true);
+	/* ======================================================
+	   MC Tween port — the site's animation system, decompiled
+	   from app.swf frame 1. Durations in seconds, per-property
+	   override, string easings, delay, callback. Default ease:
+	   easeOutExpo, exactly as the original set it.
+	   ====================================================== */
+	const EASE = {
+		linear: (t, b, c, d) => c * t / d + b,
+		easeoutexpo: (t, b, c, d) => t == d ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b,
+		easeoutcirc: (t, b, c, d) => c * Math.sqrt(1 - (t = t / d - 1) * t) + b,
+		easeinoutquad: (t, b, c, d) => (t /= d / 2) < 1 ? c / 2 * t * t + b : -c / 2 * ((--t) * (t - 2) - 1) + b
+	};
+	const tweens = [];
+	function tween(targ, props, vals, secs, ease, delay, cb) {
+		if (!secs || secs < 0.001) secs = 2;
+		const fn = EASE[(ease || "easeoutexpo").toLowerCase()] || EASE.easeoutexpo;
+		const now = performance.now();
+		props.forEach((prop, k) => {
+			// per-property override, like the original tween controller
+			for (let i = tweens.length - 1; i >= 0; i--)
+				if (tweens[i].targ === targ && tweens[i].prop === prop) tweens.splice(i, 1);
+			tweens.push({
+				targ, prop, start: undefined, end: vals[k],
+				t0: now, t1: now + secs * 1000, delay: (delay || 0) * 1000,
+				fn, cb: k === 0 ? cb : undefined
 			});
-			field.appendChild(el);
 		});
-		for (const b of $("galleryList").children) b.setAttribute("aria-current", b.dataset.slug === g.slug);
-		$("contactBtn").setAttribute("aria-current", g.slug === "contact");
-		const t = overviewTarget(g);
-		cam.x = t.x; cam.y = t.y; cam.z = t.z * 0.92;
-		apply();
-		glideTo(t, 900);
 	}
-	function focusPhoto(i, manual) {
-		const p = current.photos[i];
-		if (!p || !p.src) return;
-		focused = i;
-		if (manual) restartDwell();
-		return glideTo(frameTarget(p));
+	function stopTween(targ, props) {
+		for (let i = tweens.length - 1; i >= 0; i--)
+			if (tweens[i].targ === targ && (!props || props.includes(tweens[i].prop))) tweens.splice(i, 1);
 	}
-	const toOverview = () => { focused = -1; return glideTo(overviewTarget(current), 1000); };
+	function tick(now) {
+		for (let i = 0; i < tweens.length; i++) {
+			const t = tweens[i];
+			if (t.t0 + t.delay > now) continue;
+			if (t.start === undefined) t.start = t.targ[t.prop];
+			if (now >= t.t1 + t.delay) {
+				t.targ[t.prop] = t.end;
+				const cb = t.cb;
+				tweens.splice(i, 1); i--;
+				if (cb) cb();
+			} else {
+				t.targ[t.prop] = t.fn(now - t.delay - t.t0, t.start, t.end - t.start, t.t1 - t.t0);
+			}
+		}
+		panLoop();
+		cams.forEach(c => c.apply());
+		requestAnimationFrame(tick);
+	}
 
+	/* ======================================================
+	   Cameras — one per gallery, persistent, as in the original
+	   (createCameras). camera: x,y,z(scale%),r(deg); tar: x,y.
+	   ====================================================== */
+	const cams = [];
+	class Camera {
+		constructor(g, idx) {
+			this.g = g; this.idx = idx;
+			this.el = document.createElement("div");
+			this.el.className = "camera";
+			this.tarEl = document.createElement("div");
+			this.tarEl.className = "tar";
+			this.el.appendChild(this.tarEl);
+			stage.appendChild(this.el);
+			this.x = cx(); this.y = cy(); this.z = 0; this.r = 0;
+			this.tar = { x: 0, y: 0 };
+			this.built = false;
+			this.zTop = 10;
+		}
+		build() {
+			if (this.built) return;
+			this.built = true;
+			this.g.photos.forEach((p, i) => {
+				if (!p.src) return;
+				const w = p.w * p.scale / 100, h = p.h * p.scale / 100;
+				const el = document.createElement("button");
+				el.className = "photo";
+				el.style.cssText = `width:${w}px;height:${h}px;left:${p.x - w / 2}px;top:${p.y - h / 2}px;transform:rotate(${p.rotation}deg)`;
+				const img = document.createElement("img");
+				img.src = p.src; img.alt = p.txt || this.g.name; img.loading = "lazy"; img.draggable = false;
+				el.appendChild(img);
+				el.addEventListener("click", e => { e.stopPropagation(); photoClick(this, i, el); });
+				this.tarEl.appendChild(el);
+				p._el = el;
+			});
+		}
+		apply() {
+			this.el.style.transform = `translate(${this.x}px, ${this.y}px) rotate(${this.r}deg) scale(${this.z / 100})`;
+			this.tarEl.style.transform = `translate(${this.tar.x}px, ${this.tar.y}px)`;
+		}
+	}
+	all.forEach((g, i) => cams.push(new Camera(g, i)));
+
+	/* ======================================================
+	   Center — focus choreography, decompiled from Center.as:
+	   tar pans 2s · camera centers + counter-rotates 1s ·
+	   zoom to 100% of the photo 2s with 0.5s delay.
+	   ====================================================== */
+	let curID = 1;                 // the original opens on gallery index 1
+	let focusedId = -1, isZooming = false;
+	let pan = false, panSpeed = 0.02;
+
+	function photoClick(cam, i, el) {
+		if (cam.idx !== curID) return;
+		slideOff(true);            // a manual click stops the slideshow (PictureFrame.checkClick)
+		focusPhoto(i);
+	}
+	function focusPhoto(i) {
+		const cam = cams[curID], p = cam.g.photos[i];
+		if (!p || !p.src) return;
+		focusedId = i;
+		isZooming = true;
+		pan = false;
+		p._el.style.zIndex = ++cam.zTop;
+		const zoom = 100 / (p.scale / 100) / 1;          // 100 / (scale*0.01) → photo at its native size
+		tween(cam.tar, ["x", "y"], [-p.x, -p.y], 2);
+		tween(cam, ["r", "x", "y"], [-p.rotation, cx(), cy()], 1);
+		tween(cam, ["z"], [Math.min(zoom, 100 / (p.scale / 100))], 2, undefined, 0.5, () => {
+			isZooming = false;
+			if (!slideshowOn) { pan = true; panSpeed = 0.02; }
+			if (p.pan === false) pan = false;
+			if (cam.g.type === "project" && p.txt) showCaption(p.txt);
+		});
+		hideCaption();
+	}
+
+	/* mouse-follow pan — Center.followMouse, speed 0.02/0.01 */
+	let mx = -1, my = -1, mouseIn = false;
+	addEventListener("pointermove", e => { mx = e.clientX; my = e.clientY; mouseIn = true; });
+	document.documentElement.addEventListener("mouseleave", () => mouseIn = false);
+	function panLoop() {
+		if (!pan || isZooming) return;
+		const cam = cams[curID];
+		if (mouseIn && mx > 0 && mx < innerWidth && my > 0 && my < innerHeight) {
+			const tx = cx() - (mx - cx());
+			const ty = cy() - (my - cy());
+			cam.x += (tx - cam.x) * panSpeed;
+			cam.y += (ty - cam.y) * panSpeed;
+		}
+	}
+
+	/* background click = the original "back" plane: tiered zoom-out + resume pan */
+	stage.addEventListener("click", () => {
+		if (isZooming) return;
+		slideOff(true);
+		hideCaption();
+		const cam = cams[curID];
+		let amt = 55;
+		if (cam.z < 80) { amt = 30; panSpeed = 0.01; }
+		else { amt = 55; panSpeed = 0.02; }
+		tween(cam, ["x", "y", "z"], [cx(), cy(), amt], 1, "easeoutexpo");
+		focusedId = -1;
+		pan = true;
+	});
+
+	/* zoom-out cursor badge — follows the mouse over the bare wall when zoomed in */
+	const zBtn = $("zoomOutBtn");
+	let zPos = { x: 0, y: 0 };
+	stage.addEventListener("pointermove", e => {
+		if (e.target === stage || e.target.classList.contains("tar") || e.target.classList.contains("camera")) {
+			if (cams[curID].z > 45) zBtn.style.opacity = 1; else zBtn.style.opacity = 0;
+		} else zBtn.style.opacity = 0;
+	});
+	stage.addEventListener("pointerleave", () => zBtn.style.opacity = 0);
+	(function badgeLoop() {
+		zPos.x += (mx - zPos.x) * 0.6;
+		zPos.y += (my - 15 - zPos.y) * 0.6;
+		zBtn.style.transform = `translate(${zPos.x - 13}px, ${zPos.y - 13}px)`;
+		requestAnimationFrame(badgeLoop);
+	})();
+
+	/* caption tab */
+	function showCaption(txt) { $("infoTab").textContent = txt; $("infoTab").classList.add("show"); }
+	function hideCaption() { $("infoTab").classList.remove("show"); }
+
+	/* ======================================================
+	   Gallery switching — switchCameras + slideInNext:
+	   old wall shrinks (1s easeOutCirc), new wall enters from
+	   a random side while the old flies out the other (6s/2s).
+	   ====================================================== */
+	let lastID = 1, switching = false;
+	function switchCameras(id) {
+		if (id === curID) return;
+		slideOff(true);
+		hideCaption();
+		const oldCam = cams[curID];
+		curID = id;
+		const cam = cams[curID];
+		cam.build();
+		focusedId = -1; pan = false;
+		$("curGallery").textContent = cam.g.slug === "contact" ? "Contact" : cam.g.name;
+		for (const b of $("galleryList").children) b.setAttribute("aria-current", b.dataset.slug === cam.g.slug);
+		$("contactBtn").setAttribute("aria-current", cam.g.slug === "contact");
+		const drift = Math.round(Math.random() * 50);
+		tween(oldCam, ["z", "r"], [30, 0], 1, "easeoutcirc", 0, () => {
+			// place the new camera offscreen in a random direction; fly the old one out the other way
+			cam.z = 40; cam.r = 0; cam.tar.x = 0; cam.tar.y = 0;
+			const dir = Math.floor(Math.random() * 4);
+			stopTween(oldCam);
+			if (dir === 0)      { cam.x = innerWidth * 2;  cam.y = cy(); tween(oldCam, ["x", "y"], [-2500, cy()], 6); }
+			else if (dir === 1) { cam.x = -2500;           cam.y = cy(); tween(oldCam, ["x", "y"], [innerWidth * 2, cy()], 6); }
+			else if (dir === 2) { cam.x = cx(); cam.y = -2500;           tween(oldCam, ["x", "y"], [cx(), innerHeight * 2], 6); }
+			else                { cam.x = cx(); cam.y = innerHeight * 2; tween(oldCam, ["x", "y"], [cx(), -2500], 6); }
+			tween(cam, ["x", "y"], [cx(), cy()], 2, undefined, 0, () => { pan = true; panSpeed = 0.02; });
+		});
+		tween(oldCam.tar, ["x", "y"], [oldCam.tar.x + drift, oldCam.tar.y + drift], 1);
+		lastID = curID;
+	}
+
+	/* nav */
 	for (const g of galleries) {
 		const b = document.createElement("button");
 		b.dataset.slug = g.slug;
 		b.style.setProperty("--out", css(g.outColor) || "#9a9a97");
 		b.style.setProperty("--over", css(g.overColor) || "#ffffff");
-		b.style.setProperty("--sel", css(g.selectColor) || "#cc3b16");
+		b.style.setProperty("--sel", css(g.selectColor) || "#f94b07");
 		b.textContent = g.name;
-		b.addEventListener("click", () => { render(g); restartDwell(); });
+		b.addEventListener("click", () => switchCameras(cams.findIndex(c => c.g === g)));
 		$("galleryList").appendChild(b);
 	}
-	if (contact) $("contactBtn").addEventListener("click", () => { render(contact); restartDwell(); });
+	if (contact) $("contactBtn").addEventListener("click", () => switchCameras(cams.findIndex(c => c.g === contact)));
 
-	/* ============ panels ============ */
-	$("stripL").addEventListener("click", () => $("sidenav").classList.toggle("closed"));
-	$("stripR").addEventListener("click", () => $("controls").classList.toggle("closed"));
+	/* panels — 1s easeOutExpo slides + the original UI sounds at 48% */
+	const uiSnd = on => { const a = $(on ? "uiOpen" : "uiClose"); a.volume = 0.48; a.currentTime = 0; a.play().catch(() => {}); };
+	$("stripL").addEventListener("click", () => { const el = $("sidenav"); el.classList.toggle("closed"); uiSnd(!el.classList.contains("closed")); });
+	$("stripR").addEventListener("click", () => { const el = $("controls"); el.classList.toggle("closed"); uiSnd(!el.classList.contains("closed")); });
 
-	/* ============ drag ============ */
-	let dragging = false, movedFar = false, sx = 0, sy = 0, ox = 0, oy = 0;
-	stage.addEventListener("pointerdown", e => {
-		if (tween) { cancelAnimationFrame(tween.raf); tween = null; }
-		dragging = true; movedFar = false;
-		sx = e.clientX; sy = e.clientY; ox = cam.x; oy = cam.y;
-		stage.classList.add("dragging");
-		stage.setPointerCapture(e.pointerId);
-	});
-	stage.addEventListener("pointermove", e => {
-		if (!dragging) return;
-		const dx = e.clientX - sx, dy = e.clientY - sy;
-		if (Math.abs(dx) + Math.abs(dy) > 5) movedFar = true;
-		cam.x = ox + dx; cam.y = oy + dy;
-		apply();
-	});
-	const endDrag = () => { dragging = false; stage.classList.remove("dragging"); restartDwell(); };
-	stage.addEventListener("pointerup", endDrag);
-	stage.addEventListener("pointercancel", endDrag);
-	addEventListener("keydown", e => {
-		if (e.key === "Escape") toOverview();
-		if (e.key === "ArrowRight") stepAuto(+1, true);
-		if (e.key === "ArrowLeft") stepAuto(-1, true);
-	});
-	let resizeT = 0;
-	addEventListener("resize", () => {
-		clearTimeout(resizeT);
-		resizeT = setTimeout(() => {
-			if (!current || innerWidth < 100 || innerHeight < 100) return;
-			if (focused >= 0) glideTo(frameTarget(current.photos[focused]), 300);
-			else glideTo(overviewTarget(current), 300);
-		}, 150);
-	});
-
-	/* ============ autoplay ============ */
-	let autoplay = false, dwellTimer = 0, delayS = 5;
-	function setAutoplay(on) {
-		autoplay = on;
-		$("apOnBtn").classList.toggle("active", on);
-		$("apOffBtn").classList.toggle("active", !on);
-		restartDwell();
+	/* ======================================================
+	   Slideshow — SlideShowControls: default 5s, slider 5–15,
+	   linear countdown bar, wrap; manual click → resume hint.
+	   ====================================================== */
+	let slideshowOn = false, slideTimer = 0, delayS = 5, hintTimer = 0, barRAF = 0, barT0 = 0;
+	function slideOn() {
+		slideshowOn = true;
+		pan = false;
+		$("apOnBtn").classList.add("active"); $("apOffBtn").classList.remove("active");
+		$("resumeTab").classList.remove("show");
+		clearInterval(slideTimer);
+		slideTimer = setInterval(slideNext, delayS * 1000);
+		startBar();
+		slideNext();                          // startSlideOn focuses the current photo immediately
 	}
-	function nextIndex(dir) {
-		const n = current.photos.length;
-		let i = focused;
-		for (let k = 0; k < n; k++) { i = (i + dir + n) % n; if (current.photos[i].src) return i; }
-		return -1;
+	function slideOff(showHint) {
+		const was = slideshowOn;
+		slideshowOn = false;
+		$("apOnBtn").classList.remove("active"); $("apOffBtn").classList.add("active");
+		clearInterval(slideTimer);
+		cancelAnimationFrame(barRAF);
+		$("timerBar").style.height = "0%";
+		if (showHint && was) {
+			$("resumeTab").classList.add("show");
+			clearTimeout(hintTimer);
+			hintTimer = setTimeout(() => $("resumeTab").classList.remove("show"), 5000);
+		}
 	}
-	function stepAuto(dir, manual) { const i = nextIndex(dir); if (i >= 0) focusPhoto(i, manual); }
-	function restartDwell() {
-		clearTimeout(dwellTimer);
-		if (!autoplay) return;
-		dwellTimer = setTimeout(async function tick() {
-			if (autoplay && !dragging) { const i = nextIndex(+1); if (i >= 0) await focusPhoto(i, false); }
-			dwellTimer = setTimeout(tick, delayS * 1000);
-		}, delayS * 1000);
+	function slideNext() {
+		const n = cams[curID].g.photos.length;
+		let i = focusedId;
+		for (let k = 0; k < n; k++) { i = (i + 1) % n; if (cams[curID].g.photos[i].src) break; }
+		focusPhoto(i);
+		startBar();
 	}
-	$("apOnBtn").addEventListener("click", () => setAutoplay(true));
-	$("apOffBtn").addEventListener("click", () => setAutoplay(false));
+	function startBar() {
+		cancelAnimationFrame(barRAF); barT0 = performance.now();
+		(function fill() {
+			const k = Math.min(1, (performance.now() - barT0) / (delayS * 1000));
+			$("timerBar").style.height = (k * 100) + "%";
+			if (slideshowOn) barRAF = requestAnimationFrame(fill);
+		})();
+	}
+	$("resumeTab").addEventListener("click", () => slideOn());
+	$("apOnBtn").addEventListener("click", () => slideOn());
+	$("apOffBtn").addEventListener("click", () => slideOff(false));
 	$("delay").addEventListener("input", e => {
 		delayS = +e.target.value;
 		$("delayVal").textContent = delayS;
-		restartDwell();
+		if (slideshowOn) { clearInterval(slideTimer); slideTimer = setInterval(slideNext, delayS * 1000); startBar(); }
 	});
-	$("prevBtn").addEventListener("click", () => stepAuto(-1, true));
-	$("nextBtn").addEventListener("click", () => stepAuto(+1, true));
+	$("prevBtn").addEventListener("click", () => { slideOff(true); const n = cams[curID].g.photos.length; focusPhoto((focusedId - 1 + n) % n); });
+	$("nextBtn").addEventListener("click", () => { slideOff(true); const n = cams[curID].g.photos.length; focusPhoto((focusedId + 1) % n); });
 
-	/* ============ music — original playlist, original names ============ */
+	/* ======================================================
+	   Music — the <audioplayer> playlist from gallery.xml,
+	   volume 40 as in the original. Auto-advance, wrap.
+	   ====================================================== */
 	const tracks = [
-		["absolute",       "joe1"],
-		["amanecer",       "joe2"],
-		["luz de luna",    "joe3"],
-		["corriendo",      "joe4"],
-		["mirando arriba", "joe5"],
-		["imaginando",     "joe6"],
-		["fence",          "low-fence"],
-		["snow",           "low-snow"],
-		["low-kompletezz", "low-kompletezz"]
+		["absolute", "joe1"], ["amanecer", "joe2"], ["luz de luna", "joe3"],
+		["corriendo", "joe4"], ["mirando arriba", "joe5"], ["imaginando", "joe6"],
+		["fence", "low-fence"], ["snow", "low-snow"], ["low-kompletezz", "low-kompletezz"]
 	];
 	let trackIdx = 0, music = false;
-	function markTrack() {
-		[...$("tracks").children].forEach((b, i) => b.classList.toggle("active", i === trackIdx));
-	}
+	function markTrack() { [...$("tracks").children].forEach((b, i) => b.classList.toggle("active", i === trackIdx)); }
 	function playTrack(i) {
 		trackIdx = (i + tracks.length) % tracks.length;
 		player.src = `audio/${tracks[trackIdx][1]}.mp3`;
@@ -436,26 +590,46 @@
 		b.addEventListener("click", () => { playTrack(i); if (!music) setMusic(true); });
 		$("tracks").appendChild(b);
 	});
-	player.volume = 0.75;
+	player.volume = 0.4;
 	player.addEventListener("ended", () => playTrack(trackIdx + 1));
 	$("musOnBtn").addEventListener("click", () => setMusic(true));
 	$("musOffBtn").addEventListener("click", () => setMusic(false));
 	$("vol").addEventListener("input", e => player.volume = e.target.value / 100);
 	markTrack();
 
-	/* ============ gate ============ */
+	/* resize (guard degenerate embedded viewports) */
+	let resizeT = 0;
+	addEventListener("resize", () => {
+		clearTimeout(resizeT);
+		resizeT = setTimeout(() => {
+			if (innerWidth < 100 || innerHeight < 100) return;
+			tween(cams[curID], ["x", "y"], [cx(), cy()], 2);
+		}, 150);
+	});
+
+	/* ======================================================
+	   Gate — masthead fades in 2s; ENTER + AUTO PLAY fade in
+	   after load (0.5s / 1s delays). Enter starts music + view.
+	   ====================================================== */
 	let gateAutoplay = false;
+	setTimeout(() => $("gate").classList.add("ready"), 60);
 	$("apOn").addEventListener("click", () => { gateAutoplay = true; $("apOn").classList.add("picked"); $("apOff").classList.remove("picked"); });
 	$("apOff").addEventListener("click", () => { gateAutoplay = false; $("apOff").classList.add("picked"); $("apOn").classList.remove("picked"); });
 	$("enter").addEventListener("click", () => {
 		$("gate").classList.add("leaving");
 		setTimeout(() => $("gate").remove(), 1000);
-		setMusic(true);                          // as it was in 2007
-		setAutoplay(gateAutoplay);
-		if (gateAutoplay) stepAuto(+1, false);
+		setMusic(true);
+		if (gateAutoplay) slideOn();
 	});
 
-	render(galleries[0]);
+	/* boot — as createCameras: open on gallery 1 at 55% */
+	const start = cams[curID];
+	start.build();
+	start.z = 55; start.x = cx(); start.y = cy();
+	$("curGallery").textContent = start.g.name;
+	for (const b of $("galleryList").children) b.setAttribute("aria-current", b.dataset.slug === start.g.slug);
+	pan = true; panSpeed = 0.02;
+	requestAnimationFrame(tick);
 })();
 </script>
 </body>

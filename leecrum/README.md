@@ -13,6 +13,10 @@ ActionScript.
   excised before browsers would decode them). Frames are baked into the
   photos as shipped in 2007. Full source resolution — the SWFs carried
   ~2× the pixels they displayed, so the rebuild is retina-crisp for free.
+- `leecrum-src` (scratchpad) — the decompiled ActionScript of app.swf/main.swf
+  (JPEXS ffdec). The engine below is a port of it, not an approximation:
+  Center.as (camera choreography), SlideShowControls.as, MenuView/OptionsView,
+  the MC Tween library with its easeOutExpo default.
 - `index.html` — the whole engine, camera-canvas like the 2007 original:
   photographs affixed at their unique points on one canvas; click a photo
   and the camera glides to frame it; AUTO PLAY steps photo-to-photo; drag

@@ -8,8 +8,8 @@
 	html, body { height: 100%; margin: 0; padding: 0; background: #ffffff; overflow: hidden; }
 	/* fixed 600x549 stage — center it and let it scale up preserving aspect */
 	#flashcontent { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
-	/* native stage is 995x650; shown at half the fit-to-viewport size, centered */
-	#flashcontent ruffle-player { width: min(50vw, calc(50vh * 995 / 650)); height: min(50vh, calc(50vw * 650 / 995)); display: block; background: #ffffff; }
+	/* native stage is 995x650; shown at ~65.5% of the fit-to-viewport size, centered */
+	#flashcontent ruffle-player { width: min(65.46375vw, calc(65.46375vh * 995 / 650)); height: min(65.46375vh, calc(65.46375vw * 650 / 995)); display: block; background: #ffffff; }
 </style>
 </head>
 <body>

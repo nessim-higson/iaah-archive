@@ -9,8 +9,8 @@
 	#splash { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #ffffff; cursor: pointer; z-index: 2; }
 	#splash img { display: block; max-width: 92vw; max-height: 92vh; border: 0; }
 	#flashcontent { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: #ffffff; z-index: 1; }
-	/* native stage is 995x650; shown at half the fit-to-viewport size, centered */
-	#flashcontent ruffle-player { width: min(50vw, calc(50vh * 995 / 650)); height: min(50vh, calc(50vw * 650 / 995)); display: block; background: #ffffff; }
+	/* native stage is 995x650; shown at ~65.5% of the fit-to-viewport size, centered */
+	#flashcontent ruffle-player { width: min(65.46375vw, calc(65.46375vh * 995 / 650)); height: min(65.46375vh, calc(65.46375vw * 650 / 995)); display: block; background: #ffffff; }
 </style>
 </head>
 <body>
