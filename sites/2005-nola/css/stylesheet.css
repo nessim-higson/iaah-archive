@@ -1,0 +1,8 @@
+/* Reconstructed — the original stylesheet.css did not survive in the
+   archive. The front page relies on it for its black canvas (its body
+   tag says bgcolor="#FFFFFF", masked in 2005 by a fullscreen table);
+   every inner essay page carries the same rule inline. */
+body {
+	margin: 0px;
+	background-color: #000000;
+}
