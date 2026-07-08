@@ -13,7 +13,8 @@
 </head>
 <body>
 	<div id="website"></div>
-	<script src="../../ruffle/ruffle.js"></script>
+	<script src="swfaddress.js"></script>
+	<script src="../../ruffle/ruffle.js?v=0.4.0-2026.7.8"></script>
 	<script>
 		window.RufflePlayer = window.RufflePlayer || {};
 		window.RufflePlayer.config = {
@@ -25,7 +26,9 @@
 			allowScriptAccess: true,
 			allowFullscreen: true,
 			openUrlMode: "confirm",
-			logLevel: "warn"
+			logLevel: "warn",
+			playerVersion: 10,
+			frameRate: 30
 		};
 		window.addEventListener("DOMContentLoaded", () => {
 			const ruffle = window.RufflePlayer.newest();
