@@ -38,6 +38,7 @@ they live on in git history.)
 | Year | Site | Source |
 |------|------|--------|
 | 2007 | [Lee Crum](https://archive.iamalwayshungry.com/sites/leecrum/) — New Orleans photographer, studio-engine site (main.swf/app.swf/gallery.xml, 12 galleries · 306 photos as SWFs) | `~/Desktop/LEE_CRUM_WORKING_SITE` |
+| 2026 | [LEE Ⓒ RUM — rebuilt](https://archive.iamalwayshungry.com/leecrum/) — the same site as a native web page: 260 photographs mined out of the SWF containers, layouts driven by the original 2007 `gallery.xml` | `leecrum/` (see its README) |
 
 Lee Crum notes: expect a long dark intro (~30s) before the LEE ⊙ RUM masthead
 and the AUTO PLAY / ENTER gate appear. The working folder's `portraitgallery/`
