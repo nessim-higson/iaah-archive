@@ -1461,3 +1461,6 @@ div[data-view="Content"] .page_container { padding-top: 5.646rem; }
   .thumbnails .trow { display: block; }
   .thumbnails .thumbnail { width: 100% !important; padding: 2.6% 1.3%; }
 }
+/* scroll transition, unscoped so it also covers the collage thumbnails */
+.scroll-transition-fade { transition: transform 1s ease-in-out, opacity 0.8s ease-in-out; }
+.scroll-transition-fade.below-viewport { opacity: 0; transform: translateY(40px); }

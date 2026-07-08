@@ -22,13 +22,22 @@ for url, fn in asset_map.items():
     if m:
         hash_map[m.group(1)] = fn
 
+# freight renditions fetched alongside originals: content pages serve w1500
+# (originals stay in assets/ as the archival copy), collage thumbs serve w750
+rend = json.load(open(os.path.join(H, "renditions.json")))
+w1500_map = {h: f"w1500/{h[:8]}-{n}" for h, n in rend["w1500"].items()}
+w750_map = {h: f"w750/{h[:8]}-{n}" for h, n in rend["w750"].items()}
+
 FREIGHT = re.compile(r"(?:https?:)?//freight\.cargo\.site/[^\s\"'<>\\)]*?/i/([0-9a-f]{16,})/([^\s\"'<>\\)]+)")
 
-def localize(s, depth):
-    """Rewrite freight URLs to local asset paths. depth = dir depth of the page."""
+def localize(s, depth, renditions=False):
+    """Rewrite freight URLs to local asset paths. depth = dir depth of the page.
+    renditions=True prefers the w1500 copy where one exists."""
     prefix = "../" * depth
     def sub(m):
         h = m.group(1)
+        if renditions and h in w1500_map:
+            return prefix + "assets/" + w1500_map[h]
         if h in hash_map:
             return prefix + "assets/" + hash_map[h]
         return m.group(0)
@@ -99,7 +108,7 @@ def thumb_grid(depth):
             pr = thumbs_by_url.get(t["href"])
             if not pr or not pr["thumb"]["hash"]:
                 continue
-            fn = hash_map.get(pr["thumb"]["hash"])
+            fn = w750_map.get(pr["thumb"]["hash"]) or hash_map.get(pr["thumb"]["hash"])
             w, hgt = pr["thumb"]["width"], pr["thumb"]["height"]
             out.append(
                 f'<div class="thumbnail" style="width:{wrap_widths[t["href"]]}%">'
@@ -169,6 +178,33 @@ HEAD_TMPL = '''<!DOCTYPE html>
 {footer}
 </div>
 </div>
+<script>
+/* Cargo scroll transition: imagery below the fold fades/rises in on scroll */
+(function () {{
+  var els = document.querySelectorAll('.page_content img, .thumbnails .thumbnail');
+  var vh = window.innerHeight;
+  var pend = [];
+  els.forEach(function (el) {{
+    if (el.getBoundingClientRect().top > vh) {{
+      el.classList.add('scroll-transition-fade', 'below-viewport');
+      pend.push(el);
+    }}
+  }});
+  if (!('IntersectionObserver' in window)) {{
+    pend.forEach(function (e) {{ e.classList.remove('below-viewport'); }});
+    return;
+  }}
+  var io = new IntersectionObserver(function (entries) {{
+    entries.forEach(function (en) {{
+      if (en.isIntersecting) {{
+        en.target.classList.remove('below-viewport');
+        io.unobserve(en.target);
+      }}
+    }});
+  }}, {{ rootMargin: '0px 0px -60px 0px' }});
+  pend.forEach(function (e) {{ io.observe(e); }});
+}})();
+</script>
 </body>
 </html>
 '''
@@ -181,9 +217,11 @@ def build_page(page, idx=None):
     depth = 0 if page["is_homepage"] else 1
     prefix = "../" * depth
     content = page["content"]
-    content = localize(content, depth)
+    content = localize(content, depth, renditions=True)
     content = fix_links(content, depth)
     content = img_src_swap(content)
+    # the first image is the hero — load it eagerly, everything else stays lazy
+    content = content.replace('loading="lazy"', 'loading="eager" fetchpriority="high"', 1)
     body = render_page_container(content, page["id"], "")
 
     lc = []
@@ -256,12 +294,19 @@ div[data-view="Content"] .page_container { padding-top: 5.646rem; }
   .thumbnails .trow { display: block; }
   .thumbnails .thumbnail { width: 100% !important; padding: 2.6% 1.3%; }
 }
+/* scroll transition, unscoped so it also covers the collage thumbnails */
+.scroll-transition-fade { transition: transform 1s ease-in-out, opacity 0.8s ease-in-out; }
+.scroll-transition-fade.below-viewport { opacity: 0; transform: translateY(40px); }
 """
 open(os.path.join(OUT, "css", "site.css"), "w").write(css + PORT_CSS)
 
-# assets + fonts
+# assets + fonts (+ rendition tiers)
 for fn in os.listdir(os.path.join(H, "assets")):
     shutil.copy2(os.path.join(H, "assets", fn), os.path.join(OUT, "assets", fn))
+for tier in ("w1500", "w750"):
+    os.makedirs(os.path.join(OUT, "assets", tier), exist_ok=True)
+    for fn in os.listdir(os.path.join(H, tier)):
+        shutil.copy2(os.path.join(H, tier, fn), os.path.join(OUT, "assets", tier, fn))
 for fn in os.listdir(os.path.join(H, "fonts")):
     shutil.copy2(os.path.join(H, "fonts", fn), os.path.join(OUT, "fonts", fn))
 
