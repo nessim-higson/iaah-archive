@@ -1,0 +1,16 @@
+# Case-mismatch aliases: these 2004-era pages reference files in lowercase,
+# but the files shipped uppercase. macOS hides this; Cloudflare Pages is
+# case-sensitive. Redirects instead of file copies because the local
+# filesystem cannot hold case-variant siblings.
+/sites/2004-refresh/news.html /sites/2004-refresh/NEWS.html 301
+/sites/2004-refresh/new/work/la1.jpg /sites/2004-refresh/new/work/LA1.jpg 301
+/sites/2004-refresh/new/work/la2.jpg /sites/2004-refresh/new/work/LA2.jpg 301
+/sites/2004-refresh/new/work/la3.jpg /sites/2004-refresh/new/work/LA3.jpg 301
+/sites/2004-refresh/new/work/la4.jpg /sites/2004-refresh/new/work/LA4.jpg 301
+/sites/2004-refresh/new/work/la5.jpg /sites/2004-refresh/new/work/LA5.jpg 301
+/sites/2004-refresh/new/work/la6.jpg /sites/2004-refresh/new/work/LA6.jpg 301
+/sites/2004-refresh/new/work/ts1.jpg /sites/2004-refresh/new/work/TS1.jpg 301
+/sites/2004-refresh/new/work/ts2.jpg /sites/2004-refresh/new/work/TS2.jpg 301
+/sites/2004-refresh/new/work/tcm1.jpg /sites/2004-refresh/new/work/TCM1.jpg 301
+/sites/2004-refresh/new/work/tcm2.jpg /sites/2004-refresh/new/work/TCM2.jpg 301
+/sites/2004-refresh/new/work/tcm3.jpg /sites/2004-refresh/new/work/TCM3.jpg 301

@@ -32,11 +32,21 @@ client deliveries that never made the canon:
 
 Reconstruction notes: the 2005 front page (`index.html`) was reunited with its
 site body (`nessDelivery/latest/`); its `includes/` came from the same
-snapshot's `NEW/` section. The NOLA index had its `thoughts/` prefix flattened
-and its "back" link pointed at the museum's 2005 site (original preserved as
-`index-original.html`). `scaleBrowser.js` for the 2009 delivery was recovered
-from `IAAH-ORGANIZE/::IAAH/IAAH:07`. Everything else is byte-for-byte; PSD/FLA
-working files were left behind in the source archive, which remains untouched.
+snapshot's `NEW/` section, and the katrina page's PDFs/movies were mirrored
+into `NEW/` where it expects them (`funk.html`/`human.mov` recovered from the
+snapshot's `videoStuff/`). The NOLA index had its `thoughts/` prefix flattened,
+a 2005 `<style>`-for-`<script>` typo fixed (blanks modern parsers; original
+preserved as `index-original.html`), and its "back" links pointed at the
+museum's 2005 site. The 2004 site's `latest/` section was un-nested from
+`new/latest/` so the splash's links resolve; `shirt1/2.html` restored from the
+old-work vault. `scaleBrowser.js` for the 2009 delivery was recovered from
+`IAAH-ORGANIZE/::IAAH/IAAH:07`, and its `assest/{start,hoop}/` images mirrored
+to the `assest/images/` paths its XML requests. A dozen 2004-era lowercase
+references to uppercase files (`news.html`→`NEWS.html`, `la1.jpg`→`LA1.jpg`…)
+are handled by `_redirects` — macOS forgives case, Cloudflare Pages doesn't,
+and a case-insensitive filesystem can't hold both spellings. Everything else
+is byte-for-byte; PSD/FLA working files were left behind in the source
+archive, which remains untouched.
 
 Best experienced on a desktop, as it was in 2006.
 
