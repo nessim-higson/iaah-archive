@@ -69,6 +69,18 @@ the source archive, which remains untouched.
 
 Best experienced on a desktop, as it was in 2006.
 
+## The Cargo years
+
+| Year | Site | Source |
+|------|------|--------|
+| 2022 | [iaah.work](https://archive.iamalwayshungry.com/sites/iaah-work/) — the current studio site, ported off Cargo in its entirety (39 projects + reel, 293 assets, Quiosco + icon fonts, freeform collage homepage) | live crawl of iaah.work, 2026-07-08 |
+
+The port is fully static and self-contained — Cargo's runtime CSS was
+serialized from the live DOM, the freeform homepage layout captured from
+rendered geometry (verified sub-pixel identical), and every image and font is
+served locally. Only the Vimeo embeds stay external. Method + content model in
+[`sites/iaah-work/_port/`](sites/iaah-work/_port/README.md).
+
 ## Structure
 
 - `index.html` — the museum hub
