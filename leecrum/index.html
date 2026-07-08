@@ -27,7 +27,7 @@
 
 	/* ================= wall + cameras ================= */
 	#stage { position: absolute; inset: 0; background: var(--wall); overflow: hidden; }
-	.camera { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+	.camera { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
 	.tar { position: absolute; left: 0; top: 0; }
 	.photo {
 		position: absolute; transform-origin: center center;
@@ -325,7 +325,12 @@
 			}
 		}
 		panLoop();
-		cams.forEach(c => c.apply());
+		cams.forEach(c => {
+			c.apply();
+			const animating = tweens.some(t => t.targ === c || t.targ === c.tar);
+			const hint = animating ? "transform" : "auto";
+			if (c.el.style.willChange !== hint) c.el.style.willChange = hint;
+		});
 		requestAnimationFrame(tick);
 	}
 
