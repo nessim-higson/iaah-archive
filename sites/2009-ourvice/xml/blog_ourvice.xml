@@ -1,0 +1,304 @@
+<ourvice>
+
+
+	<mainConfig>
+		<scrimColor></scrimColor>
+		<fontAddress>assest/font/font.swf</fontAddress>
+		<menuTitle spaceBelow="10" kerning="2" fontSize="34" color="0xFFCC00" face="HelveticaNeue HeavyCond"  >ForWord</menuTitle>
+	</mainConfig>
+	<sets>
+		<menuItem  deeplink="INTRODUCTION">
+			<btn overcolor="0x66CCFF" outcolor="0xFF3399" selectcolor="0xFFCC00" spaceBelow="10" kerning="2" fontSize="24" face="TitlingGothicFB Skyline Thin" >
+				<btn><![CDATA[set1]]></btn>
+				<backGroundColor color="0xFFCC00" />
+			</btn>
+			<images>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/start/one.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/start/two.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/start/three.jpg]]></image>
+				</item>
+								
+
+			</images>
+		
+		</menuItem>	
+		<menuItem  deeplink="HOOP">
+			<btn overcolor="0x66CCFF" outcolor="0xFF3399" selectcolor="0xFFCC00" spaceBelow="10" kerning="2" fontSize="24" face="TripleCondGothic" >
+				<btn><![CDATA[set2]]></btn>
+				<backGroundColor color="0x000000" />
+			</btn>
+			<images>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/hoop/one.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/hoop/two.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/hoop/three.jpg]]></image>
+				</item>
+			
+			</images>
+		
+		</menuItem>		
+		<menuItem  deeplink="set3">
+			<btn overcolor="0x66CCFF" outcolor="0xFF3399" selectcolor="0xFFCC00" spaceBelow="10" kerning="2" fontSize="24" face="Helvetica Neue Light" >
+				<btn><![CDATA[set3]]></btn>
+				<backGroundColor color="0xffffff" />
+			</btn>
+			<images>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				
+				
+
+			</images>
+		
+		</menuItem>		
+		<menuItem  deeplink="set4">
+			<btn overcolor="0x66CCFF" outcolor="0xFF3399" selectcolor="0xFFCC00" spaceBelow="10" kerning="2" fontSize="24" face="Gotham-Medium" >
+				<btn><![CDATA[set4]]></btn>
+				<backGroundColor color="0x333333" />
+			</btn>
+			<images>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				
+
+			</images>
+		
+		</menuItem>	
+		<menuItem  deeplink="set5">
+			<btn overcolor="0x66CCFF" outcolor="0xFF3399" selectcolor="0xFFCC00" spaceBelow="10" kerning="2" fontSize="24" face="Gotham-Medium" >
+				<btn><![CDATA[set5]]></btn>
+				<backGroundColor color="0xFFCC00" />
+			</btn>
+			<images>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				
+
+			</images>
+		
+		</menuItem>	
+		<menuItem  deeplink="set6">
+			<btn overcolor="0x66CCFF" outcolor="0xFF3399" selectcolor="0xFFCC00" spaceBelow="10" kerning="2" fontSize="24" face="HelveticaNeue HeavyCondObl" >
+				<btn><![CDATA[set6]]></btn>
+				<backGroundColor color="0x999999" />
+			</btn>
+			<images>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				
+
+			</images>
+		
+		</menuItem>		
+		<menuItem  deeplink="set7">
+			<btn overcolor="0x66CCFF" outcolor="0xFF3399" selectcolor="0xFFCC00" spaceBelow="10" kerning="2" fontSize="24" face="Gotham-Medium" >
+				<btn><![CDATA[set7]]></btn>
+				<backGroundColor color="0xFFCC00" />
+			</btn>
+			<images>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/stache_.png]]></image>
+				</item>
+				
+				
+
+			</images>
+		
+		</menuItem>		
+		<menuItem  deeplink="set8">
+			<btn overcolor="0x66CCFF" outcolor="0xFF3399" selectcolor="0xFFCC00" spaceBelow="10" kerning="2" fontSize="24" face="Gotham-Medium" >
+				<btn><![CDATA[set8]]></btn>
+				<backGroundColor color="0xFFCC00" />
+			</btn>
+			<images>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img1.jpg]]></image>
+				</item>
+				
+
+			</images>
+		
+		</menuItem>		
+			<menuItem  deeplink="set9">
+			<btn overcolor="0x66CCFF" outcolor="0xFF3399" selectcolor="0xFFCC00" spaceBelow="10" kerning="2" fontSize="24" face="Gotham-Medium" >
+				<btn><![CDATA[set9]]></btn>
+				<backGroundColor color="0xFFCC00" />
+			</btn>
+			<images>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				<item focusX="100"  focusY="100">
+					<image><![CDATA[assest/images/img.jpg]]></image>
+				</item>
+				
+
+			</images>
+		
+		</menuItem>	
+		
+	</sets>
+	
+	
+
+</ourvice>
