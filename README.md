@@ -16,19 +16,18 @@ Nothing to install; these are the original, unmodified SWFs.
 
 ## The deep archive
 
-Seven more snapshots pulled from the backup folders (`:: IAAH_Site`,
-`IAAH-ORGANIZE`, `BACKUP-12.1.08`) — temporary fronts, working builds, and
-client deliveries that never made the canon:
+Four more snapshots pulled from the backup folders (`:: IAAH_Site`,
+`IAAH-ORGANIZE`) — the HTML years before the Flash canon. (Three Flash-era
+working builds — the 2006 `app.swf`/`use_this` builds and the 2009 ourvice
+delivery_d — were exhibited briefly and culled as too close to the canon;
+they live on in git history.)
 
 | Year | Site | Source in archive |
 |------|------|-------------------|
-| 2003 | [For Temporary Use Only](https://archive.iamalwayshungry.com/sites/2003-temp/) · [splash](https://archive.iamalwayshungry.com/sites/2003-temp/splash/) | `…/IAAH-web/Temporary site/IAAH-Cut/working` |
+| 2003 | [For Temporary Use Only](https://archive.iamalwayshungry.com/sites/2003-temp/) · [splash](https://archive.iamalwayshungry.com/sites/2003-temp/splash/) · [remastered probe](https://archive.iamalwayshungry.com/sites/2003-temp/remastered/) | `…/IAAH-web/Temporary site/IAAH-Cut/working` |
 | 2004 | [REFRESH](https://archive.iamalwayshungry.com/sites/2004-refresh/) — 73-page HTML site w/ old-work vault | `…/FUCKITY FUCK - SITE/REFRESH` |
 | 2005 | [SITE.UPDATE 9.27.05](https://archive.iamalwayshungry.com/sites/2005-fall/) — Katrina-era front | `…/SITE.UPDATE.9.27.05/nessDelivery/latest` |
 | 2005 | [New Orleans piece](https://archive.iamalwayshungry.com/sites/2005-nola/) — 47-page photo essay | `…/CURRENT-IAAH-9.4.06/NEW-ORLEANS-PIECE/HTML` |
-| 2006 | [IAAH_site spring build](https://archive.iamalwayshungry.com/sites/2006-app/) — unreleased `app.swf` | `…/BCKP/IAAH_site` |
-| 2006 | [use_this 9.4.06](https://archive.iamalwayshungry.com/sites/2006-fall/) — working `main.swf` | `…/CURRENT-IAAH-9.4.06/use_this` |
-| 2009 | [ourvice final delivery](https://archive.iamalwayshungry.com/sites/2009-ourvice/) — delivery_d, 4.24.09 | `…/BACKUP-12.1.08/IAAH-V7/IAAH-WORKING/delivery_d` |
 
 Reconstruction notes: the 2005 front page (`index.html`) was reunited with its
 site body (`nessDelivery/latest/`); its `includes/` came from the same
@@ -39,9 +38,7 @@ a 2005 `<style>`-for-`<script>` typo fixed (blanks modern parsers; original
 preserved as `index-original.html`), and its "back" links pointed at the
 museum's 2005 site. The 2004 site's `latest/` section was un-nested from
 `new/latest/` so the splash's links resolve; `shirt1/2.html` restored from the
-old-work vault. `scaleBrowser.js` for the 2009 delivery was recovered from
-`IAAH-ORGANIZE/::IAAH/IAAH:07`, and its `assest/{start,hoop}/` images mirrored
-to the `assest/images/` paths its XML requests. A dozen 2004-era lowercase
+old-work vault. A dozen 2004-era lowercase
 references to uppercase files (`news.html`→`NEWS.html`, `la1.jpg`→`LA1.jpg`…)
 are handled by `_redirects` — macOS forgives case, Cloudflare Pages doesn't,
 and a case-insensitive filesystem can't hold both spellings. The 2003/04
