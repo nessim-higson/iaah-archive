@@ -5,7 +5,7 @@ Reads:  harvest/model.json, harvest/layout_live.json, harvest/base_css_dump.css,
         member.css, harvest/asset_map.json, harvest/assets/, harvest/fonts/
 Writes: <repo>/sites/iaah-work/  (homepage + 39 project pages + css/assets/fonts)
 """
-import json, re, os, shutil, html as htmlmod
+import json, re, os, shutil, html as htmlmod, urllib.parse
 
 SP = os.path.dirname(os.path.abspath(__file__))
 H = os.path.join(SP, "harvest")
@@ -71,16 +71,95 @@ def render_page_container(content, did, classes, style=""):
 </div>'''
 
 def img_src_swap(s):
-    """data-src -> src, add lazy loading; honor Cargo's data-scale (% width)."""
+    """data-src -> src + lazy loading, then Cargo's sizing rules:
+    - data-scale=N  -> width N% of container, never upscaled past natural
+    - otherwise     -> width = min(container, natural)  (Cargo elementresizer)
+    Tags that already carry a style= (set by the gallery renderer) are left
+    untouched — gallery placement supersedes these rules."""
     s = re.sub(r'<img([^>]*?)\sdata-src="([^"]+)"', r'<img\1 loading="lazy" src="\2"', s)
-    def scale(m):
+    def size(m):
         tag = m.group(0)
-        pct = m.group(1)
         if 'style="' in tag:
-            return tag.replace('style="', f'style="width:{pct}%;', 1)
-        return tag[:-1] + f' style="width:{pct}%">'
-    s = re.sub(r'<img[^>]*data-scale="(\d+)"[^>]*>', scale, s)
+            return tag
+        ds = re.search(r'data-scale="(\d+)"', tag)
+        wo = re.search(r'width_o="(\d+)"', tag)
+        if ds:
+            cap = f';max-width:{wo.group(1)}px' if wo else ""
+            style = f"width:{ds.group(1)}%{cap}"
+        elif wo:
+            style = f"width:100%;max-width:{wo.group(1)}px;height:auto"
+        else:
+            return tag
+        return re.sub(r"\s*/?>$", f' style="{style}">', tag)
+    s = re.sub(r"<img[^>]*>", size, s)
     return s
+
+def render_galleries(s):
+    """Replace Cargo <div class="image-gallery" data-gallery="..."> blocks
+    (laid out by Cargo JS on the live site) with statically positioned markup.
+    meta_data percentages are relative to the gallery container; y and the
+    container height share width-relative units."""
+    out, pos = [], 0
+    for g in re.finditer(r'<div class="image-gallery" data-gallery="([^"]+)">', s):
+        d = json.loads(urllib.parse.unquote(g.group(1)))
+        close = s.index("</div>", g.end())
+        inner = s[g.end():close]
+        imgs = re.findall(r"<img[^>]*>", inner)
+        out.append(s[pos:g.start()])
+        out.append(render_gallery(d, imgs))
+        pos = close + len("</div>")
+    out.append(s[pos:])
+    return "".join(out)
+
+def gal_img(tag, style):
+    """Prepare a gallery child img: gallery placement owns sizing, so strip
+    data-scale and pin an explicit style (img_src_swap skips styled tags)."""
+    tag = re.sub(r'\s*data-scale="\d+"', "", tag)
+    return re.sub(r"\s*/?>$", f' style="{style}">', tag)
+
+def render_gallery(d, imgs):
+    data = d.get("data") or {}
+    md = data.get("meta_data") or {}
+    mode = d.get("mode_id")
+    has_xy = any(("x" in v or "y" in v) for v in md.values())
+    if mode in (4, 5) and md and has_xy:  # montessori: absolute % placement
+        maxy = data.get("max_y") or data.get("height") or 100
+        kids = []
+        for i, tag in enumerate(imgs):
+            m0 = md.get(str(i)) or {}
+            w, x, y = m0.get("width", 100), m0.get("x", 0), m0.get("y", 0)
+            top = (y / maxy * 100) if maxy else 0
+            kids.append(f'<div class="gal-item" style="position:absolute;'
+                        f'left:{x:.4f}%;top:{top:.4f}%;width:{w:.4f}%;'
+                        f'z-index:{m0.get("z", i + 1)}">'
+                        + gal_img(tag, "width:100%;max-width:none;height:auto;display:block")
+                        + "</div>")
+        return (f'<div class="image-gallery initialized ported" style="position:relative;'
+                f'height:0;padding-bottom:{maxy:.4f}%">' + "".join(kids) + "</div>")
+    if mode == 5:  # responsive freeform: stacked rows at natural image size,
+        # bleeding past the content column and clipped at the viewport (as live)
+        pad = float(str(data.get("image_padding") or 2))
+        kids = []
+        for t in imgs:
+            t = t.replace("assets/w1500/", "assets/")  # natural size needs the original
+            wo = re.search(r'width_o="(\d+)"', t)
+            w = f"width:{wo.group(1)}px" if wo else "width:auto"
+            kids.append(f'<div class="gal-item" style="margin-bottom:{pad}%">'
+                        + gal_img(t, f"{w};max-width:none;height:auto;display:block")
+                        + "</div>")
+        kids = "".join(kids)
+        return ('<div class="image-gallery initialized ported-rows" style="text-align:left">'
+                + kids + "</div>")
+    # columns mode (2): N per row, gaps between columns only
+    cols = int(str(data.get("columns") or 2))
+    pad = float(str(data.get("image_padding") or 1))
+    iw = (100 - pad * (cols - 1)) / cols
+    kids = "".join(f'<div class="gal-item" style="width:{iw:.4f}%;'
+                   f'margin-bottom:{pad}%">'
+                   + gal_img(t, "width:100%;max-width:none;height:auto;display:block")
+                   + "</div>" for t in imgs)
+    return ('<div class="image-gallery initialized ported" style="display:flex;'
+            'flex-wrap:wrap;justify-content:space-between">' + kids + "</div>")
 
 # ---- thumbnail rows from live geometry ----
 rows, cur, cur_top = [], [], None
@@ -219,6 +298,7 @@ def build_page(page, idx=None):
     content = page["content"]
     content = localize(content, depth, renditions=True)
     content = fix_links(content, depth)
+    content = render_galleries(content)
     content = img_src_swap(content)
     # the first image is the hero — load it eagerly, everything else stays lazy
     content = content.replace('loading="lazy"', 'loading="eager" fetchpriority="high"', 1)
@@ -282,8 +362,8 @@ bodycopy.content_padding { padding: 1.9rem; }
 /* accommodate: overlay pins reserve space at the top of the content page */
 div[data-view="Content"] .page_container { padding-top: 5.646rem; }
 .page_content img { max-width: 100%; height: auto; }
-.page_content [grid-col] img, .page_content > img { width: 100%; height: auto; }
 .page_content iframe { max-width: 100%; }
+.content_container { overflow-x: clip; }
 .header-image img { width: 100%; height: auto; display: block; }
 .thumbnails { position: relative; }
 .thumbnails .trow { display: flex; justify-content: center; align-items: center; }
@@ -297,6 +377,14 @@ div[data-view="Content"] .page_container { padding-top: 5.646rem; }
 /* scroll transition, unscoped so it also covers the collage thumbnails */
 .scroll-transition-fade { transition: transform 1s ease-in-out, opacity 0.8s ease-in-out; }
 .scroll-transition-fade.below-viewport { opacity: 0; transform: translateY(40px); }
+/* statically ported Cargo galleries (base CSS hides raw gallery children) */
+.image-gallery.ported img { display: block; width: 100%; height: auto; }
+@media (max-width: 700px) {
+  .image-gallery.ported { height: auto !important; padding-bottom: 0 !important;
+    display: block !important; }
+  .image-gallery.ported .gal-item { position: static !important;
+    width: 100% !important; margin: 0 0 4% !important; }
+}
 """
 open(os.path.join(OUT, "css", "site.css"), "w").write(css + PORT_CSS)
 

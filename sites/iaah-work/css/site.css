@@ -1449,8 +1449,8 @@ bodycopy.content_padding { padding: 1.9rem; }
 /* accommodate: overlay pins reserve space at the top of the content page */
 div[data-view="Content"] .page_container { padding-top: 5.646rem; }
 .page_content img { max-width: 100%; height: auto; }
-.page_content [grid-col] img, .page_content > img { width: 100%; height: auto; }
 .page_content iframe { max-width: 100%; }
+.content_container { overflow-x: clip; }
 .header-image img { width: 100%; height: auto; display: block; }
 .thumbnails { position: relative; }
 .thumbnails .trow { display: flex; justify-content: center; align-items: center; }
@@ -1464,3 +1464,11 @@ div[data-view="Content"] .page_container { padding-top: 5.646rem; }
 /* scroll transition, unscoped so it also covers the collage thumbnails */
 .scroll-transition-fade { transition: transform 1s ease-in-out, opacity 0.8s ease-in-out; }
 .scroll-transition-fade.below-viewport { opacity: 0; transform: translateY(40px); }
+/* statically ported Cargo galleries (base CSS hides raw gallery children) */
+.image-gallery.ported img { display: block; width: 100%; height: auto; }
+@media (max-width: 700px) {
+  .image-gallery.ported { height: auto !important; padding-bottom: 0 !important;
+    display: block !important; }
+  .image-gallery.ported .gal-item { position: static !important;
+    width: 100% !important; margin: 0 0 4% !important; }
+}
