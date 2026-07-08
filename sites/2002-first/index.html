@@ -2,25 +2,40 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>IAAH™ / the first one — resurrected</title>
-<meta name="description" content="iamalwayshungry — Nessim Higson's first Flash site, resurrected via Ruffle.">
+<title>.:: I AM ALWAYS HUNGRY ::.</title>
+<meta name="description" content="I AM ALWAYS HUNGRY — Nessim Higson's first Flash site, resurrected via Ruffle.">
 <style>
-	html, body { height: 100%; margin: 0; padding: 0; background: #101010; overflow: hidden; }
-	/* fixed 600x549 stage — center it and let it scale up preserving aspect */
-	#flashcontent { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
-	#flashcontent ruffle-player { width: min(100vw, calc(100vh * 600 / 549)); height: min(100vh, calc(100vw * 549 / 600)); display: block; }
+	html, body { height: 100%; margin: 0; padding: 0; background: #ffffff; overflow: hidden; }
+	#splash { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #ffffff; cursor: pointer; z-index: 2; }
+	#splash img { display: block; max-width: 92vw; max-height: 92vh; border: 0; }
+	#flashcontent { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: #ffffff; z-index: 1; }
+	/* native stage is 995x650; shown at half the fit-to-viewport size, centered */
+	#flashcontent ruffle-player { width: min(50vw, calc(50vh * 995 / 650)); height: min(50vh, calc(50vw * 650 / 995)); display: block; background: #ffffff; }
 </style>
 </head>
 <body>
+	<div id="splash" title="enter">
+		<img id="splashimg" alt="I Am Always Hungry — click to enter">
+	</div>
 	<div id="flashcontent"></div>
+
 	<script src="../../ruffle/ruffle.js"></script>
 	<script>
+		// The original rotated through ~12 splash graphics; pick one at random, as it did.
+		var graphics = [
+			"splsh1.jpg","splsh2.jpg","splsh3.jpg","splsh4.jpg","splsh5.jpg",
+			"splsh6.jpg","splsh7.jpg","splsh8.jpg","splsh9.jpg","splsh10.jpg",
+			"old-photo.jpg","Nutrition2.jpg"
+		];
+		document.getElementById("splashimg").src =
+			"splashgraphics/" + graphics[Math.floor(Math.random() * graphics.length)];
+
 		window.RufflePlayer = window.RufflePlayer || {};
 		window.RufflePlayer.config = {
 			autoplay: "on",
 			unmuteOverlay: "hidden",
 			splashScreen: false,
-			letterbox: "on",
+			letterbox: "off",
 			scale: "showAll",
 			forceScale: true,
 			backgroundColor: "#FFFFFF",
@@ -29,14 +44,25 @@
 			openUrlMode: "confirm",
 			logLevel: "warn"
 		};
-		window.addEventListener("DOMContentLoaded", () => {
-			const ruffle = window.RufflePlayer.newest();
-			const player = ruffle.createPlayer();
-			document.getElementById("flashcontent").appendChild(player);
-			const api = player.ruffle ? player.ruffle() : player;
-			// hmm.swf is the master timeline: it boots frontpage.swf + the who/what/where/how sections
+
+		var started = false;
+		function enter() {
+			if (started) return;
+			started = true;
+			document.getElementById("splash").style.display = "none";
+			var host = document.getElementById("flashcontent");
+			host.style.display = "flex";
+			// Create + start the player INSIDE the click gesture so the site's autoplay
+			// music is allowed and Ruffle boots reliably.
+			var ruffle = window.RufflePlayer.newest();
+			var player = ruffle.createPlayer();
+			host.appendChild(player);
+			var api = player.ruffle ? player.ruffle() : player;
+			// hmm.swf is the site's loader: it composites frontpage.swf (home) with base.swf
+			// (the who/what/where/how nav) and the section movies.
 			api.load({ url: "hmm.swf", parameters: {} });
-		});
+		}
+		document.getElementById("splash").addEventListener("click", enter);
 	</script>
 </body>
 </html>

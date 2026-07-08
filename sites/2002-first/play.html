@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>IAAH™ / the first one — resurrected</title>
+<meta name="description" content="iamalwayshungry — Nessim Higson's first Flash site, resurrected via Ruffle.">
+<style>
+	html, body { height: 100%; margin: 0; padding: 0; background: #ffffff; overflow: hidden; }
+	/* fixed 600x549 stage — center it and let it scale up preserving aspect */
+	#flashcontent { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+	/* native stage is 995x650; shown at half the fit-to-viewport size, centered */
+	#flashcontent ruffle-player { width: min(50vw, calc(50vh * 995 / 650)); height: min(50vh, calc(50vw * 650 / 995)); display: block; background: #ffffff; }
+</style>
+</head>
+<body>
+	<div id="flashcontent"></div>
+	<script src="../../ruffle/ruffle.js"></script>
+	<script>
+		window.RufflePlayer = window.RufflePlayer || {};
+		window.RufflePlayer.config = {
+			autoplay: "on",
+			unmuteOverlay: "hidden",
+			splashScreen: false,
+			letterbox: "off",
+			scale: "showAll",
+			forceScale: true,
+			backgroundColor: "#FFFFFF",
+			contextMenu: "rightClickOnly",
+			allowScriptAccess: true,
+			openUrlMode: "confirm",
+			logLevel: "warn"
+		};
+		window.addEventListener("DOMContentLoaded", () => {
+			const ruffle = window.RufflePlayer.newest();
+			const player = ruffle.createPlayer();
+			document.getElementById("flashcontent").appendChild(player);
+			const api = player.ruffle ? player.ruffle() : player;
+			// hmm.swf is the site's loader/orchestrator: it composites frontpage.swf (home) with
+			// base.swf (the who/what/where/how nav chrome) and the section movies.
+			api.load({ url: "hmm.swf", parameters: {} });
+		});
+	</script>
+</body>
+</html>
