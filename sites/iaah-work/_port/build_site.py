@@ -62,8 +62,15 @@ def render_page_container(content, did, classes, style=""):
 </div>'''
 
 def img_src_swap(s):
-    """data-src -> src, add lazy loading."""
+    """data-src -> src, add lazy loading; honor Cargo's data-scale (% width)."""
     s = re.sub(r'<img([^>]*?)\sdata-src="([^"]+)"', r'<img\1 loading="lazy" src="\2"', s)
+    def scale(m):
+        tag = m.group(0)
+        pct = m.group(1)
+        if 'style="' in tag:
+            return tag.replace('style="', f'style="width:{pct}%;', 1)
+        return tag[:-1] + f' style="width:{pct}%">'
+    s = re.sub(r'<img[^>]*data-scale="(\d+)"[^>]*>', scale, s)
     return s
 
 # ---- thumbnail rows from live geometry ----
@@ -195,7 +202,9 @@ def build_page(page, idx=None):
     if idx is not None:
         pagenav = render_page_container(pin_html("Page Nav", depth, page_nav_for(idx, depth)),
                                         pins["Page Nav"]["id"], "accommodate")
-    thumbs = thumb_grid(depth) if page["is_homepage"] else ""
+    # Cargo "project scroll": the full index collage is appended below every
+    # project too, so scrolling past a project loops back to the landing grid.
+    thumbs = thumb_grid(depth)
     title = "IAAH" if page["is_homepage"] else f'{page["title"]} - IAAH'
 
     return HEAD_TMPL.format(
