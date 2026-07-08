@@ -13,9 +13,13 @@ ActionScript.
   excised before browsers would decode them). Frames are baked into the
   photos as shipped in 2007. Full source resolution — the SWFs carried
   ~2× the pixels they displayed, so the rebuild is retina-crisp for free.
-- `index.html` — the whole engine. Drag to pan the wall (direct control,
-  no inertia), click a photo to focus, Esc/click to dismiss. Masthead
-  recreated typographically (Didot + double-ring Ⓒ).
+- `index.html` — the whole engine, camera-canvas like the 2007 original:
+  photographs affixed at their unique points on one canvas; click a photo
+  and the camera glides to frame it; AUTO PLAY steps photo-to-photo; drag
+  pans directly. Entry gate recreates the original AUTO PLAY ON/OFF · ENTER
+  screen — entering starts the music (a user gesture, so browsers allow it).
+- `audio/` — the original 17-track soundtrack, extracted from the site's
+  FLV audio streams (ffmpeg, codec copy — no re-encode).
 
 Source of truth: `iaah-revival/sites/leecrum/` (the emulated original) and
 `~/Desktop/LEE_CRUM_WORKING_SITE` (untouched). Dev server: `leecrum-modern`,

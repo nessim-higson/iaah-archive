@@ -4,11 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LEE Ⓒ RUM — rebuilt</title>
-<meta name="description" content="Lee Crum, New Orleans photographer. The 2007 Flash site rebuilt on the open web — same photographs, same layouts, driven by the original gallery.xml data.">
+<meta name="description" content="Lee Crum, New Orleans photographer. The 2007 Flash site rebuilt on the open web — same photographs, same canvas, same music, driven by the original gallery.xml data.">
 <style>
 	:root {
 		--stage: #1c1c1c;
-		--panel: #242424;
 		--ink: #b9b9b9;
 		--dim: #6f6f6f;
 		--select: #f94b07;
@@ -34,7 +33,7 @@
 	.masthead {
 		display: inline-flex; align-items: center; gap: 0.18em;
 		font-family: Didot, "Didot LT STD", "Bodoni 72", "Playfair Display", Georgia, serif;
-		font-size: clamp(34px, 6vw, 64px);
+		font-size: clamp(30px, 5vw, 56px);
 		letter-spacing: 0.08em;
 		color: #8f8f8f;
 		user-select: none;
@@ -73,7 +72,7 @@
 	nav button[aria-current="true"] { color: var(--sel, var(--select)); }
 	nav button .n { font-size: 9px; color: var(--dim); margin-left: 8px; letter-spacing: 0.1em; }
 
-	/* ---------- photo field ---------- */
+	/* ---------- camera canvas ---------- */
 	#stage {
 		position: absolute; inset: 0;
 		cursor: grab;
@@ -81,7 +80,8 @@
 	}
 	#stage.dragging { cursor: grabbing; }
 	#field {
-		position: absolute; left: 50%; top: 50%;
+		position: absolute; left: 0; top: 0;
+		transform-origin: 0 0;
 		will-change: transform;
 	}
 	.photo {
@@ -89,49 +89,68 @@
 		transform-origin: center center;
 		box-shadow: 0 14px 44px rgba(0,0,0,0.55);
 		background: var(--frame);
-		padding: 0;
-		border: 0;
+		padding: 0; border: 0;
 		cursor: pointer;
-		transition: box-shadow 0.25s ease, filter 0.25s ease;
 	}
 	.photo img {
 		display: block; width: 100%; height: 100%;
 		filter: saturate(0.96);
 	}
-	.photo:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
-	.photo:hover img { filter: saturate(1); }
 
-	/* ---------- focus mode ---------- */
-	#focus {
-		position: fixed; inset: 0; z-index: 60;
-		display: none;
-		place-items: center;
-		background: rgba(12,12,12,0.93);
-		cursor: zoom-out;
-	}
-	#focus.open { display: grid; }
-	#focus img {
-		max-width: min(92vw, 1400px); max-height: 86vh;
-		box-shadow: 0 30px 90px rgba(0,0,0,0.9);
-	}
-	#focus figcaption {
+	/* ---------- caption ---------- */
+	#caption {
 		position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
+		z-index: 40;
 		font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink);
+		opacity: 0; transition: opacity 0.4s ease;
+		pointer-events: none;
 	}
+	#caption.show { opacity: 1; }
 
-	/* ---------- footer note ---------- */
-	footer {
+	/* ---------- controls ---------- */
+	#controls {
 		position: fixed; right: 34px; bottom: 30px; z-index: 40;
 		text-align: right;
 		font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim);
-		line-height: 2;
-		pointer-events: none;
+		line-height: 2.1;
 	}
-	footer b { color: var(--ink); font-weight: 500; }
+	#controls button {
+		all: unset; cursor: pointer;
+		color: var(--dim);
+		letter-spacing: 0.18em; text-transform: uppercase; font-size: 9px;
+	}
+	#controls button b { color: var(--ink); font-weight: 500; }
+	#controls button:hover b { color: #fff; }
+	#controls .on b { color: var(--select); }
+	#controls .track { color: var(--dim); }
+	#controls .note b { color: var(--ink); }
+
+	/* ---------- entry gate ---------- */
+	#gate {
+		position: fixed; inset: 0; z-index: 100;
+		background: #141414;
+		display: grid; place-items: center;
+		transition: opacity 0.9s ease;
+	}
+	#gate.leaving { opacity: 0; pointer-events: none; }
+	#gate .inner { text-align: center; }
+	#gate .masthead { font-size: clamp(40px, 8vw, 84px); }
+	#gate .choices {
+		margin-top: 34px;
+		font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim);
+		display: flex; gap: 10px; justify-content: center; align-items: baseline;
+	}
+	#gate .choices button { all: unset; cursor: pointer; letter-spacing: 0.3em; font-size: 10px; text-transform: uppercase; }
+	#gate #apOn, #gate #apOff { color: var(--dim); }
+	#gate .picked { color: #fff !important; }
+	#gate #enter { color: var(--select); margin-left: 22px; font-weight: 600; }
+	#gate #enter:hover { color: #fff; }
+
 	@media (max-width: 700px) {
-		footer { display: none; }
 		nav { left: 22px; bottom: 22px; }
 		header { padding: 20px 22px 14px; }
+		#controls { right: 22px; bottom: 22px; }
+		#caption { display: none; }
 	}
 </style>
 </head>
@@ -144,43 +163,126 @@
 
 <div id="stage"><div id="field"></div></div>
 <nav id="nav" aria-label="galleries"></nav>
+<div id="caption"></div>
 
-<div id="focus" role="dialog" aria-modal="true">
-	<img alt="">
-	<figcaption></figcaption>
+<div id="controls">
+	<button id="autoplayBtn">auto play <b>off</b></button><br>
+	<button id="soundBtn">sound <b>off</b></button><br>
+	<span class="track" id="trackName"></span><br>
+	<span class="note">rebuilt <b>2026</b> from the original <b>gallery.xml</b> &middot; 2007</span>
 </div>
 
-<footer>
-	<span>drag to wander &middot; click to look</span><br>
-	<span>rebuilt <b>2026</b> from the original <b>gallery.xml</b> &middot; 2007</span>
-</footer>
+<div id="gate">
+	<div class="inner">
+		<div class="masthead">LEE <span class="c">C</span> RUM</div>
+		<div class="choices">
+			<span>auto play</span>
+			<button id="apOn">on</button>
+			<span>or</span>
+			<button id="apOff" class="picked">off</button>
+			<button id="enter">enter</button>
+		</div>
+	</div>
+</div>
+
+<audio id="player"></audio>
 
 <script>
 (async () => {
 	const man = await (await fetch("manifest.json")).json();
-	// hide the engine's internal "contact" pseudo-gallery from the wall
 	const galleries = man.galleries.filter(g => g.photos.some(p => p.src) && g.slug !== "contact");
 
 	const nav = document.getElementById("nav");
 	const field = document.getElementById("field");
 	const stage = document.getElementById("stage");
-	const focusEl = document.getElementById("focus");
-	const focusImg = focusEl.querySelector("img");
-	const focusCap = focusEl.querySelector("figcaption");
+	const caption = document.getElementById("caption");
+	const gate = document.getElementById("gate");
+	const player = document.getElementById("player");
+	const autoplayBtn = document.getElementById("autoplayBtn");
+	const soundBtn = document.getElementById("soundBtn");
+	const trackName = document.getElementById("trackName");
 
 	const css = c => c ? "#" + c.replace(/^0x/i, "") : null;
 
-	let panX = 0, panY = 0, current = null;
+	/* ============ the camera ============ */
+	/* world: photo coords from gallery.xml, origin at canvas center.
+	   view: translate(tx,ty) scale(z) with origin 0 0 —
+	   world point p lands at (tx + p.x*z, ty + p.y*z). */
+	const cam = { x: 0, y: 0, z: 1 };          // current
+	let tween = null;
 
-	function render(g) {
-		current = g;
-		panX = 0; panY = 0;
-		applyPan();
-		field.innerHTML = "";
+	/* viewport with floors — some embedded contexts report 0×0 mid-layout */
+	const vp = () => ({
+		w: Math.max(innerWidth, document.documentElement.clientWidth, 320),
+		h: Math.max(innerHeight, document.documentElement.clientHeight, 240)
+	});
+
+	function apply() {
+		field.style.transform = `translate(${cam.x}px, ${cam.y}px) scale(${cam.z})`;
+	}
+	function camFor(px, py, z) {
+		const v = vp();
+		return { x: v.w / 2 - px * z, y: v.h / 2 - py * z, z };
+	}
+	const easeInOut = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+	function glideTo(target, ms = 1150) {
+		if (tween) cancelAnimationFrame(tween.raf);
+		const from = { ...cam };
+		const t0 = performance.now();
+		return new Promise(done => {
+			tween = { raf: 0 };
+			const step = now => {
+				const k = Math.min(1, (now - t0) / ms);
+				const e = easeInOut(k);
+				cam.x = from.x + (target.x - from.x) * e;
+				cam.y = from.y + (target.y - from.y) * e;
+				cam.z = from.z + (target.z - from.z) * e;
+				apply();
+				if (k < 1) tween.raf = requestAnimationFrame(step);
+				else { tween = null; done(); }
+			};
+			tween.raf = requestAnimationFrame(step);
+		});
+	}
+
+	/* rotated extents, for framing */
+	function extents(p) {
+		const w = p.w * p.scale / 100, h = p.h * p.scale / 100;
+		const r = Math.abs(p.rotation % 180) * Math.PI / 180;
+		return {
+			w: Math.abs(w * Math.cos(r)) + Math.abs(h * Math.sin(r)),
+			h: Math.abs(w * Math.sin(r)) + Math.abs(h * Math.cos(r))
+		};
+	}
+	function frameTarget(p) {
+		const e = extents(p);
+		const v = vp();
+		const z = Math.min(v.w / e.w, v.h / e.h) * 0.74;
+		return camFor(p.x, p.y, Math.min(z, 100 / p.scale)); // never beyond source pixels
+	}
+	function overviewTarget(g) {
+		let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
 		for (const p of g.photos) {
 			if (!p.src) continue;
-			const w = p.w * p.scale / 100;
-			const h = p.h * p.scale / 100;
+			const e = extents(p);
+			x0 = Math.min(x0, p.x - e.w / 2); x1 = Math.max(x1, p.x + e.w / 2);
+			y0 = Math.min(y0, p.y - e.h / 2); y1 = Math.max(y1, p.y + e.h / 2);
+		}
+		const v = vp();
+		const z = Math.min(v.w / (x1 - x0), v.h / (y1 - y0)) * 0.88;
+		return camFor((x0 + x1) / 2, (y0 + y1) / 2, z);
+	}
+
+	/* ============ galleries ============ */
+	let current = null, focused = -1;
+
+	function render(g) {
+		current = g; focused = -1;
+		caption.classList.remove("show");
+		field.innerHTML = "";
+		g.photos.forEach((p, i) => {
+			if (!p.src) return;
+			const w = p.w * p.scale / 100, h = p.h * p.scale / 100;
 			const el = document.createElement("button");
 			el.className = "photo";
 			el.style.width = w + "px";
@@ -194,59 +296,159 @@
 			img.loading = "lazy";
 			img.draggable = false;
 			el.appendChild(img);
-			el.addEventListener("click", e => {
-				if (moved) return;               // a drag, not a click
-				focusImg.src = p.src;
-				focusCap.textContent = p.txt || g.name;
-				focusEl.classList.add("open");
-				e.stopPropagation();
+			el.addEventListener("click", () => {
+				if (movedFar) return;                   // drag, not click
+				if (focused === i) { toOverview(); }
+				else { focusPhoto(i, true); }
 			});
 			field.appendChild(el);
-		}
+		});
 		for (const b of nav.children) b.setAttribute("aria-current", b.dataset.slug === g.slug);
+		const t = overviewTarget(g);
+		cam.x = t.x; cam.y = t.y; cam.z = t.z * 0.9;    // settle-in from slightly wider
+		apply();
+		glideTo(t, 900);
 	}
 
-	// nav
+	function focusPhoto(i, manual) {
+		const p = current.photos[i];
+		if (!p || !p.src) return;
+		focused = i;
+		caption.textContent = p.txt || "";
+		caption.classList.toggle("show", !!p.txt);
+		if (manual) restartDwell();
+		return glideTo(frameTarget(p));
+	}
+	function toOverview() {
+		focused = -1;
+		caption.classList.remove("show");
+		return glideTo(overviewTarget(current), 1000);
+	}
+
 	for (const g of galleries) {
 		const b = document.createElement("button");
 		b.dataset.slug = g.slug;
 		b.style.setProperty("--out", css(g.outColor) || "#aaaaaa");
 		b.style.setProperty("--over", css(g.overColor) || "#ffffff");
 		b.style.setProperty("--sel", css(g.selectColor) || "#f94b07");
-		const count = g.photos.filter(p => p.src).length;
-		b.innerHTML = `${g.name}<span class="n">${count}</span>`;
-		b.addEventListener("click", () => render(g));
+		b.innerHTML = `${g.name}<span class="n">${g.photos.filter(p => p.src).length}</span>`;
+		b.addEventListener("click", () => { render(g); restartDwell(); });
 		nav.appendChild(b);
 	}
 
-	// drag-to-pan (direct control, no inertia)
-	let dragging = false, moved = false, sx = 0, sy = 0, ox = 0, oy = 0;
-	function applyPan() {
-		field.style.transform = `translate(${panX}px, ${panY}px)`;
-	}
+	/* ============ drag to pan (direct, interrupts glides) ============ */
+	let dragging = false, movedFar = false, sx = 0, sy = 0, ox = 0, oy = 0;
 	stage.addEventListener("pointerdown", e => {
-		dragging = true; moved = false;
-		sx = e.clientX; sy = e.clientY; ox = panX; oy = panY;
+		if (tween) { cancelAnimationFrame(tween.raf); tween = null; }
+		dragging = true; movedFar = false;
+		sx = e.clientX; sy = e.clientY; ox = cam.x; oy = cam.y;
 		stage.classList.add("dragging");
 		stage.setPointerCapture(e.pointerId);
 	});
 	stage.addEventListener("pointermove", e => {
 		if (!dragging) return;
 		const dx = e.clientX - sx, dy = e.clientY - sy;
-		if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
-		panX = ox + dx; panY = oy + dy;
-		applyPan();
+		if (Math.abs(dx) + Math.abs(dy) > 5) movedFar = true;
+		cam.x = ox + dx; cam.y = oy + dy;
+		apply();
 	});
-	const endDrag = () => { dragging = false; stage.classList.remove("dragging"); };
+	const endDrag = () => {
+		dragging = false;
+		stage.classList.remove("dragging");
+		restartDwell();
+	};
 	stage.addEventListener("pointerup", endDrag);
 	stage.addEventListener("pointercancel", endDrag);
-
-	// focus dismiss
-	focusEl.addEventListener("click", () => {
-		focusEl.classList.remove("open");
-		focusImg.src = "";
+	addEventListener("keydown", e => {
+		if (e.key === "Escape") toOverview();
+		if (e.key === "ArrowRight") { stepAuto(+1, true); }
+		if (e.key === "ArrowLeft") { stepAuto(-1, true); }
 	});
-	addEventListener("keydown", e => { if (e.key === "Escape") focusEl.classList.remove("open"); });
+	let resizeT = 0;
+	addEventListener("resize", () => {
+		clearTimeout(resizeT);
+		resizeT = setTimeout(() => {
+			if (!current || innerWidth < 100 || innerHeight < 100) return;
+			if (focused >= 0) glideTo(frameTarget(current.photos[focused]), 300);
+			else glideTo(overviewTarget(current), 300);
+		}, 150);
+	});
+
+	/* ============ auto play ============ */
+	let autoplay = false, dwellTimer = 0;
+	const DWELL = 3600;
+
+	function setAutoplay(on) {
+		autoplay = on;
+		autoplayBtn.innerHTML = `auto play <b>${on ? "on" : "off"}</b>`;
+		autoplayBtn.classList.toggle("on", on);
+		restartDwell();
+	}
+	function nextIndex(dir) {
+		const n = current.photos.length;
+		let i = focused;
+		for (let k = 0; k < n; k++) {
+			i = (i + dir + n) % n;
+			if (current.photos[i].src) return i;
+		}
+		return -1;
+	}
+	function stepAuto(dir, manual) {
+		const i = nextIndex(dir);
+		if (i >= 0) focusPhoto(i, manual);
+	}
+	function restartDwell() {
+		clearTimeout(dwellTimer);
+		if (!autoplay) return;
+		dwellTimer = setTimeout(async function tick() {
+			if (autoplay && !dragging) {
+				const i = nextIndex(+1);
+				if (i >= 0) await focusPhoto(i, false);
+			}
+			dwellTimer = setTimeout(tick, DWELL);
+		}, DWELL);
+	}
+	autoplayBtn.addEventListener("click", () => setAutoplay(!autoplay));
+
+	/* ============ music ============ */
+	const tracks = [
+		"06AeginaAirlines", "10HarmonyInBlueIII_", "Avril", "Dungeoneering",
+		"OctoberPt.1", "Palimpsest", "Springtime", "Theory",
+		"joe1", "joe2", "joe3", "joe4", "joe5", "joe6",
+		"low-fence", "low-kompletezz", "low-snow"
+	];
+	let trackIdx = Math.floor(Math.random() * tracks.length);
+	let sound = false;
+
+	function playTrack(i) {
+		trackIdx = (i + tracks.length) % tracks.length;
+		player.src = `audio/${tracks[trackIdx]}.mp3`;
+		player.play().catch(() => {});
+		trackName.textContent = "♪ " + tracks[trackIdx].replace(/^low-|^\d+|_$/g, "").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\./g, " ");
+	}
+	function setSound(on) {
+		sound = on;
+		soundBtn.innerHTML = `sound <b>${on ? "on" : "off"}</b>`;
+		soundBtn.classList.toggle("on", on);
+		if (on) { if (!player.src) playTrack(trackIdx); else player.play().catch(() => {}); }
+		else player.pause();
+		trackName.style.visibility = on ? "visible" : "hidden";
+	}
+	player.addEventListener("ended", () => playTrack(trackIdx + 1));
+	soundBtn.addEventListener("click", () => setSound(!sound));
+
+	/* ============ the gate ============ */
+	let gateAutoplay = false;
+	const apOn = document.getElementById("apOn"), apOff = document.getElementById("apOff");
+	apOn.addEventListener("click", () => { gateAutoplay = true; apOn.classList.add("picked"); apOff.classList.remove("picked"); });
+	apOff.addEventListener("click", () => { gateAutoplay = false; apOff.classList.add("picked"); apOn.classList.remove("picked"); });
+	document.getElementById("enter").addEventListener("click", () => {
+		gate.classList.add("leaving");
+		setTimeout(() => gate.remove(), 1000);
+		setSound(true);                     // user gesture — the 2007 site had music
+		setAutoplay(gateAutoplay);
+		if (gateAutoplay) stepAuto(+1, false);
+	});
 
 	render(galleries[0]);
 })();
