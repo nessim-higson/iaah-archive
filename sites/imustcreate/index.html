@@ -59,6 +59,12 @@
 			(function (n) { window["NewWindow" + n] = function () { openWork(n); }; })(i);
 		}
 
+		// Warm the HTTP cache while the splash is up: base.swf only ASKS for the
+		// section movies mid-intro (nav frame 34), and a click on a chip before
+		// its section has arrived fires into an empty level and looks dead.
+		["stage.swf","base.swf","one.swf","two.swf","three.swf","sound2.swf",
+		 "print.swf","tv.swf","misc.swf"].forEach(function (f) { fetch(f); });
+
 		window.RufflePlayer = window.RufflePlayer || {};
 		window.RufflePlayer.config = {
 			autoplay: "on",

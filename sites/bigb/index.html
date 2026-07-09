@@ -13,6 +13,11 @@
 </head>
 <body>
 	<div id="site"><div id="flashcontent"></div></div>
+	<script>
+		// Warm the HTTP cache: main3 loads its sections on click; a click before
+		// they've arrived fires into an empty level and looks dead.
+		["main3.swf","about.swf","contact.swf"].forEach(function (f) { fetch(f); });
+	</script>
 	<script src="../../ruffle/ruffle.js"></script>
 	<script>
 		window.RufflePlayer = window.RufflePlayer || {};
