@@ -13,8 +13,8 @@
 		--ink: #c8c8c6;
 		--dim: #7a7a78;
 		--red: #d21e12;
-		--accent: #0099cc;
-		--strip: 24px;
+		--accent: #38b6e0;
+		--strip: 43px;
 	}
 	* { box-sizing: border-box; }
 	html, body { height: 100%; margin: 0; overflow: hidden; }
@@ -33,21 +33,18 @@
 	/* zoom-out cursor badge (follows mouse over the bare wall when zoomed in) */
 	#zoomOutBtn {
 		position: fixed; left: 0; top: 0; z-index: 44;
-		width: 26px; height: 26px; border-radius: 50%;
-		border: 1.5px solid #9a9a97; color: #9a9a97;
-		display: grid; place-items: center;
-		font: 15px/1 "Helvetica Neue", sans-serif;
+		width: 47px; height: 26px;
+		background: url(assets/ui/zoomout.png) no-repeat 0 0 / 100% 100%;
 		opacity: 0; pointer-events: none;
-		background: rgba(255,255,255,0.6);
 	}
 
 	/* caption tab — slides up from the bottom center */
 	#infoTab {
 		position: fixed; left: 50%; bottom: 0; transform: translate(-50%, 100%);
 		z-index: 46;
-		background: #111; color: #ccc;
-		font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-		padding: 8px 18px 10px;
+		background: rgba(228, 228, 226, 0.88); color: #333;
+		font-size: 11px; letter-spacing: 0.05em;
+		padding: 6px 16px 8px;
 		transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 		white-space: nowrap;
 	}
@@ -69,12 +66,12 @@
 	/* ================= edge strips ================= */
 	.strip {
 		position: fixed; top: 0; bottom: 0; width: var(--strip); z-index: 50;
-		background: linear-gradient(180deg, #191918, #101010 40%, #161615);
+		background: #121211 url(assets/ui/strip.png) repeat-y 0 0 / 100% auto;
 		cursor: pointer; user-select: none;
 	}
-	.strip::after { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(0, 153, 204, 0.5); }
-	#stripL { left: 0; } #stripL::after { right: 0; }
-	#stripR { right: 0; } #stripR::after { left: 0; }
+	#stripL { left: 0; }
+	#stripR { right: 0; transform: scaleX(-1); }
+	#stripR .lbl, #stripR #timerBar { transform: scaleX(-1); }
 	.strip .lbl {
 		position: absolute; left: 50%;
 		writing-mode: vertical-rl; transform: translateX(-50%) rotate(180deg);
@@ -83,35 +80,30 @@
 	}
 	.strip .lbl.top { top: 14px; }
 	#stripL .lbl.bot { bottom: 14px; color: var(--accent); }
-	#stripR .lbl.top { transform: translateX(-50%); }
+	#stripR .lbl.top { transform: scaleX(-1) translateX(50%); }
 	/* slideshow countdown fill on the right strip */
 	#timerBar {
 		position: absolute; left: 0; right: 0; bottom: 0; height: 0%;
-		background: rgba(0, 153, 204, 0.35);
+		background: rgba(56, 182, 224, 0.35);
 	}
 
 	/* ================= navigation panel ================= */
 	#sidenav {
-		position: fixed; top: 0; bottom: 0; left: var(--strip); width: 350px; z-index: 45;
-		background:
-			radial-gradient(1200px 500px at -20% -10%, rgba(255,255,255,0.045), transparent 60%),
-			var(--panel);
-		padding: 44px 38px;
+		position: fixed; top: 0; bottom: 0; left: var(--strip); width: 400px; z-index: 45;
+		background: #141413 url(assets/ui/panel.png) no-repeat 0 0 / cover;
+		padding: 48px 44px;
 		transform: translateX(0);
 		transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 		overflow: hidden;
 	}
 	#sidenav.closed { transform: translateX(calc(-100% - var(--strip))); }
-	#sidenav .logotype {
-		font-family: Georgia, serif;
-		font-size: 21px; letter-spacing: 0.52em; color: #d6d6d2;
-		text-transform: uppercase; white-space: nowrap;
-	}
+	#sidenav .logotype img { width: 260px; height: auto; display: block; margin-left: -6px; }
 	#sidenav .rule { height: 1px; background: #3a3a38; margin: 22px 0 26px; }
 	#sidenav button {
 		all: unset; display: block; cursor: pointer;
-		font-size: 11px; letter-spacing: 0.42em; text-transform: uppercase;
-		color: var(--out, #9a9a97); line-height: 2.35;
+		font-family: Georgia, "Times New Roman", serif;
+		font-size: 12.5px; letter-spacing: 0.32em; text-transform: uppercase;
+		color: var(--out, #8f8f8c); line-height: 2.4;
 		transition: color 0.15s ease;
 		white-space: nowrap;
 	}
@@ -127,9 +119,9 @@
 
 	/* ================= controls panel ================= */
 	#controls {
-		position: fixed; top: 0; bottom: 0; right: var(--strip); width: 215px; z-index: 45;
-		background: var(--panel2);
-		padding: 40px 26px;
+		position: fixed; top: 0; bottom: 0; right: var(--strip); width: 300px; z-index: 45;
+		background: #141413 url(assets/ui/panel.png) no-repeat 100% 0 / cover;
+		padding: 150px 40px 0 44px;
 		transform: translateX(0);
 		transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 		font-size: 11px; letter-spacing: 0.06em; color: var(--dim);
@@ -202,7 +194,7 @@
 <body>
 
 <div id="stage"><canvas id="wall"></canvas></div>
-<div id="zoomOutBtn">–</div>
+<div id="zoomOutBtn"></div>
 <div id="infoTab"></div>
 <div id="resumeTab"><b>resume</b>&nbsp; slideshow</div>
 
@@ -216,9 +208,10 @@
 </div>
 
 <div id="sidenav">
-	<div class="logotype">Lee Crum</div>
+	<div class="logotype"><img src="assets/ui/logo.png" alt="Lee Crum"></div>
 	<div class="rule"></div>
 	<button id="contactBtn">Contact</button>
+	<div class="rule"></div>
 	<div id="galleryList"></div>
 	<div class="deco d1"></div><div class="deco d2"></div><div class="deco d3"></div>
 </div>
