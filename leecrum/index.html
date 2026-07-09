@@ -75,7 +75,8 @@
 	.strip .lbl {
 		position: absolute; left: 50%;
 		writing-mode: vertical-rl; transform: translateX(-50%) rotate(180deg);
-		font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim);
+		font-family: "Lucida Grande", Verdana, sans-serif;
+		font-size: 10.5px; letter-spacing: 0.12em; color: #9a9a98;
 		white-space: nowrap;
 	}
 	.strip .lbl.top { top: 14px; }
@@ -102,20 +103,16 @@
 	#sidenav button {
 		all: unset; display: block; cursor: pointer;
 		font-family: Georgia, "Times New Roman", serif;
-		font-size: 12.5px; letter-spacing: 0.32em; text-transform: uppercase;
-		color: var(--out, #8f8f8c); line-height: 2.4;
+		font-size: 11.5px; letter-spacing: 0.38em; text-transform: uppercase;
+		color: var(--out, #8b8b88); line-height: 2.7;
 		transition: color 0.15s ease;
 		white-space: nowrap;
 	}
 	#sidenav button:hover { color: var(--over, #ffffff); }
-	#sidenav button[aria-current="true"] { color: var(--sel, #f94b07); }
+	#sidenav button[aria-current="true"] { color: var(--sel, #b8431f); }
 	#sidenav #contactBtn { margin-bottom: 26px; color: #b9b9b6; }
 	#sidenav #contactBtn:hover { color: #fff; }
-	#sidenav #contactBtn[aria-current="true"] { color: #f94b07; }
-	#sidenav .deco { position: absolute; border: 10px solid rgba(0,0,0,0.5); outline: 1px solid rgba(255,255,255,0.03); pointer-events: none; }
-	#sidenav .deco.d1 { width: 150px; height: 190px; left: 26px; bottom: 190px; }
-	#sidenav .deco.d2 { width: 110px; height: 88px;  left: 205px; bottom: 250px; }
-	#sidenav .deco.d3 { width: 190px; height: 120px; left: 60px; bottom: 40px; }
+	#sidenav #contactBtn[aria-current="true"] { color: #b8431f; }
 
 	/* ================= controls panel ================= */
 	#controls {
@@ -124,11 +121,13 @@
 		padding: 150px 40px 0 44px;
 		transform: translateX(0);
 		transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
-		font-size: 11px; letter-spacing: 0.06em; color: var(--dim);
+		font-family: "Lucida Grande", Verdana, "Helvetica Neue", sans-serif;
+		font-size: 12px; letter-spacing: 0; color: #a0a09e;
+		line-height: 1.7;
 	}
 	#controls.closed { transform: translateX(calc(100% + var(--strip))); }
-	#controls .row { margin-bottom: 14px; }
-	#controls button { all: unset; cursor: pointer; color: var(--dim); }
+	#controls .row { margin-bottom: 16px; }
+	#controls button { all: unset; cursor: pointer; color: #8a8a88; }
 	#controls button.active { color: var(--accent); }
 	#controls button:hover { color: #fff; }
 	#controls input[type="range"] {
@@ -142,7 +141,7 @@
 	#controls .minmax { display: flex; justify-content: space-between; font-size: 9px; color: #555553; }
 	#controls .sep { height: 26px; }
 	#tracks { margin-top: 10px; }
-	#tracks button { display: block; line-height: 1.9; letter-spacing: 0.04em; }
+	#tracks button { display: block; line-height: 1.85; letter-spacing: 0; }
 	#tracks button.active { color: var(--accent); }
 	#prevnext { margin-top: 20px; margin-bottom: 4px; }
 
@@ -213,7 +212,6 @@
 	<button id="contactBtn">Contact</button>
 	<div class="rule"></div>
 	<div id="galleryList"></div>
-	<div class="deco d1"></div><div class="deco d2"></div><div class="deco d3"></div>
 </div>
 
 <div id="controls" class="closed">
@@ -515,7 +513,7 @@
 		b.dataset.slug = g.slug;
 		b.style.setProperty("--out", css(g.outColor) || "#9a9a97");
 		b.style.setProperty("--over", css(g.overColor) || "#ffffff");
-		b.style.setProperty("--sel", css(g.selectColor) || "#f94b07");
+		b.style.setProperty("--sel", "#b8431f");
 		b.textContent = g.name;
 		b.addEventListener("click", () => switchCameras(cams.findIndex(c => c.g === g)));
 		$("galleryList").appendChild(b);
