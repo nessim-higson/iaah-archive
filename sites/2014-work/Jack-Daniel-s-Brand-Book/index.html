@@ -344,7 +344,12 @@ An exploration for Black Swan. A film about polarity and opposites, fittingly re
 <script type="text/javascript" src="../_jsapps/_libs/cargo.rail.package.js"></script>
 <script type="text/javascript" src="../_jsapps/rail/rail.app.js"></script>
 <script type="text/javascript" src="../_jsapps/rail/rail.jquery.js"></script>
-<link href="../_jsapps/rail/rail.css" rel="stylesheet" type="text/css" /><script>/* archived 2026: Cargo's ajax router assumes a domain-root mount and stalls under /sites/2014-work/ — let every real link be a real page load */
+<link href="../_jsapps/rail/rail.css" rel="stylesheet" type="text/css" /><style>/* archived 2026: backstretch computes cover-sizing in the img load
+handler, which local images beat (same race as the fade) — reproduce the
+cover behavior in CSS so slides always fill the viewport like the live site */
+#backstretch img { width: 100% !important; height: 100% !important; object-fit: cover; left: 0 !important; top: 0 !important; margin: 0 !important; }
+</style>
+<script>/* archived 2026: Cargo's ajax router assumes a domain-root mount and stalls under /sites/2014-work/ — let every real link be a real page load */
 (function(){
   document.addEventListener('click', function(e){
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
