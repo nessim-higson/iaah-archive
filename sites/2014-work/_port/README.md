@@ -37,3 +37,17 @@ https://work.iamalwayshungry.com (DNS A record → Cargo's Rackspace box).
 Vimeo embeds (the reels) stay external. Everything else — all 58 pages,
 1,021 assets, both typefaces — is served from this folder. Verified: zero
 external requests on home/project/Profile pages, zero broken images.
+
+## Post-launch fix (2026-07-09)
+
+Cargo 1's ajax page router (pushState + preloaded page cache) assumes the
+site is mounted at the domain root; under `/sites/2014-work/` it pushed the
+URL, dimmed the grid and never swapped content in ("the work doesn't pull
+up"). Every page now carries a small capture-phase click interceptor
+(before `</body>`) that stops Cargo's router and lets internal links be
+real page loads — each archived page is complete, so navigation is plain
+HTML again. The same snippet re-pins the `#logo` link, which Cargo rewrites
+to `/` at runtime. The dark home thumbnails are authentic — verified on the
+live site: all 56 thumbs render at CSS opacity 1 there too; the artwork was
+uploaded dark. (The `.inactive {opacity:.2}` 40-days gate exists in the CSS
+but no project carries the `{inactive}` title marker anymore.)

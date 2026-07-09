@@ -318,5 +318,21 @@ An exploration for Black Swan. A film about polarity and opposites, fittingly re
 <script type="text/javascript" src="../_jsapps/_libs/cargo.rail.package.js"></script>
 <script type="text/javascript" src="../_jsapps/rail/rail.app.js"></script>
 <script type="text/javascript" src="../_jsapps/rail/rail.jquery.js"></script>
-<link href="../_jsapps/rail/rail.css" rel="stylesheet" type="text/css" /></body>
+<link href="../_jsapps/rail/rail.css" rel="stylesheet" type="text/css" /><script>/* archived 2026: Cargo's ajax router assumes a domain-root mount and stalls under /sites/2014-work/ — let every real link be a real page load */
+(function(){
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var h = a.getAttribute('href');
+    if (!h || h.charAt(0) === '#' || /^(javascript:|mailto:)/i.test(h)) return;
+    e.stopPropagation();
+  }, true);
+  var fix = function(){
+    var l = document.querySelector('#logo a');
+    if (l) l.setAttribute('href', '../');
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fix); else fix();
+  setTimeout(fix, 800); setTimeout(fix, 2500);
+})();</script>
+</body>
 </html>
