@@ -334,8 +334,14 @@ An exploration for Black Swan. A film about polarity and opposites, fittingly re
     e.stopPropagation();
   }, true);
   var fix = function(){
-    var l = document.querySelector('#logo a');
-    if (l) l.setAttribute('href', '../');
+    var links = document.querySelectorAll('a[href^="/"]');
+    for (var i = 0; i < links.length; i++) {
+      var h = links[i].getAttribute('href');
+      if (h.indexOf('//') === 0) continue;
+      var rest = h === '/' ? '' : h.replace(/^\//, '');
+      if (rest && rest.indexOf('.') === -1 && rest.charAt(rest.length - 1) !== '/') rest += '/';
+      links[i].setAttribute('href', '../' + rest);
+    }
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fix); else fix();
   setTimeout(fix, 800); setTimeout(fix, 2500);
@@ -343,6 +349,7 @@ An exploration for Black Swan. A film about polarity and opposites, fittingly re
      slideshow binds its load handler, leaving slides at opacity 0 + spinner.
      The live original survives on CDN latency; here we complete the reveal. */
   setInterval(function(){
+    fix();
     var imgs = document.querySelectorAll('#backstretch img');
     var revealed = false;
     for (var i = 0; i < imgs.length; i++) {
