@@ -161,39 +161,36 @@ def render_gallery(d, imgs):
     return ('<div class="image-gallery initialized ported" style="display:flex;'
             'flex-wrap:wrap;justify-content:space-between">' + kids + "</div>")
 
-# ---- thumbnail rows from live geometry ----
-rows, cur, cur_top = [], [], None
-for t in layout["all"]:
-    if cur_top is None or abs(t["top"] - cur_top) < 60:
-        cur.append(t)
-        cur_top = t["top"] if cur_top is None else cur_top
-    else:
-        rows.append(cur); cur = [t]; cur_top = t["top"]
-if cur: rows.append(cur)
-
-wrap_widths = {}   # href -> exact cargo width value from live wrapper style
-for t in layout["all"]:
-    m = re.search(r"width:\s*([\d.]+)%", t.get("parentStyle") or "")
-    wrap_widths[t["href"]] = m.group(1) if m else "50"
+# ---- thumbnail collage: absolute placement from live-captured geometry ----
+# The live homepage is a staggered freeform canvas (items overlap vertical
+# bands); everything scales proportionally with viewport width, so the
+# captured 1440px rects convert directly to container-relative percentages.
+CONT_W = layout["contW"]
+CONT_H = layout["contH"]
 
 thumbs_by_url = {p["url"]: p for p in model["projects_index"]}
 
 def thumb_grid(depth):
     prefix = "../" * depth
-    out = ['<div class="thumbnails" data-view="Thumbnail"><div class="container thumbnails_width clearfix">']
-    for row in rows:
-        out.append('<div class="trow">')
-        for t in row:
-            pr = thumbs_by_url.get(t["href"])
-            if not pr or not pr["thumb"]["hash"]:
-                continue
-            fn = w750_map.get(pr["thumb"]["hash"]) or hash_map.get(pr["thumb"]["hash"])
-            w, hgt = pr["thumb"]["width"], pr["thumb"]["height"]
-            out.append(
-                f'<div class="thumbnail" style="width:{wrap_widths[t["href"]]}%">'
-                f'<a class="image-link" href="{prefix}{t["href"]}/" title="{htmlmod.escape(pr["title_no_html"])}">'
-                f'<img src="{prefix}assets/{fn}" width="{w}" height="{hgt}" loading="lazy" alt="{htmlmod.escape(pr["title_no_html"])}"></a></div>')
-        out.append("</div>")
+    out = [f'<div class="thumbnails" data-view="Thumbnail">'
+           f'<div class="pgrid" style="position:relative;height:0;'
+           f'padding-bottom:{CONT_H / CONT_W * 100:.3f}%">']
+    for t in layout["all"]:
+        pr = thumbs_by_url.get(t["href"])
+        if not pr or not pr["thumb"]["hash"]:
+            continue
+        fn = w750_map.get(pr["thumb"]["hash"]) or hash_map.get(pr["thumb"]["hash"])
+        w, hgt = pr["thumb"]["width"], pr["thumb"]["height"]
+        l_pct = t["left"] / CONT_W * 100
+        t_pct = t["top"] / CONT_H * 100  # CSS top:% resolves against container height
+        w_pct = t["w"] / CONT_W * 100
+        title = htmlmod.escape(pr["title_no_html"])
+        out.append(
+            f'<div class="pthumb" style="position:absolute;left:{l_pct:.4f}%;'
+            f'top:{t_pct:.4f}%;width:{w_pct:.4f}%">'
+            f'<a href="{prefix}{t["href"]}/" title="{title}">'
+            f'<img src="{prefix}assets/{fn}" width="{w}" height="{hgt}" '
+            f'loading="lazy" alt="{title}"></a></div>')
     out.append("</div></div>")
     return "\n".join(out)
 
@@ -237,7 +234,7 @@ HEAD_TMPL = '''<!DOCTYPE html>
 <meta property="og:description" content="{desc}">
 <meta property="og:image" content="{prefix}assets/{ogimg}">
 <link href="{prefix}assets/{favicon}" rel="shortcut icon">
-<link href="{prefix}css/site.css" rel="stylesheet" type="text/css">
+<link href="{prefix}css/site.css?v={cssv}" rel="stylesheet" type="text/css">
 {local_css_block}
 </head>
 <body{bodyclass}>
@@ -260,7 +257,7 @@ HEAD_TMPL = '''<!DOCTYPE html>
 <script>
 /* Cargo scroll transition: imagery below the fold fades/rises in on scroll */
 (function () {{
-  var els = document.querySelectorAll('.page_content img, .thumbnails .thumbnail');
+  var els = document.querySelectorAll('.page_content img, .pthumb');
   var vh = window.innerHeight;
   var pend = [];
   els.forEach(function (el) {{
@@ -326,7 +323,7 @@ def build_page(page, idx=None):
     title = "IAAH" if page["is_homepage"] else f'{page["title"]} - IAAH'
 
     return HEAD_TMPL.format(
-        title=htmlmod.escape(title), desc=DESC, prefix=prefix,
+        title=htmlmod.escape(title), desc=DESC, prefix=prefix, cssv=CSS_VERSION,
         ogimg=OGIMG, favicon=FAVICON, local_css_block=lcb,
         bodyclass=' class="homepage"' if page["is_homepage"] else "",
         logo=logo, topnav=topnav, content=body, thumbs=thumbs,
@@ -365,14 +362,16 @@ div[data-view="Content"] .page_container { padding-top: 5.646rem; }
 .page_content iframe { max-width: 100%; }
 .content_container { overflow-x: clip; }
 .header-image img { width: 100%; height: auto; display: block; }
+/* collage grid — port-owned class names so Cargo's base CSS (.container,
+   .thumbnail, .image-link are all live Cargo classnames) cannot interfere.
+   Absolute staggered placement captured from the live 1440px render; all
+   values are %-of-width so the canvas scales proportionally, as live does. */
 .thumbnails { position: relative; }
-.thumbnails .trow { display: flex; justify-content: center; align-items: center; }
-.thumbnails .thumbnail { box-sizing: border-box; padding: 0.9% 1.3%; }
-.thumbnails .thumbnail img { width: 100%; height: auto; display: block; }
-.thumbnails a.image-link { display: block; }
+.pthumb a { display: block; }
+.pthumb img { width: 100%; height: auto; display: block; }
 @media (max-width: 700px) {
-  .thumbnails .trow { display: block; }
-  .thumbnails .thumbnail { width: 100% !important; padding: 2.6% 1.3%; }
+  .pgrid { height: auto !important; padding-bottom: 0 !important; }
+  .pthumb { position: static !important; width: 100% !important; margin: 0 0 4%; }
 }
 /* scroll transition, unscoped so it also covers the collage thumbnails */
 .scroll-transition-fade { transition: transform 1s ease-in-out, opacity 0.8s ease-in-out; }
@@ -386,7 +385,10 @@ div[data-view="Content"] .page_container { padding-top: 5.646rem; }
     width: 100% !important; margin: 0 0 4% !important; }
 }
 """
-open(os.path.join(OUT, "css", "site.css"), "w").write(css + PORT_CSS)
+full_css = css + PORT_CSS
+import hashlib
+CSS_VERSION = hashlib.sha1(full_css.encode()).hexdigest()[:8]
+open(os.path.join(OUT, "css", "site.css"), "w").write(full_css)
 
 # assets + fonts (+ rendition tiers)
 for fn in os.listdir(os.path.join(H, "assets")):

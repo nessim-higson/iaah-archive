@@ -1453,16 +1453,15 @@ div[data-view="Content"] .page_container { padding-top: 5.646rem; }
 .content_container { overflow-x: clip; }
 .header-image img { width: 100%; height: auto; display: block; }
 /* collage grid — port-owned class names so Cargo's base CSS (.container,
-   .thumbnail, .image-link are all live Cargo classnames) cannot interfere */
+   .thumbnail, .image-link are all live Cargo classnames) cannot interfere.
+   Absolute staggered placement captured from the live 1440px render; all
+   values are %-of-width so the canvas scales proportionally, as live does. */
 .thumbnails { position: relative; }
-.pgrid { width: 100%; }
-.prow { display: flex; justify-content: center; align-items: center; }
-.pthumb { box-sizing: border-box; padding: 0.9% 1.3%; flex: none; }
 .pthumb a { display: block; }
 .pthumb img { width: 100%; height: auto; display: block; }
 @media (max-width: 700px) {
-  .prow { display: block; }
-  .pthumb { width: 100% !important; padding: 2.6% 1.3%; }
+  .pgrid { height: auto !important; padding-bottom: 0 !important; }
+  .pthumb { position: static !important; width: 100% !important; margin: 0 0 4%; }
 }
 /* scroll transition, unscoped so it also covers the collage thumbnails */
 .scroll-transition-fade { transition: transform 1s ease-in-out, opacity 0.8s ease-in-out; }
