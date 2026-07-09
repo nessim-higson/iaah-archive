@@ -28,14 +28,20 @@
 			contextMenu: "rightClickOnly",
 			allowScriptAccess: true,
 			openUrlMode: "confirm",
-			logLevel: "warn"
+			logLevel: "warn",
+			// fonts.swf carries the site's own FreightBigMediumItalic glyphs
+			// registered under the two device-font names the app requests
+			// ("Times New Roman" via runtime htmlText, "FreightDispBoldItalic"
+			// via the Nav field's tag) — so both resolve to the Freight italic
+			// that the Autoplay label uses, instead of Ruffle's sans fallback.
+			fontSources: ["fonts.swf"]
 		};
 		window.addEventListener("DOMContentLoaded", () => {
 			const ruffle = window.RufflePlayer.newest();
 			const player = ruffle.createPlayer();
 			document.getElementById("flashcontent").appendChild(player);
 			const api = player.ruffle ? player.ruffle() : player;
-			api.load({ url: "resizeapp.swf" });
+			api.load({ url: "resizeapp.swf?v=4" });
 		});
 	</script>
 </body>
