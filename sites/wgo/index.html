@@ -2,93 +2,41 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What's Going On — iamalwayshungry × Lee Crum</title>
-<meta name="description" content="What's Going On — a Katrina commemorative piece pairing Lee Crum's 1980s New Orleans photography with Marvin Gaye's lyrics. Flash microsite (2007), resurrected via Ruffle.">
+<title>What's Goin On?</title>
+<meta name="description" content="What's Going On — a Katrina commemorative piece pairing Lee Crum's New Orleans photography with Marvin Gaye's lyrics. Score by Joe Minadeo / patternbased. Flash microsite by iamalwayshungry (2007), resurrected via Ruffle.">
 <style>
-	:root { --fg: #e8e4dc; --dim: #6f6a62; }
-	html, body { height: 100%; margin: 0; padding: 0; background: #000; overflow: hidden;
-		font-family: Georgia, "Times New Roman", serif; color: var(--fg); }
-	#stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+	html, body { height: 100%; margin: 0; padding: 0; background: #ffffff; overflow: hidden; }
 	#flashcontent { width: 100%; height: 100%; }
 	#flashcontent ruffle-player { width: 100%; height: 100%; display: block; }
-
-	/* nav chrome — fades unless hovered */
-	#nav { position: fixed; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s ease;
-		z-index: 2147483647; }
-	#nav.show { opacity: 1; }
-	.arrow { position: fixed; top: 50%; transform: translateY(-50%); pointer-events: auto;
-		width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
-		background: none; border: 0; color: var(--fg); cursor: pointer; font-size: 34px; line-height: 1;
-		opacity: .55; transition: opacity .2s ease; user-select: none; }
-	.arrow:hover { opacity: 1; }
-	.arrow:disabled { opacity: .12; cursor: default; }
-	#prev { left: 8px; } #next { right: 8px; }
-	#counter { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-		pointer-events: none; font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
-		color: var(--dim); }
-	#title { position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
-		pointer-events: none; font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
-		color: var(--dim); }
 </style>
 </head>
 <body>
-	<div id="stage"><div id="flashcontent"></div></div>
-
-	<div id="nav">
-		<div id="title">What's Going On · iamalwayshungry × Lee Crum · 2007</div>
-		<button id="prev" class="arrow" aria-label="Previous page">&#8249;</button>
-		<button id="next" class="arrow" aria-label="Next page">&#8250;</button>
-		<div id="counter"></div>
-	</div>
-
+	<div id="flashcontent"></div>
 	<script src="../../ruffle/ruffle.js"></script>
 	<script>
-		// The 7 spreads of the commemorative book, in order. The cover is wgo.swf;
-		// the original site had no wgo1 — spreads run wgo, wgo2 … wgo7.
-		const PAGES = ["swf/wgo.swf","swf/wgo2.swf","swf/wgo3.swf","swf/wgo4.swf",
-		               "swf/wgo5.swf","swf/wgo6.swf","swf/wgo7.swf"];
-		let idx = 0, player = null, api = null;
-
+		// Original 2007 embed: SWFObject → resizeapp.swf (Flash 9 / AS3, NO_SCALE
+		// full-browser app). It loads xml/wgo.xml (15 photo + lyric spreads) and
+		// streams Marvin_Gaye.mp3 / joe_minadeo.mp3 alongside.
 		window.RufflePlayer = window.RufflePlayer || {};
 		window.RufflePlayer.config = {
-			autoplay: "on", unmuteOverlay: "hidden", splashScreen: false,
-			letterbox: "on", scale: "showAll", backgroundColor: "#000000",
-			contextMenu: "off", allowScriptAccess: true, openUrlMode: "confirm",
+			autoplay: "on",
+			unmuteOverlay: "hidden",
+			splashScreen: false,
+			letterbox: "off",
+			scale: "noscale",
+			backgroundColor: "#FFFFFF",
+			contextMenu: "rightClickOnly",
+			allowScriptAccess: true,
+			openUrlMode: "confirm",
 			logLevel: "warn"
 		};
-
-		function render() {
-			const old = player;
-			player = window.RufflePlayer.newest().createPlayer();
+		window.addEventListener("DOMContentLoaded", () => {
+			const ruffle = window.RufflePlayer.newest();
+			const player = ruffle.createPlayer();
 			document.getElementById("flashcontent").appendChild(player);
-			api = player.ruffle ? player.ruffle() : player;
-			api.load({ url: PAGES[idx] });
-			if (old) old.remove();               // swap cleanly so each spread replays its animation
-			document.getElementById("prev").disabled = idx === 0;
-			document.getElementById("next").disabled = idx === PAGES.length - 1;
-			document.getElementById("counter").textContent =
-				(idx === 0 ? "Cover" : "Page " + idx) + " / " + (PAGES.length - 1);
-		}
-		function go(n) {
-			const t = Math.min(PAGES.length - 1, Math.max(0, idx + n));
-			if (t !== idx) { idx = t; render(); }
-		}
-
-		document.getElementById("prev").addEventListener("click", () => go(-1));
-		document.getElementById("next").addEventListener("click", () => go(1));
-		window.addEventListener("keydown", e => {
-			if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { go(1); e.preventDefault(); }
-			else if (e.key === "ArrowLeft" || e.key === "PageUp") { go(-1); e.preventDefault(); }
+			const api = player.ruffle ? player.ruffle() : player;
+			api.load({ url: "resizeapp.swf" });
 		});
-
-		// reveal nav on mouse move, fade after idle
-		const nav = document.getElementById("nav");
-		let hideT;
-		function poke() { nav.classList.add("show"); clearTimeout(hideT);
-			hideT = setTimeout(() => nav.classList.remove("show"), 2200); }
-		window.addEventListener("mousemove", poke);
-		window.addEventListener("DOMContentLoaded", () => { render(); poke(); });
 	</script>
 </body>
 </html>
