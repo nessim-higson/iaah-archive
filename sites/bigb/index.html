@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Big B — Bryant Fernandez</title>
+<meta name="description" content="Big B — Bryant Fernandez's personal Flash site (2002, unfinished). Home, about and contact survive; the work section was never exported. Resurrected via Ruffle.">
+<style>
+	html, body { height: 100%; margin: 0; padding: 0; background: #FFFFFF; }
+	#site { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+	#flashcontent { width: 640px; height: 480px; }
+	#flashcontent ruffle-player { width: 640px; height: 480px; display: block; }
+</style>
+</head>
+<body>
+	<div id="site"><div id="flashcontent"></div></div>
+	<script src="../../ruffle/ruffle.js"></script>
+	<script>
+		window.RufflePlayer = window.RufflePlayer || {};
+		window.RufflePlayer.config = {
+			autoplay: "on",
+			unmuteOverlay: "hidden",
+			splashScreen: false,
+			letterbox: "off",
+			scale: "showAll",
+			backgroundColor: "#FFFFFF",
+			contextMenu: "rightClickOnly",
+			allowScriptAccess: true,
+			openUrlMode: "allow",
+			logLevel: "warn"
+		};
+		window.addEventListener("DOMContentLoaded", () => {
+			const ruffle = window.RufflePlayer.newest();
+			const player = ruffle.createPlayer();
+			document.getElementById("flashcontent").appendChild(player);
+			const api = player.ruffle ? player.ruffle() : player;
+			api.load({ url: "main3.swf" });
+		});
+	</script>
+</body>
+</html>
