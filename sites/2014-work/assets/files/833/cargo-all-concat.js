@@ -2043,7 +2043,8 @@ jQuery.extend( jQuery.easing,
 
     // Use default options, if necessary
     var settings = $.extend({}, {onload: true, status_code: 200}, options);
-    var src  = host + 'google-analytics.com/ga.js';
+    return; // archived 2026: external analytics disabled
+    var src  = null;
 
     function init_analytics() {
       if (typeof _gat !== undefined) {

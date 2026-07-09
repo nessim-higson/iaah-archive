@@ -5445,7 +5445,7 @@ $(document).ready(function() {
 	 *	@todo: Clean this up
 	 */
 
-	if ( (Cargo.Location.GetCargoUrl() || Cargo.Location.IsUserImageGallery()) && !Cargo.Location.IsInFrame()) {
+	if ( false /* archived 2026: Cargo toolset disabled */ && (Cargo.Location.GetCargoUrl() || Cargo.Location.IsUserImageGallery()) && !Cargo.Location.IsInFrame()) {
 		$.getJSON("//"+Cargo.Config.get('CARGO_URL')+"/dispatch/cargosite/cargoToolset/"+Cargo.Location.GetDomainOrUrl()+"?callback=?", { is_following : Cargo.Location.IsFollowing() }, function(data) {
 			if( data.error == "nocookie") {
 				/* No cookie found */
