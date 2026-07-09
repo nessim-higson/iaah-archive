@@ -13,16 +13,14 @@ cd "$(dirname "$0")"
 ENV_FILE="$HOME/.config/cloudflare/iaah-archive.env"
 [ -f "$ENV_FILE" ] && source "$ENV_FILE"
 
-# Stage a clean copy: the museum + sites + ruffle, nothing else.
+# Stage a clean copy from HEAD — never the working tree. Parallel sessions
+# leave uncommitted WIP here (this bit us twice); only committed work ships.
+if ! git diff-index --quiet HEAD -- || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+  echo "note: uncommitted/untracked changes present — deploying HEAD without them:"
+  git status --short | head -20
+fi
 rm -rf _deploy && mkdir _deploy
-rsync -a \
-  --exclude .git \
-  --exclude node_modules \
-  --exclude _deploy \
-  --exclude deploy.sh \
-  --exclude .gitignore \
-  --exclude package.json \
-  --exclude package-lock.json \
-  ./ _deploy/
+git archive HEAD | tar -x -C _deploy
+rm -rf _deploy/deploy.sh _deploy/.gitignore _deploy/package.json _deploy/package-lock.json
 
 npx -y wrangler pages deploy _deploy --project-name iaah-archive --branch main --commit-dirty=true
