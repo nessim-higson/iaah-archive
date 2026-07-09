@@ -1,0 +1,59 @@
+/*
+ * The Typekit service used to deliver this font or fonts for use on websites
+ * is provided by Adobe and is subject to these Terms of Use
+ * http://www.adobe.com/products/eulas/tou_typekit. For font license
+ * information, see the list below.
+ *
+ * futura-pt:
+ *   - http://typekit.com/eulas/00000000000000000001008f
+ *   - http://typekit.com/eulas/000000000000000000010091
+ *   - http://typekit.com/eulas/000000000000000000013365
+ * nimbus-sans:
+ *   - http://typekit.com/eulas/00000000000000000001518d
+ *   - http://typekit.com/eulas/000000000000000000012544
+ *   - http://typekit.com/eulas/00000000000000000001011c
+ *
+ * © 2009-2026 Adobe Systems Incorporated. All Rights Reserved.
+ */
+/*{"last_published":"2016-05-03 14:41:10 UTC"}*/
+
+@import url("https://p.typekit.net/p.css?s=1&k=ffg6iny&ht=tk&f=10793.10795.10797.10879.10881.10884&a=568269&app=typekit&e=css");
+
+@font-face {
+font-family:"nimbus-sans";
+src:url("files/da0c19-n4.woff2") format("woff2"),url("files/da0c19-n4.woff") format("woff"),url("files/da0c19-n4.otf") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+font-family:"nimbus-sans";
+src:url("files/360cf4-n7.woff2") format("woff2"),url("files/360cf4-n7.woff") format("woff"),url("files/360cf4-n7.otf") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+
+@font-face {
+font-family:"nimbus-sans";
+src:url("files/50ea52-n3.woff2") format("woff2"),url("files/50ea52-n3.woff") format("woff"),url("files/50ea52-n3.otf") format("opentype");
+font-display:auto;font-style:normal;font-weight:300;font-stretch:normal;
+}
+
+@font-face {
+font-family:"futura-pt";
+src:url("files/2cd6bf-n5.woff2") format("woff2"),url("files/2cd6bf-n5.woff") format("woff"),url("files/2cd6bf-n5.otf") format("opentype");
+font-display:auto;font-style:normal;font-weight:500;font-stretch:normal;
+}
+
+@font-face {
+font-family:"futura-pt";
+src:url("files/309dfe-n7.woff2") format("woff2"),url("files/309dfe-n7.woff") format("woff"),url("files/309dfe-n7.otf") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+
+@font-face {
+font-family:"futura-pt";
+src:url("files/9b05f3-n4.woff2") format("woff2"),url("files/9b05f3-n4.woff") format("woff"),url("files/9b05f3-n4.otf") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+.tk-nimbus-sans { font-family: "nimbus-sans",sans-serif; }
+.tk-futura-pt { font-family: "futura-pt",sans-serif; }
