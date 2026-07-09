@@ -46,6 +46,18 @@ subfolder is an unrelated HTML gallery export that shipped without its image
 renditions — kept as-is, not linked. The `welcome.html` GoDaddy placeholder is
 kept too.
 
+## The memorial
+
+| Year | Site | Source |
+|------|------|--------|
+| 2007 | [What's Going On?](https://archive.iamalwayshungry.com/sites/wgo/) — a post-Katrina commemorative piece: Lee Crum's New Orleans photographs (15 spreads) set to Marvin Gaye's "What's Going On", scored by Joe Minadeo / patternbased | `resizeapp.swf` (Flash 9 · AS3) + `xml/wgo.xml` + two MP3s |
+
+A standalone art piece, not a portfolio site. AS3 under Ruffle, so it shares
+the v7/v8 "slow to wake" flake — the chrome (title, autoplay toggle, prev/next)
+paints first; the photo/lyric spreads can lag on the `Loader.load()` stub.
+Note: the piece serves the full Marvin Gaye master recording and complete
+lyrics — original 2007 work, republished as-is.
+
 Reconstruction notes: the 2005 front page (`index.html`) was reunited with its
 site body (`nessDelivery/latest/`); its `includes/` came from the same
 snapshot's `NEW/` section, and the katrina page's PDFs/movies were mirrored
