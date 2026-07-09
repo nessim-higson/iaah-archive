@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>I MUST CREATE</title>
+<meta name="description" content="I MUST CREATE — Bryant Fernandez's self-promotion site (2002), by Bryant Fernandez, Jared Lyvers, Matt Cross and Nessim Higson. Resurrected via Ruffle.">
+<style>
+	html, body { height: 100%; margin: 0; padding: 0; background: #FFFFFF; }
+	/* splash — mirrors splash1.html: the imustcreate.jpg mark centered on white */
+	#splash { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+	#splash img { display: block; border: 0; }
+	/* stage — mirrors Start.html: fixed 700×550, centered, white */
+	#site { width: 100%; height: 100%; display: none; align-items: center; justify-content: center; }
+	#flashcontent { width: 700px; height: 550px; }
+	#flashcontent ruffle-player { width: 700px; height: 550px; display: block; }
+	/* fallback lightbox for when the browser blocks the 2002 popups */
+	#lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); align-items: center; justify-content: center; z-index: 10; }
+	#lightbox iframe { background: #fff; border: 0; box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+</style>
+</head>
+<body>
+	<div id="splash" title="enter"><img src="imustcreate.jpg" alt="i must create"></div>
+	<div id="site"><div id="flashcontent"></div></div>
+	<div id="lightbox"></div>
+	<script src="../../ruffle/ruffle.js"></script>
+	<script>
+		// The 2002 work popups, verbatim geometry from Start.html (NewWindow1–18).
+		// NewWindow19 (called by the t-shirts section) was never defined in any
+		// surviving Start page — kept as a no-op, as found.
+		var WORK = {
+			1:["gothic.html",700,453],    2:["protective.html",700,453],
+			3:["Dogs.html",392,560],      4:["helmet.html",700,453],
+			5:["coach.html",700,453],     6:["game.html",700,453],
+			7:["minivan.html",470,619],   8:["chick.html",470,619],
+			9:["castillo.html",700,453],  10:["fire.html",700,453],
+			11:["golf.html",470,619],     12:["little.html",470,619],
+			13:["avocado.html",470,619],  14:["jumping.html",300,400],
+			15:["sheetrock.html",300,400],16:["golf.html",300,400],
+			17:["ticket.html",300,400],   18:["orange.html",300,400]
+		};
+		function openWork(n) {
+			var w = WORK[n];
+			if (!w) return; // NewWindow19: t-shirts popup lost to time
+			var win = window.open(w[0], "_blank",
+				"toolbar=no,width=" + w[1] + ",height=" + w[2] + ",menubar=no,status=yes,scrollbars=no,resizable=no");
+			if (win) {
+				win.moveTo(((screen.width/2)-298),((screen.height/2)-330));
+			} else {
+				// popup blocked — show the same page in an in-page frame instead
+				var box = document.getElementById("lightbox");
+				box.innerHTML = '<iframe src="' + w[0] + '" width="' + w[1] + '" height="' + w[2] + '"></iframe>';
+				box.style.display = "flex";
+			}
+		}
+		document.getElementById("lightbox").addEventListener("click", function () {
+			this.style.display = "none"; this.innerHTML = "";
+		});
+		for (var i = 1; i <= 19; i++) {
+			(function (n) { window["NewWindow" + n] = function () { openWork(n); }; })(i);
+		}
+
+		window.RufflePlayer = window.RufflePlayer || {};
+		window.RufflePlayer.config = {
+			autoplay: "on",
+			unmuteOverlay: "hidden",
+			splashScreen: false,
+			letterbox: "off",
+			scale: "showAll",
+			backgroundColor: "#FFFFFF",
+			contextMenu: "rightClickOnly",
+			allowScriptAccess: true,
+			openUrlMode: "allow",
+			logLevel: "warn"
+		};
+		// boot inside the click gesture so the site's music is allowed to play
+		document.getElementById("splash").addEventListener("click", function () {
+			this.style.display = "none";
+			document.getElementById("site").style.display = "flex";
+			var ruffle = window.RufflePlayer.newest();
+			var player = ruffle.createPlayer();
+			document.getElementById("flashcontent").appendChild(player);
+			var api = player.ruffle ? player.ruffle() : player;
+			api.load({ url: "stage.swf" });
+		});
+	</script>
+</body>
+</html>

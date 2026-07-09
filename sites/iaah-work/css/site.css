@@ -1452,14 +1452,17 @@ div[data-view="Content"] .page_container { padding-top: 5.646rem; }
 .page_content iframe { max-width: 100%; }
 .content_container { overflow-x: clip; }
 .header-image img { width: 100%; height: auto; display: block; }
+/* collage grid — port-owned class names so Cargo's base CSS (.container,
+   .thumbnail, .image-link are all live Cargo classnames) cannot interfere */
 .thumbnails { position: relative; }
-.thumbnails .trow { display: flex; justify-content: center; align-items: center; }
-.thumbnails .thumbnail { box-sizing: border-box; padding: 0.9% 1.3%; }
-.thumbnails .thumbnail img { width: 100%; height: auto; display: block; }
-.thumbnails a.image-link { display: block; }
+.pgrid { width: 100%; }
+.prow { display: flex; justify-content: center; align-items: center; }
+.pthumb { box-sizing: border-box; padding: 0.9% 1.3%; flex: none; }
+.pthumb a { display: block; }
+.pthumb img { width: 100%; height: auto; display: block; }
 @media (max-width: 700px) {
-  .thumbnails .trow { display: block; }
-  .thumbnails .thumbnail { width: 100% !important; padding: 2.6% 1.3%; }
+  .prow { display: block; }
+  .pthumb { width: 100% !important; padding: 2.6% 1.3%; }
 }
 /* scroll transition, unscoped so it also covers the collage thumbnails */
 .scroll-transition-fade { transition: transform 1s ease-in-out, opacity 0.8s ease-in-out; }

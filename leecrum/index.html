@@ -34,6 +34,7 @@
 		padding: 0; border: 0; background: none; cursor: pointer;
 	}
 	.photo img { display: block; width: 100%; height: 100%; }
+	.camera.animating .photo img { will-change: transform; }
 
 	/* zoom-out cursor badge (follows mouse over the bare wall when zoomed in) */
 	#zoomOutBtn {
@@ -329,7 +330,10 @@
 			c.apply();
 			const animating = tweens.some(t => t.targ === c || t.targ === c.tar);
 			const hint = animating ? "transform" : "auto";
-			if (c.el.style.willChange !== hint) c.el.style.willChange = hint;
+			if (c.el.style.willChange !== hint) {
+				c.el.style.willChange = hint;
+				c.el.classList.toggle("animating", animating);
+			}
 		});
 		requestAnimationFrame(tick);
 	}
