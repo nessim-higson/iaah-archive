@@ -313,6 +313,20 @@ An exploration for Black Swan. A film about polarity and opposites, fittingly re
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fix); else fix();
   setTimeout(fix, 800); setTimeout(fix, 2500);
+  /* backstretch fade watchdog: locally-served images load before the 2014
+     slideshow binds its load handler, leaving slides at opacity 0 + spinner.
+     The live original survives on CDN latency; here we complete the reveal. */
+  setInterval(function(){
+    var img = document.querySelector('#backstretch img');
+    if (img && img.complete && img.naturalWidth > 0) {
+      if (getComputedStyle(img).opacity === '0') {
+        img.style.transition = 'opacity .5s';
+        img.style.opacity = '1';
+      }
+      var sp = document.getElementById('nav_loadspin');
+      if (sp) sp.style.display = 'none';
+    }
+  }, 400);
 })();</script>
 </body>
 </html>
