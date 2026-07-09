@@ -17,7 +17,10 @@ ActionScript.
   (JPEXS ffdec). The engine below is a port of it, not an approximation:
   Center.as (camera choreography), SlideShowControls.as, MenuView/OptionsView,
   the MC Tween library with its easeOutExpo default.
-- `index.html` — the whole engine, camera-canvas like the 2007 original:
+- `index.html` — the whole engine. The wall renders on a <canvas>, resampling
+  every photograph's full-resolution source on every frame — the way Flash
+  drew — so imagery stays crisp during camera moves, not just at rest.
+  Camera-canvas like the 2007 original:
   photographs affixed at their unique points on one canvas; click a photo
   and the camera glides to frame it; AUTO PLAY steps photo-to-photo; drag
   pans directly. Entry gate recreates the original AUTO PLAY ON/OFF · ENTER

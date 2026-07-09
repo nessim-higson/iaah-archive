@@ -25,16 +25,10 @@
 		color: var(--ink);
 	}
 
-	/* ================= wall + cameras ================= */
+	/* ================= wall — canvas renderer, full-res sampling
+	   every frame, the way Flash drew it ================= */
 	#stage { position: absolute; inset: 0; background: var(--wall); overflow: hidden; }
-	.camera { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
-	.tar { position: absolute; left: 0; top: 0; }
-	.photo {
-		position: absolute; transform-origin: center center;
-		padding: 0; border: 0; background: none; cursor: pointer;
-	}
-	.photo img { display: block; width: 100%; height: 100%; }
-	.camera.animating .photo img { will-change: transform; }
+	#wall { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
 	/* zoom-out cursor badge (follows mouse over the bare wall when zoomed in) */
 	#zoomOutBtn {
@@ -207,7 +201,7 @@
 </head>
 <body>
 
-<div id="stage"></div>
+<div id="stage"><canvas id="wall"></canvas></div>
 <div id="zoomOutBtn">–</div>
 <div id="infoTab"></div>
 <div id="resumeTab"><b>resume</b>&nbsp; slideshow</div>
@@ -276,20 +270,21 @@
 
 	const $ = id => document.getElementById(id);
 	const stage = $("stage"), player = $("player");
+	const canvas = $("wall"), ctx = canvas.getContext("2d");
 	const css = c => c ? "#" + c.replace(/^0x/i, "") : null;
 	const cx = () => innerWidth / 2, cy = () => innerHeight / 2;
+	const RAD = Math.PI / 180;
+	let dirty = true;
 
 	/* ======================================================
-	   MC Tween port — the site's animation system, decompiled
-	   from app.swf frame 1. Durations in seconds, per-property
-	   override, string easings, delay, callback. Default ease:
-	   easeOutExpo, exactly as the original set it.
+	   MC Tween port — decompiled from app.swf frame 1.
+	   Durations in seconds, per-property override, delays,
+	   callbacks. Default ease: easeOutExpo, as the original.
 	   ====================================================== */
 	const EASE = {
 		linear: (t, b, c, d) => c * t / d + b,
 		easeoutexpo: (t, b, c, d) => t == d ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b,
-		easeoutcirc: (t, b, c, d) => c * Math.sqrt(1 - (t = t / d - 1) * t) + b,
-		easeinoutquad: (t, b, c, d) => (t /= d / 2) < 1 ? c / 2 * t * t + b : -c / 2 * ((--t) * (t - 2) - 1) + b
+		easeoutcirc: (t, b, c, d) => c * Math.sqrt(1 - (t = t / d - 1) * t) + b
 	};
 	const tweens = [];
 	function tween(targ, props, vals, secs, ease, delay, cb) {
@@ -297,115 +292,133 @@
 		const fn = EASE[(ease || "easeoutexpo").toLowerCase()] || EASE.easeoutexpo;
 		const now = performance.now();
 		props.forEach((prop, k) => {
-			// per-property override, like the original tween controller
 			for (let i = tweens.length - 1; i >= 0; i--)
 				if (tweens[i].targ === targ && tweens[i].prop === prop) tweens.splice(i, 1);
-			tweens.push({
-				targ, prop, start: undefined, end: vals[k],
+			tweens.push({ targ, prop, start: undefined, end: vals[k],
 				t0: now, t1: now + secs * 1000, delay: (delay || 0) * 1000,
-				fn, cb: k === 0 ? cb : undefined
-			});
+				fn, cb: k === 0 ? cb : undefined });
 		});
 	}
-	function stopTween(targ, props) {
+	function stopTween(targ) {
 		for (let i = tweens.length - 1; i >= 0; i--)
-			if (tweens[i].targ === targ && (!props || props.includes(tweens[i].prop))) tweens.splice(i, 1);
-	}
-	function tick(now) {
-		for (let i = 0; i < tweens.length; i++) {
-			const t = tweens[i];
-			if (t.t0 + t.delay > now) continue;
-			if (t.start === undefined) t.start = t.targ[t.prop];
-			if (now >= t.t1 + t.delay) {
-				t.targ[t.prop] = t.end;
-				const cb = t.cb;
-				tweens.splice(i, 1); i--;
-				if (cb) cb();
-			} else {
-				t.targ[t.prop] = t.fn(now - t.delay - t.t0, t.start, t.end - t.start, t.t1 - t.t0);
-			}
-		}
-		panLoop();
-		cams.forEach(c => {
-			c.apply();
-			const animating = tweens.some(t => t.targ === c || t.targ === c.tar);
-			const hint = animating ? "transform" : "auto";
-			if (c.el.style.willChange !== hint) {
-				c.el.style.willChange = hint;
-				c.el.classList.toggle("animating", animating);
-			}
-		});
-		requestAnimationFrame(tick);
+			if (tweens[i].targ === targ) tweens.splice(i, 1);
 	}
 
 	/* ======================================================
-	   Cameras — one per gallery, persistent, as in the original
-	   (createCameras). camera: x,y,z(scale%),r(deg); tar: x,y.
+	   Cameras — one per gallery, persistent (createCameras).
+	   Pure state now; the canvas draws them.
 	   ====================================================== */
-	const cams = [];
 	class Camera {
 		constructor(g, idx) {
 			this.g = g; this.idx = idx;
-			this.el = document.createElement("div");
-			this.el.className = "camera";
-			this.tarEl = document.createElement("div");
-			this.tarEl.className = "tar";
-			this.el.appendChild(this.tarEl);
-			stage.appendChild(this.el);
 			this.x = cx(); this.y = cy(); this.z = 0; this.r = 0;
 			this.tar = { x: 0, y: 0 };
 			this.built = false;
-			this.zTop = 10;
+			this.order = [];              // draw order; focused photo moves to the end
 		}
 		build() {
 			if (this.built) return;
 			this.built = true;
 			this.g.photos.forEach((p, i) => {
 				if (!p.src) return;
-				const w = p.w * p.scale / 100, h = p.h * p.scale / 100;
-				const el = document.createElement("button");
-				el.className = "photo";
-				el.style.cssText = `width:${w}px;height:${h}px;left:${p.x - w / 2}px;top:${p.y - h / 2}px;transform:rotate(${p.rotation}deg)`;
-				const img = document.createElement("img");
-				img.src = p.src; img.alt = p.txt || this.g.name; img.loading = "lazy"; img.draggable = false;
-				el.appendChild(img);
-				el.addEventListener("click", e => { e.stopPropagation(); photoClick(this, i, el); });
-				this.tarEl.appendChild(el);
-				p._el = el;
+				const img = new Image();
+				img.decoding = "async";
+				img.onload = () => { dirty = true; };
+				img.src = p.src;
+				p._img = img;
+				this.order.push(i);
 			});
 		}
-		apply() {
-			this.el.style.transform = `translate(${this.x}px, ${this.y}px) rotate(${this.r}deg) scale(${this.z / 100})`;
-			this.tarEl.style.transform = `translate(${this.tar.x}px, ${this.tar.y}px)`;
-		}
 	}
+	const cams = [];
 	all.forEach((g, i) => cams.push(new Camera(g, i)));
 
 	/* ======================================================
-	   Center — focus choreography, decompiled from Center.as:
+	   Canvas renderer — resamples the full-resolution source
+	   through the live transform on every frame, like Flash.
+	   ====================================================== */
+	function sizeCanvas() {
+		const dpr = Math.min(devicePixelRatio || 1, 2);
+		canvas.width = Math.max(1, Math.round(innerWidth * dpr));
+		canvas.height = Math.max(1, Math.round(innerHeight * dpr));
+		canvas._dpr = dpr;
+		dirty = true;
+	}
+	sizeCanvas();
+	function draw() {
+		const dpr = canvas._dpr;
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+		ctx.clearRect(0, 0, innerWidth, innerHeight);
+		ctx.imageSmoothingEnabled = true;
+		ctx.imageSmoothingQuality = "high";
+		for (const cam of cams) {
+			if (!cam.built || cam.z <= 0.5) continue;
+			if (cam.x < -3000 || cam.x > innerWidth + 3000) continue;
+			ctx.save();
+			ctx.translate(cam.x, cam.y);
+			ctx.rotate(cam.r * RAD);
+			ctx.scale(cam.z / 100, cam.z / 100);
+			ctx.translate(cam.tar.x, cam.tar.y);
+			for (const i of cam.order) {
+				const p = cam.g.photos[i];
+				if (!p._img || !p._img.complete || !p._img.naturalWidth) continue;
+				ctx.save();
+				ctx.translate(p.x, p.y);
+				if (p.rotation) ctx.rotate(p.rotation * RAD);
+				const s = p.scale / 100;
+				ctx.scale(s, s);
+				ctx.drawImage(p._img, -p.w / 2, -p.h / 2, p.w, p.h);
+				ctx.restore();
+			}
+			ctx.restore();
+		}
+	}
+
+	/* screen → world → hit test (inverse of the draw transform) */
+	function worldPoint(cam, sx, sy) {
+		let x = sx - cam.x, y = sy - cam.y;
+		const cr = Math.cos(-cam.r * RAD), sr = Math.sin(-cam.r * RAD);
+		[x, y] = [x * cr - y * sr, x * sr + y * cr];
+		x /= cam.z / 100; y /= cam.z / 100;
+		return { x: x - cam.tar.x, y: y - cam.tar.y };
+	}
+	function photoAt(cam, sx, sy) {
+		const w = worldPoint(cam, sx, sy);
+		for (let k = cam.order.length - 1; k >= 0; k--) {
+			const i = cam.order[k], p = cam.g.photos[i];
+			if (!p._img) continue;
+			let lx = w.x - p.x, ly = w.y - p.y;
+			if (p.rotation) {
+				const cr = Math.cos(-p.rotation * RAD), sr = Math.sin(-p.rotation * RAD);
+				[lx, ly] = [lx * cr - ly * sr, lx * sr + ly * cr];
+			}
+			const hw = p.w * p.scale / 200, hh = p.h * p.scale / 200;
+			if (Math.abs(lx) <= hw && Math.abs(ly) <= hh) return i;
+		}
+		return -1;
+	}
+
+	/* ======================================================
+	   Center — focus choreography from Center.as:
 	   tar pans 2s · camera centers + counter-rotates 1s ·
-	   zoom to 100% of the photo 2s with 0.5s delay.
+	   zoom to the photo's native scale 2s, 0.5s delay.
 	   ====================================================== */
 	let curID = 1;                 // the original opens on gallery index 1
 	let focusedId = -1, isZooming = false;
 	let pan = false, panSpeed = 0.02;
 
-	function photoClick(cam, i, el) {
-		if (cam.idx !== curID) return;
-		slideOff(true);            // a manual click stops the slideshow (PictureFrame.checkClick)
-		focusPhoto(i);
-	}
 	function focusPhoto(i) {
 		const cam = cams[curID], p = cam.g.photos[i];
 		if (!p || !p.src) return;
 		focusedId = i;
 		isZooming = true;
 		pan = false;
-		p._el.style.zIndex = ++cam.zTop;
-		const zoom = 100 / (p.scale / 100) / 1;          // 100 / (scale*0.01) → photo at its native size
+		const k = cam.order.indexOf(i);
+		if (k !== -1) { cam.order.splice(k, 1); cam.order.push(i); }   // swapDepths
+		const zoom = 100 / (p.scale / 100);
 		tween(cam.tar, ["x", "y"], [-p.x, -p.y], 2);
 		tween(cam, ["r", "x", "y"], [-p.rotation, cx(), cy()], 1);
-		tween(cam, ["z"], [Math.min(zoom, 100 / (p.scale / 100))], 2, undefined, 0.5, () => {
+		tween(cam, ["z"], [zoom], 2, undefined, 0.5, () => {
 			isZooming = false;
 			if (!slideshowOn) { pan = true; panSpeed = 0.02; }
 			if (p.pan === false) pan = false;
@@ -414,7 +427,7 @@
 		hideCaption();
 	}
 
-	/* mouse-follow pan — Center.followMouse, speed 0.02/0.01 */
+	/* mouse-follow pan — Center.followMouse, lerp 0.02 / 0.01 */
 	let mx = -1, my = -1, mouseIn = false;
 	addEventListener("pointermove", e => { mx = e.clientX; my = e.clientY; mouseIn = true; });
 	document.documentElement.addEventListener("mouseleave", () => mouseIn = false);
@@ -424,17 +437,26 @@
 		if (mouseIn && mx > 0 && mx < innerWidth && my > 0 && my < innerHeight) {
 			const tx = cx() - (mx - cx());
 			const ty = cy() - (my - cy());
-			cam.x += (tx - cam.x) * panSpeed;
-			cam.y += (ty - cam.y) * panSpeed;
+			const nx = cam.x + (tx - cam.x) * panSpeed;
+			const ny = cam.y + (ty - cam.y) * panSpeed;
+			if (Math.abs(nx - cam.x) > 0.01 || Math.abs(ny - cam.y) > 0.01) {
+				cam.x = nx; cam.y = ny; dirty = true;
+			}
 		}
 	}
 
-	/* background click = the original "back" plane: tiered zoom-out + resume pan */
-	stage.addEventListener("click", () => {
+	/* clicks: photo → focus (stops slideshow); bare wall → tiered zoom-out */
+	canvas.addEventListener("click", e => {
 		if (isZooming) return;
+		const cam = cams[curID];
+		const hit = photoAt(cam, e.clientX, e.clientY);
+		if (hit >= 0) {
+			slideOff(true);                          // PictureFrame.checkClick
+			focusPhoto(hit);
+			return;
+		}
 		slideOff(true);
 		hideCaption();
-		const cam = cams[curID];
 		let amt = 55;
 		if (cam.z < 80) { amt = 30; panSpeed = 0.01; }
 		else { amt = 55; panSpeed = 0.02; }
@@ -443,15 +465,16 @@
 		pan = true;
 	});
 
-	/* zoom-out cursor badge — follows the mouse over the bare wall when zoomed in */
+	/* cursor + zoom-out badge over bare wall when zoomed in */
 	const zBtn = $("zoomOutBtn");
 	let zPos = { x: 0, y: 0 };
-	stage.addEventListener("pointermove", e => {
-		if (e.target === stage || e.target.classList.contains("tar") || e.target.classList.contains("camera")) {
-			if (cams[curID].z > 45) zBtn.style.opacity = 1; else zBtn.style.opacity = 0;
-		} else zBtn.style.opacity = 0;
+	canvas.addEventListener("pointermove", e => {
+		const cam = cams[curID];
+		const overPhoto = photoAt(cam, e.clientX, e.clientY) >= 0;
+		canvas.style.cursor = overPhoto ? "pointer" : "default";
+		zBtn.style.opacity = (!overPhoto && cam.z > 45) ? 1 : 0;
 	});
-	stage.addEventListener("pointerleave", () => zBtn.style.opacity = 0);
+	canvas.addEventListener("pointerleave", () => zBtn.style.opacity = 0);
 	(function badgeLoop() {
 		zPos.x += (mx - zPos.x) * 0.6;
 		zPos.y += (my - 15 - zPos.y) * 0.6;
@@ -465,10 +488,8 @@
 
 	/* ======================================================
 	   Gallery switching — switchCameras + slideInNext:
-	   old wall shrinks (1s easeOutCirc), new wall enters from
-	   a random side while the old flies out the other (6s/2s).
+	   shrink 1s easeOutCirc, then fly-out/fly-in (6s / 2s).
 	   ====================================================== */
-	let lastID = 1, switching = false;
 	function switchCameras(id) {
 		if (id === curID) return;
 		slideOff(true);
@@ -483,7 +504,6 @@
 		$("contactBtn").setAttribute("aria-current", cam.g.slug === "contact");
 		const drift = Math.round(Math.random() * 50);
 		tween(oldCam, ["z", "r"], [30, 0], 1, "easeoutcirc", 0, () => {
-			// place the new camera offscreen in a random direction; fly the old one out the other way
 			cam.z = 40; cam.r = 0; cam.tar.x = 0; cam.tar.y = 0;
 			const dir = Math.floor(Math.random() * 4);
 			stopTween(oldCam);
@@ -494,7 +514,6 @@
 			tween(cam, ["x", "y"], [cx(), cy()], 2, undefined, 0, () => { pan = true; panSpeed = 0.02; });
 		});
 		tween(oldCam.tar, ["x", "y"], [oldCam.tar.x + drift, oldCam.tar.y + drift], 1);
-		lastID = curID;
 	}
 
 	/* nav */
@@ -516,8 +535,8 @@
 	$("stripR").addEventListener("click", () => { const el = $("controls"); el.classList.toggle("closed"); uiSnd(!el.classList.contains("closed")); });
 
 	/* ======================================================
-	   Slideshow — SlideShowControls: default 5s, slider 5–15,
-	   linear countdown bar, wrap; manual click → resume hint.
+	   Slideshow — SlideShowControls: 5s default, 5–15 slider,
+	   linear countdown, wrap; manual click → resume hint.
 	   ====================================================== */
 	let slideshowOn = false, slideTimer = 0, delayS = 5, hintTimer = 0, barRAF = 0, barT0 = 0;
 	function slideOn() {
@@ -527,8 +546,7 @@
 		$("resumeTab").classList.remove("show");
 		clearInterval(slideTimer);
 		slideTimer = setInterval(slideNext, delayS * 1000);
-		startBar();
-		slideNext();                          // startSlideOn focuses the current photo immediately
+		slideNext();
 	}
 	function slideOff(showHint) {
 		const was = slideshowOn;
@@ -570,8 +588,7 @@
 	$("nextBtn").addEventListener("click", () => { slideOff(true); const n = cams[curID].g.photos.length; focusPhoto((focusedId + 1) % n); });
 
 	/* ======================================================
-	   Music — the <audioplayer> playlist from gallery.xml,
-	   volume 40 as in the original. Auto-advance, wrap.
+	   Music — the gallery.xml <audioplayer> playlist, vol 40.
 	   ====================================================== */
 	const tracks = [
 		["absolute", "joe1"], ["amanecer", "joe2"], ["luz de luna", "joe3"],
@@ -606,19 +623,19 @@
 	$("vol").addEventListener("input", e => player.volume = e.target.value / 100);
 	markTrack();
 
-	/* resize (guard degenerate embedded viewports) */
+	/* resize */
 	let resizeT = 0;
 	addEventListener("resize", () => {
 		clearTimeout(resizeT);
 		resizeT = setTimeout(() => {
 			if (innerWidth < 100 || innerHeight < 100) return;
+			sizeCanvas();
 			tween(cams[curID], ["x", "y"], [cx(), cy()], 2);
 		}, 150);
 	});
 
 	/* ======================================================
-	   Gate — masthead fades in 2s; ENTER + AUTO PLAY fade in
-	   after load (0.5s / 1s delays). Enter starts music + view.
+	   Gate
 	   ====================================================== */
 	let gateAutoplay = false;
 	setTimeout(() => $("gate").classList.add("ready"), 60);
@@ -631,7 +648,30 @@
 		if (gateAutoplay) slideOn();
 	});
 
-	/* boot — as createCameras: open on gallery 1 at 55% */
+	/* ======================================================
+	   Main loop: tweens → pan → draw when anything changed
+	   ====================================================== */
+	function tick(now) {
+		let moved = tweens.length > 0;
+		for (let i = 0; i < tweens.length; i++) {
+			const t = tweens[i];
+			if (t.t0 + t.delay > now) continue;
+			if (t.start === undefined) t.start = t.targ[t.prop];
+			if (now >= t.t1 + t.delay) {
+				t.targ[t.prop] = t.end;
+				const cb = t.cb;
+				tweens.splice(i, 1); i--;
+				if (cb) cb();
+			} else {
+				t.targ[t.prop] = t.fn(now - t.delay - t.t0, t.start, t.end - t.start, t.t1 - t.t0);
+			}
+		}
+		panLoop();
+		if (moved || dirty) { draw(); dirty = false; }
+		requestAnimationFrame(tick);
+	}
+
+	/* boot — createCameras: open on gallery 1 at 55% */
 	const start = cams[curID];
 	start.build();
 	start.z = 55; start.x = cx(); start.y = cy();
