@@ -7,13 +7,23 @@
 <style>
 	:root { --bg: #161616; --ink: #eaeaea; --dim: #8a8a8a; --line: #2e2e2e; --accent: #ffe600; }
 	* { box-sizing: border-box; }
-	html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+	html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); -webkit-text-size-adjust: 100%; }
 	body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
 	main { max-width: 780px; margin: 0 auto; padding: 9vh 24px 6vh; width: 100%; flex: 1; }
 	h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
 	h1 .tm { font-size: 0.4em; vertical-align: super; }
-	p.lede { color: var(--dim); font-size: 15px; line-height: 1.6; margin: 0 0 56px; max-width: 52ch; }
+	p.lede { color: var(--dim); font-size: 15px; line-height: 1.6; margin: 0 0 32px; max-width: 52ch; }
 	p.lede a { color: var(--ink); }
+
+	/* sort control */
+	.sort { display: flex; align-items: center; gap: 12px; margin: 0 0 44px; flex-wrap: wrap; }
+	.sort-label { font-family: "SF Mono", Menlo, monospace; font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.12em; }
+	.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+	.seg button { appearance: none; background: transparent; border: 0; border-left: 1px solid var(--line); color: var(--dim); font-family: "SF Mono", Menlo, monospace; font-size: 12px; padding: 8px 13px; cursor: pointer; transition: color 0.15s ease, background 0.15s ease; }
+	.seg button:first-child { border-left: 0; }
+	.seg button:hover { color: var(--ink); }
+	.seg button[aria-pressed="true"] { color: #161616; background: var(--accent); }
+
 	ul.gens { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 	ul.gens li { border-bottom: 1px solid var(--line); }
 	ul.gens a { display: flex; align-items: baseline; gap: 20px; padding: 22px 4px; text-decoration: none; color: var(--ink); transition: background 0.15s ease, padding-left 0.2s ease; }
@@ -22,41 +32,88 @@
 	.num { font-family: "SF Mono", Menlo, monospace; font-size: 13px; color: var(--dim); width: 4ch; flex: none; transition: color 0.15s ease; }
 	.name { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
 	.meta { margin-left: auto; font-family: "SF Mono", Menlo, monospace; font-size: 11px; color: var(--dim); text-align: right; flex: none; }
+	.meta a.sub { color: var(--accent); text-decoration: none; }
+	/* wing tag — only shown when the list is flattened by date */
+	.tag { display: none; font-family: "SF Mono", Menlo, monospace; font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px; align-self: center; flex: none; }
+	body[data-view="date"] .tag { display: inline-block; }
+	body[data-view="date"] .meta { text-align: right; }
+
 	footer { padding: 20px 24px; color: var(--dim); font-family: "SF Mono", Menlo, monospace; font-size: 11px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 	footer span b { color: var(--ink); font-weight: 500; }
 	h2.wing { font-family: "SF Mono", Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--dim); text-transform: uppercase; letter-spacing: 0.14em; margin: 52px 0 10px; }
 	h2.wing:first-of-type { margin-top: 0; }
 	p.wing-note { color: var(--dim); font-size: 13px; line-height: 1.6; margin: 0 0 18px; max-width: 56ch; }
-	.meta a.sub { color: var(--accent); text-decoration: none; }
+	/* when sorted by date, collapse the thematic wings entirely */
+	body[data-view="date"] .wing, body[data-view="date"] .wing-note { display: none; }
+
+	/* ---- tablet ---- */
+	@media (max-width: 860px) {
+		main { padding: 7vh 22px 6vh; }
+		p.lede { margin-bottom: 28px; }
+		.sort { margin-bottom: 38px; }
+		ul.gens a { gap: 16px; }
+		.meta { max-width: 40%; }
+	}
+
+	/* ---- mobile ---- */
+	@media (max-width: 560px) {
+		main { padding: 6vh 18px 5vh; }
+		h2.wing { margin: 40px 0 8px; }
+		.sort { margin-bottom: 32px; }
+		.seg { width: 100%; }
+		.seg button { flex: 1; padding: 9px 6px; }
+		ul.gens a { flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 18px 2px; }
+		.name { font-size: 17px; flex: 1 1 auto; }
+		.meta { margin-left: 0; flex: 1 1 100%; text-align: left; padding-left: calc(4ch + 12px); font-size: 10.5px; line-height: 1.5; max-width: none; }
+		body[data-view="date"] .meta { text-align: left; }
+		.tag { order: 3; align-self: flex-start; margin-left: calc(4ch + 12px); }
+		ul.gens a:hover { padding-left: 2px; }
+		footer { flex-direction: column; gap: 6px; padding: 20px 18px; }
+	}
 </style>
 </head>
-<body>
+<body data-view="wing">
 	<main>
 		<h1>iamalwayshungry<span class="tm">™</span></h1>
 		<p class="lede">The Flash years — the studio site as it ran 2003–2011, recovered
 		from the archive and running again in a modern browser via
 		<a href="https://ruffle.rs" target="_blank" rel="noopener">Ruffle</a>.
 		No plugins, no 2006 required.</p>
+
+		<div class="sort">
+			<span class="sort-label">Order</span>
+			<div class="seg" role="group" aria-label="Sort archive">
+				<button type="button" data-sort="wing" aria-pressed="true">By wing</button>
+				<button type="button" data-sort="old" aria-pressed="false">Oldest first</button>
+				<button type="button" data-sort="new" aria-pressed="false">Newest first</button>
+			</div>
+		</div>
+
+		<div id="archive">
 		<h2 class="wing">the canon</h2>
 		<ul class="gens">
-			<li><a target="_blank" rel="noopener" href="sites/2002-first/">
+			<li data-year="2003" data-wing="the canon"><a target="_blank" rel="noopener" href="sites/2002-first/">
 				<span class="num">2003</span>
 				<span class="name">The First One</span>
+				<span class="tag">the canon</span>
 				<span class="meta">Flash &middot; 600&times;549 fixed&nbsp;stage &middot; who/what/where/how &middot; with&nbsp;music</span>
 			</a></li>
-			<li><a target="_blank" rel="noopener" href="sites/v5/">
+			<li data-year="2007" data-wing="the canon"><a target="_blank" rel="noopener" href="sites/v5/">
 				<span class="num">2007</span>
 				<span class="name">IAAH v5</span>
+				<span class="tag">the canon</span>
 				<span class="meta">Flash 8 &middot; AS2 &middot; fullscreen&nbsp;noscale</span>
 			</a></li>
-			<li><a target="_blank" rel="noopener" href="sites/v7/">
+			<li data-year="2011" data-wing="the canon"><a target="_blank" rel="noopener" href="sites/v7/">
 				<span class="num">2011</span>
 				<span class="name">IAAH v7</span>
+				<span class="tag">the canon</span>
 				<span class="meta">Flash 9 &middot; draggable&nbsp;canvas &middot; slow&nbsp;to&nbsp;wake — patience</span>
 			</a></li>
-			<li><a target="_blank" rel="noopener" href="https://no7.iamalwayshungry.com">
+			<li data-year="2026" data-wing="the canon"><a target="_blank" rel="noopener" href="https://no7.iamalwayshungry.com">
 				<span class="num">2026</span>
 				<span class="name">IAAH no.7 — rebuilt</span>
+				<span class="tag">the canon</span>
 				<span class="meta">decompiled &amp; rebuilt&nbsp;native &middot; same&nbsp;engine, same&nbsp;fonts &middot; no&nbsp;plugin, no&nbsp;patience</span>
 			</a></li>
 		</ul>
@@ -64,24 +121,28 @@
 		<p class="wing-note">Pulled from the backup folders — the HTML years before Flash.
 		Some links were dead in 2005 and are dead still; that's the point.</p>
 		<ul class="gens">
-			<li><a target="_blank" rel="noopener" href="sites/2003-temp/">
+			<li data-year="2003" data-wing="the deep archive"><a target="_blank" rel="noopener" href="sites/2003-temp/">
 				<span class="num">2003</span>
 				<span class="name">For Temporary Use Only</span>
+				<span class="tag">the deep archive</span>
 				<span class="meta">HTML &middot; the placeholder that shipped</span>
 			</a></li>
-			<li><a target="_blank" rel="noopener" href="sites/2004-refresh/">
+			<li data-year="2004" data-wing="the deep archive"><a target="_blank" rel="noopener" href="sites/2004-refresh/">
 				<span class="num">2004</span>
 				<span class="name">REFRESH</span>
+				<span class="tag">the deep archive</span>
 				<span class="meta">HTML &middot; 73 pages &middot; the old-work vault</span>
 			</a></li>
-			<li><a target="_blank" rel="noopener" href="sites/2005-fall/">
+			<li data-year="2005" data-wing="the deep archive"><a target="_blank" rel="noopener" href="sites/2005-fall/">
 				<span class="num">2005</span>
 				<span class="name">SITE.UPDATE 9.27.05</span>
+				<span class="tag">the deep archive</span>
 				<span class="meta">HTML &middot; Katrina-era front &middot; sliced&nbsp;GIFs</span>
 			</a></li>
-			<li><a target="_blank" rel="noopener" href="sites/2005-nola/">
+			<li data-year="2005" data-wing="the deep archive"><a target="_blank" rel="noopener" href="sites/2005-nola/">
 				<span class="num">2005</span>
 				<span class="name">New Orleans piece</span>
+				<span class="tag">the deep archive</span>
 				<span class="meta">HTML &middot; 47-page photo&nbsp;essay</span>
 			</a></li>
 		</ul>
@@ -90,14 +151,16 @@
 		in their entirety: every page, image and font now served from here.
 		No platform required.</p>
 		<ul class="gens">
-			<li><a target="_blank" rel="noopener" href="sites/2014-work/">
+			<li data-year="2014" data-wing="the cargo years"><a target="_blank" rel="noopener" href="sites/2014-work/">
 				<span class="num">2014</span>
 				<span class="name">work.iamalwayshungry.com</span>
+				<span class="tag">the cargo years</span>
 				<span class="meta">Cargo&nbsp;1 &middot; 56 projects + 2&nbsp;reels &middot; 40&nbsp;days&nbsp;/&nbsp;40&nbsp;projects &middot; ported&nbsp;static</span>
 			</a></li>
-			<li><a target="_blank" rel="noopener" href="sites/iaah-work/">
+			<li data-year="2022" data-wing="the cargo years"><a target="_blank" rel="noopener" href="sites/iaah-work/">
 				<span class="num">2022</span>
 				<span class="name">iaah.work</span>
+				<span class="tag">the cargo years</span>
 				<span class="meta">Cargo&nbsp;2 &middot; 39 projects + reel &middot; ported&nbsp;static</span>
 			</a></li>
 		</ul>
@@ -106,23 +169,26 @@
 		Bryant Fernandez, Jared Lyvers, Matt Cross. A self-promo site for Bryant,
 		recovered from the working folders.</p>
 		<ul class="gens">
-			<li><a target="_blank" rel="noopener" href="sites/imustcreate/">
+			<li data-year="2002" data-wing="the collaborations"><a target="_blank" rel="noopener" href="sites/imustcreate/">
 				<span class="num">2002</span>
 				<span class="name">I Must Create</span>
+				<span class="tag">the collaborations</span>
 				<span class="meta">Flash 5 &middot; pantone&nbsp;chips &middot; popups! &middot; Comm&nbsp;Arts + K10K&nbsp;props</span>
 			</a></li>
 		</ul>
 		<h2 class="wing">the client files</h2>
 		<p class="wing-note">Sites the studio built for others, running on the same engine.</p>
 		<ul class="gens">
-			<li><a target="_blank" rel="noopener" href="sites/leecrum/">
+			<li data-year="2007" data-wing="the client files"><a target="_blank" rel="noopener" href="sites/leecrum/">
 				<span class="num">2007</span>
 				<span class="name">Lee Crum</span>
+				<span class="tag">the client files</span>
 				<span class="meta">Flash 8 &middot; New Orleans photographer &middot; long&nbsp;intro — patience</span>
 			</a></li>
-			<li><a target="_blank" rel="noopener" href="leecrum/">
+			<li data-year="2026" data-wing="the client files"><a target="_blank" rel="noopener" href="leecrum/">
 				<span class="num">2026</span>
 				<span class="name">LEE Ⓒ RUM — rebuilt</span>
+				<span class="tag">the client files</span>
 				<span class="meta">same photographs, same layouts &middot; no&nbsp;plugin, no&nbsp;patience</span>
 			</a></li>
 		</ul>
@@ -132,16 +198,64 @@
 		Going On&rdquo;, scored by Joe Minadeo. Built in Flash, 2007; slow to wake
 		under Ruffle — patience.</p>
 		<ul class="gens">
-			<li><a target="_blank" rel="noopener" href="sites/wgo/">
+			<li data-year="2007" data-wing="the memorial"><a target="_blank" rel="noopener" href="sites/wgo/">
 				<span class="num">2007</span>
 				<span class="name">What&rsquo;s Going On?</span>
+				<span class="tag">the memorial</span>
 				<span class="meta">Flash 9 &middot; AS3 &middot; 15 photo + lyric&nbsp;spreads &middot; slow&nbsp;to&nbsp;wake — patience</span>
 			</a></li>
 		</ul>
+		</div>
 	</main>
 	<footer>
 		<span>source: <b>~/Desktop/IAAH-ARCHIVED-SITES</b> (untouched)</span>
 		<span>player: <b>ruffle</b> self-hosted</span>
 	</footer>
+
+	<script>
+	(function () {
+		var body = document.body;
+		var archive = document.getElementById('archive');
+		var buttons = document.querySelectorAll('.seg button');
+
+		// Snapshot the original DOM so "By wing" restores exactly.
+		var originalHTML = archive.innerHTML;
+
+		// Every list item, tagged with its year, for chronological views.
+		function collectItems() {
+			return Array.prototype.slice.call(archive.querySelectorAll('li[data-year]'));
+		}
+
+		function showByDate(direction) {
+			var items = collectItems();
+			items.sort(function (a, b) {
+				var ya = +a.getAttribute('data-year');
+				var yb = +b.getAttribute('data-year');
+				return direction === 'new' ? yb - ya : ya - yb;
+			});
+			var ul = document.createElement('ul');
+			ul.className = 'gens';
+			items.forEach(function (li) { ul.appendChild(li); });
+			archive.innerHTML = '';
+			archive.appendChild(ul);
+		}
+
+		function showByWing() {
+			archive.innerHTML = originalHTML;
+		}
+
+		function setSort(sort) {
+			if (sort === 'wing') { body.setAttribute('data-view', 'wing'); showByWing(); }
+			else { body.setAttribute('data-view', 'date'); showByDate(sort); }
+			buttons.forEach(function (b) {
+				b.setAttribute('aria-pressed', b.getAttribute('data-sort') === sort ? 'true' : 'false');
+			});
+		}
+
+		buttons.forEach(function (b) {
+			b.addEventListener('click', function () { setSort(b.getAttribute('data-sort')); });
+		});
+	})();
+	</script>
 </body>
 </html>
