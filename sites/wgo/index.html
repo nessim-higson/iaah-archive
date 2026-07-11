@@ -6,6 +6,16 @@
 <title>What's Goin On?</title>
 <meta name="description" content="What's Going On — a Katrina commemorative piece dedicated to the people of New Orleans. Photography by Lee Crum, score by Joe Minadeo, Flash microsite by iamalwayshungry (2007).">
 <style>
+  /* Self-hosted Didone fallback: Apple devices use native Didot (no download);
+     everyone else gets Playfair Display instead of Georgia. */
+  @font-face{
+    font-family:"Playfair Display"; font-style:italic; font-weight:400;
+    font-display:swap; src:url("fonts/playfair-italic-400.woff2") format("woff2");
+  }
+  @font-face{
+    font-family:"Playfair Display"; font-style:italic; font-weight:700;
+    font-display:swap; src:url("fonts/playfair-italic-700.woff2") format("woff2");
+  }
   :root{
     --ink:#000; --teal:#17c3d7; --gray:#8d8d8d; --hair:#dcdcdc;
     --serif:"Didot","Hoefler Text","Playfair Display",Georgia,"Times New Roman",serif;
