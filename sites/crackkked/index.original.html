@@ -1,0 +1,161 @@
+<!doctype html>
+<html class="no-js" lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Crackkked</title>
+
+    <link href="//www.google-analytics.com" rel="dns-prefetch">
+    <link href="/img/icons/favicon.ico" rel="shortcut icon">
+    <link href="/img/icons/touch.png" rel="apple-touch-icon-precomposed">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <link rel="icon" href="/img/favico.png" sizes="16x16 32x32" type="image/png">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/img/favico-precomposed.png" />
+    <link rel="apple-touch-icon" href="/img/favico-precomposed.png"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Sharing -->
+    <meta name="description" content="OMG, F#&K, SI%T, NOOOO… The aim of this site is to help express the emotions we all feel towards our digital devices and ourselves. Our daily digital struggle."/>
+    <meta property="og:title" content="Crackkked"/>
+    <meta property="og:site_name" content="Crackkked"/>
+    <meta property="og:url" content="http://www.crackkked.com"/>
+    <meta property="og:description" content="OMG, F#&K, SI%T, NOOOO… The aim of this site is to help express the emotions we all feel towards our digital devices and ourselves. Our daily digital struggle."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="/img/share-large.jpg"/>
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="image_src" href="/img/share-large.jpg"/>
+
+    <script src="/js/vendor/modernizr-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+
+<body>
+
+    <h1 class="site-title"><a href="https://crackkked.com/">Crackkked</a> </h1>
+
+    <img src="img/crackkked.gif" id="src_img" class="hidden">
+    <div class="preloader-container-outer">
+        <div id="preloader-container"></div>
+    </div>
+
+    <div class="overlay overlay-preloader">
+        <div class="inner">
+            <div>
+                <div>
+                    <p class="intro-text"></p>
+                    <p class="start-typing">
+                        <span class="no-touch">Type something and hit return</span>
+                    </p>
+                    <span class="line-loader"><span></span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="overlay overlay-typing">
+        <div class="inner">
+            <div>
+                <div>
+                    <form id="form" class="form" action="" method="post">
+                        <input id="input-text" class="text" type="text" value="" autofocus="autofocus" autocomplete="off">
+                        <input class="button" type="submit" value="Go" />
+
+                        <span class="touch">Touch and type a word.</span>
+                        <span class="warning">You have reached the character limit.</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-wrapper">
+
+        <div class="ui-component">
+            <ul>
+                <li class="refresh"><a href="#">Refresh</a></li>
+                <li class="typed"><a href="#"><img src="img/close-white.svg"/><span>Trump</span></a></li>
+                <li class="download"><a href="#">Download</a></li>
+            </ul>
+        </div>
+
+        <div class="holder-main">
+        </div>
+
+        <div class="holder-portrait">
+            <canvas id="portrait"></canvas>
+        </div>
+
+        <div class="debugger-holder">
+        </div>
+
+        <canvas id="mirror"></canvas>
+
+
+        <a id="download">Download as image</a>
+
+    </div>
+
+    <a href="#" class="info">About</a>
+    <div class="overlay overlay-info">
+  <div class="inner">
+    <div class="mask">
+      <h2>
+        <span class="title-1">A project aimed at expressing your emotions...</span>
+        <br/>
+        <span class="title-2">digitally<span class="white">.</span></span>
+      </h2>
+      <p class="body">
+        OMG, F#&K, SI%T, NOOOO…
+        <br/><br/>
+        The aim of this site is to help express the emotions we all feel towards our digital devices and ourselves. Our daily digital struggle.
+        <br/><br/>
+        The words we express as we drop our beloved phone, tablet, digital whatever.  As an added bonus, express yourself and download an image as a memento and screensaver. Share it with a friend, or admire it as the mistake that didn’t happen. Go crack yourself.
+        <br/><br/>
+        <a href="http://www.iamalwayshungry.com" target="_blank"><span>Creative Direction / Design -</span> Nessim Higson</a> <br/>
+        <a href="http://www.klash.nl" target="_blank"><span>Development -</span> Virgil Spruit</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+    <div class="sharing">
+        <span>Share</span>
+
+        <ul>
+            <li class="facebook"><a href="#" data-js="facebook-share">facebook</a></li>
+            <li class="linkedin"><a href="#" data-js="linkedin-share">linkedin</a></li>
+            <li class="twitter"><a href="#" data-js="twitter-share" data-tweet="Crackkked.com">twitter</a></li>
+            <li class="whatsapp"><a href="#" data-js="whatsapp-share" data-action="share/whatsapp/share">whatsapp</a></li>
+        </ul>
+    </div>
+
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/delaunay.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js"></script>
+    <script src="js/vendor/jquery-1.10.2.min.js"></script>
+    <script src="js/vendor/canvas2image.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.4.1/pixi.min.js"></script>
+
+    <script src="js/vendor/Blob.js"></script>
+    <script src="js/vendor/canvas-toBlob.js"></script>
+    <script src="js/vendor/FileSaver.min.js"></script>
+
+    
+        <script src="js/plugins.js"></script>
+        <script src="js/Corners.js"></script>
+        <script src="js/LetterDataModel.js"></script>
+        <script src="js/Letters.js"></script>
+        <script src="js/Lines.js"></script>
+        <script src="js/Preloader.js"></script>
+        <script src="js/Sharing.js"></script>
+        <script src="js/app.js"></script>
+
+    
+</body>
+
+</html>

@@ -46,6 +46,23 @@ subfolder is an unrelated HTML gallery export that shipped without its image
 renditions — kept as-is, not linked. The `welcome.html` GoDaddy placeholder is
 kept too.
 
+## The collaborations
+
+| Year | Site | Source |
+|------|------|--------|
+| 2016 | [Crackkked](https://archive.iamalwayshungry.com/sites/crackkked/) — type your digital rage; the word shatters into a Pixi.js/WebGL glass field you can download as an image. Creative direction/design Nessim Higson, development [Virgil Spruit](http://www.klash.nl) | live-mirrored from crackkked.com (static HTML/JS) |
+
+The original loads GSAP, Pixi.js 4.4.1, and a CodePen-hosted `delaunay.js` from
+CDNs; all three are vendored into `sites/crackkked/vendor-cdn/` and the CDN
+`<script>` tags rewritten to the local copies, so the piece is fully
+self-contained and won't rot when those CDNs move. Leading-slash asset paths
+were made relative so it runs under `/sites/crackkked/`. The pristine
+as-downloaded HTML is kept alongside as `index.original.html`. The letter
+sprites are a full alphabet of PNG shards (`img/alphabet/`) plus corner and line
+sets — 122 images in all. Two dead references on the live site
+(`img/icons/favicon.ico`, a stray `.eot`/`loader.gif`) 404 there too and were
+left out.
+
 ## The memorial
 
 | Year | Site | Source |
