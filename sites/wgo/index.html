@@ -1,156 +1,90 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What's Goin On?</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<!-- ImageReady Preload Script (splash2.psd) -->
-<script type="text/javascript">
-<!--
+<meta name="description" content="What's Going On — a Katrina commemorative piece dedicated to the people of New Orleans. Photography by Lee Crum, score by Joe Minadeo, Flash microsite by iamalwayshungry (2007).">
+<style>
+  :root{
+    --ink:#000; --teal:#17c3d7; --gray:#8d8d8d; --hair:#dcdcdc;
+    --serif:"Didot","Hoefler Text","Playfair Display",Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box; margin:0}
+  html,body{background:#fff; height:100%}
+  body{
+    font-family:var(--serif);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    display:flex; align-items:flex-start;
+    padding:clamp(28px,6vw,72px);
+  }
+  .splash{ max-width:660px; width:100%; }
 
-function newImage(arg) {
-	if (document.images) {
-		rslt = new Image();
-		rslt.src = arg;
-		return rslt;
-	}
-}
+  h1{
+    font-style:italic; font-weight:500; color:var(--ink);
+    font-size:clamp(42px,7.5vw,68px); line-height:.98; letter-spacing:-.01em;
+    margin-bottom:.28em;
+  }
+  .dedication{
+    font-style:italic; color:var(--teal);
+    font-size:clamp(19px,3.1vw,25px); line-height:1.28;
+  }
 
-function changeImages() {
-	if (document.images && (preloadFlag == true)) {
-		for (var i=0; i<changeImages.arguments.length; i+=2) {
-			document[changeImages.arguments[i]].src = changeImages.arguments[i+1];
-		}
-	}
-}
+  hr{ border:0; border-top:1px solid var(--hair); margin:22px 0 16px; }
 
-var preloadFlag = false;
-function preloadImages() {
-	if (document.images) {
-		index_03_over = newImage("images/index_03-over.gif");
-		index_07_over = newImage("images/index_07-over.gif");
-		index_11_over = newImage("images/index_11-over.gif");
-		index_15_over = newImage("images/index_15-over.gif");
-		preloadFlag = true;
-	}
-}
+  .nonprofit{
+    font-style:italic; font-weight:600; color:var(--teal);
+    font-size:14px; line-height:1.5; max-width:560px;
+  }
 
-// -->
-</script>
-<!-- End Preload Script -->
+  .links{ margin-top:6px; }
+  .links p{
+    font-style:italic; color:var(--gray);
+    font-size:15px; line-height:1.55; margin:4px 0;
+  }
+  .links a{
+    color:var(--ink); font-weight:700; text-decoration:none;
+    border-bottom:1px solid transparent; transition:border-color .15s;
+  }
+  .links a:hover{ border-bottom-color:var(--ink); }
+
+  .enter{ display:inline-block; margin-top:30px; }
+  .enter a{
+    font-style:italic; font-weight:500; color:var(--ink); text-decoration:none;
+    font-size:clamp(30px,5vw,44px); line-height:1;
+    border-bottom:2px solid transparent; transition:color .18s, border-color .18s;
+  }
+  .enter a:hover{ color:var(--teal); border-bottom-color:var(--teal); }
+</style>
 </head>
-<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="preloadImages();"><!-- ImageReady Slices (splash2.psd) -->
-<table id="Table_01" width="726" height="386" border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td colspan="9">
-			<img src="images/index_01.gif" width="725" height="248" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="1" height="248" alt=""></td>
-	</tr>
-	<tr>
-		<td colspan="6" rowspan="2">
-			<img src="images/index_02.gif" width="452" height="25" alt=""></td>
-		<td colspan="2">
-			<a href="mailto:comments@whitehouse.gov?subject=What's Going On?"
-				onmouseover="changeImages('index_03', 'images/index_03-over.gif'); return true;"
-				onmouseout="changeImages('index_03', 'images/index_03.gif'); return true;"
-				onmousedown="changeImages('index_03', 'images/index_03-over.gif'); return true;"
-				onmouseup="changeImages('index_03', 'images/index_03-over.gif'); return true;">
-				<img name="index_03" src="images/index_03.gif" width="36" height="15" border="0" alt=""></a></td>
-		<td rowspan="8">
-			<img src="images/index_04.gif" width="237" height="137" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="1" height="15" alt=""></td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<img src="images/index_05.gif" width="36" height="10" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="1" height="10" alt=""></td>
-	</tr>
-	<tr>
-		<td colspan="5" rowspan="2">
-			<img src="images/index_06.gif" width="426" height="27" alt=""></td>
-		<td colspan="2">
-			<a href="joe_minadeo.mp3"
-				onmouseover="changeImages('index_07', 'images/index_07-over.gif'); return true;"
-				onmouseout="changeImages('index_07', 'images/index_07.gif'); return true;"
-				onmousedown="changeImages('index_07', 'images/index_07-over.gif'); return true;"
-				onmouseup="changeImages('index_07', 'images/index_07-over.gif'); return true;">
-				<img name="index_07" src="images/index_07.gif" width="33" height="17" border="0" alt=""></a></td>
-		<td rowspan="6">
-			<img src="images/index_08.gif" width="29" height="112" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="1" height="17" alt=""></td>
-	</tr>
-	<tr>
-		<td colspan="2" rowspan="5">
-			<img src="images/index_09.gif" width="33" height="95" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="1" height="10" alt=""></td>
-	</tr>
-	<tr>
-		<td colspan="3" rowspan="2">
-			<img src="images/index_10.gif" width="208" height="26" alt=""></td>
-		<td>
-			<a href="WGO.pdf"
-				onmouseover="changeImages('index_11', 'images/index_11-over.gif'); return true;"
-				onmouseout="changeImages('index_11', 'images/index_11.gif'); return true;"
-				onmousedown="changeImages('index_11', 'images/index_11-over.gif'); return true;"
-				onmouseup="changeImages('index_11', 'images/index_11-over.gif'); return true;">
-				<img name="index_11" src="images/index_11.gif" width="36" height="17" border="0" alt=""></a></td>
-		<td rowspan="4">
-			<img src="images/index_12.gif" width="182" height="85" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="1" height="17" alt=""></td>
-	</tr>
-	<tr>
-		<td rowspan="3">
-			<img src="images/index_13.gif" width="36" height="68" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="1" height="9" alt=""></td>
-	</tr>
-	<tr>
-		<td rowspan="2">
-			<img src="images/index_14.gif" width="40" height="59" alt=""></td>
-		<td>
-			<a href="enter.html"
-				onmouseover="changeImages('index_15', 'images/index_15-over.gif'); return true;"
-				onmouseout="changeImages('index_15', 'images/index_15.gif'); return true;"
-				onmousedown="changeImages('index_15', 'images/index_15-over.gif'); return true;"
-				onmouseup="changeImages('index_15', 'images/index_15-over.gif'); return true;">
-				<img name="index_15" src="images/index_15.gif" width="114" height="46" border="0" alt=""></a></td>
-		<td rowspan="2">
-			<img src="images/index_16.gif" width="54" height="59" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="1" height="46" alt=""></td>
-	</tr>
-	<tr>
-		<td>
-			<img src="images/index_17.gif" width="114" height="13" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="1" height="13" alt=""></td>
-	</tr>
-	<tr>
-		<td>
-			<img src="images/spacer.gif" width="40" height="1" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="114" height="1" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="54" height="1" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="36" height="1" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="182" height="1" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="26" height="1" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="7" height="1" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="29" height="1" alt=""></td>
-		<td>
-			<img src="images/spacer.gif" width="237" height="1" alt=""></td>
-		<td></td>
-	</tr>
-</table>
-<!-- End ImageReady Slices -->
+<body>
+  <div class="splash">
+    <h1>What&rsquo;s going on?</h1>
+
+    <div class="dedication">
+      This piece is dedicated to the people of New Orleans.<br>
+      Its purpose is to ask a simple question.
+    </div>
+
+    <hr>
+
+    <p class="nonprofit">
+      This is a Non-Profit piece created to help stimulate thought, educate and promote
+      discussion surrounding New Orleans and its people. We hope you enjoy.
+    </p>
+
+    <hr>
+
+    <div class="links">
+      <p>What&rsquo;s Going On? Feel free to ask George and the White House by clicking
+        <a href="mailto:comments@whitehouse.gov?subject=What's Going On?">Here.</a></p>
+      <p>Download an exclusive track created for this project by Joe Minadeo
+        <a href="joe_minadeo.mp3">Here.</a></p>
+      <p>Download a PDF of this piece
+        <a href="WGO.pdf">Here.</a></p>
+    </div>
+
+    <div class="enter"><a href="enter.html">Enter.</a></div>
+  </div>
 </body>
 </html>
