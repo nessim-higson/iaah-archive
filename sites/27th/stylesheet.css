@@ -1,0 +1,162 @@
+/* CSS Document */
+
+body {
+	background-color:#ffffff;
+}
+
+#otherbody
+{
+	background-color:#000000;
+}
+
+#otherbody2
+{
+	background-color:#d6f909;
+}
+
+#otherbody3
+{
+	background-color:#252525;
+}
+
+#otherbody4
+{
+	background-color:#c8ede6;
+}
+
+td, body,input,textarea,select {
+	font-family:Arial, Tahoma;
+	font-size:11px;
+}
+
+td, body, h1, h2, h3 {
+	color:#000;
+}
+
+a	{
+	text-decoration: none;
+	color:#000;
+}
+
+a:visited {
+	color:#000;
+}
+
+a:hover {
+	color:#000;
+	}
+
+.menutextsize {
+	font-size:11px;
+}
+
+.data {
+	font-size: 9px;
+	color:#ffffff;
+	background-color:#000;
+	padding-left:3px;
+	padding-right:3px;
+	padding-top:2px;
+	padding-bottom:1px;
+}
+
+body {
+	margin: 0px;
+	overflow:hidden;
+	background-color: ffffff;
+}
+body, td {
+	font-family: Helvetica,Tahoma,Arial;
+	font-size: 11px;
+	line-height:140%;
+	color: black;
+}
+
+#header, #header_bg {
+	position:absolute;
+	top:100px;
+	width:475px;
+	height:475px;
+}
+
+#header_bg {
+	z-index:992;
+	background:url(http://www.iamthe27thletter.com/logo.png);
+}
+
+#header {
+	z-index:993;
+}
+
+#images {
+	z-index:1;
+	position:absolute;
+	cursor:move;
+	cursor:cross;
+	height:100%;
+top:-5px;
+}
+
+input, select {
+	font-family: helvetica,tahoma,arial;
+	font-size:10px;
+}
+
+.sel {
+	width:130px;
+}
+
+
+
+
+
+
+
+
+/*div styles-------------------------------------*/
+
+
+
+.greenBorder1
+{
+display: table; 
+height: 100%;  
+position: relative; 
+overflow: hidden;
+}
+
+.thang
+{
+position: absolute; 
+_top: 50%;
+display: table-cell; 
+vertical-align: middle;
+}
+
+
+
+.greenBorder2
+{
+position: relative; 
+top: -50%;
+}
+
+
+#main
+{
+border="0";
+position:relative;
+left:-5px;
+}
+
+#click
+{
+padding-left:73;
+padding-top:85;
+}
+
+
+
+
+
+
