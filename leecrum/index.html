@@ -159,12 +159,14 @@
 	/* ================= entry gate ================= */
 	#gate {
 		position: fixed; inset: 0; z-index: 100;
-		background: #000000;
+		background-color: #000000;
 		transition: opacity 0.9s ease, background-color 0.55s ease;
 	}
 	/* on Enter the splash inverts (dark → light) so the masthead reads black,
-	   then fades to reveal the gallery building in — as the 2007 site did */
-	#gate.inverting { background: #efeeec; }
+	   then fades to reveal the gallery building in — as the 2007 site did.
+	   NB: must be background-COLOR, not the `background` shorthand, or the
+	   transition silently no-ops. */
+	#gate.inverting { background-color: #efeeec; }
 	#gate.inverting .choices { opacity: 0; transition: opacity 0.35s ease; }
 	#gate.leaving { opacity: 0; pointer-events: none; }
 	#gate .inner { position: absolute; left: 2vw; top: 3vh; }
