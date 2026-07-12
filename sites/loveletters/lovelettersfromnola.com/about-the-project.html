@@ -47,10 +47,14 @@
 <link rel="stylesheet" type="text/css" href="../static1.squarespace.com/static/sitecss/514385a9e4b0b5f08d60e84d/128/50130f5be4b00a22f5c5a82a/514385aae4b0b5f08d60e9ae/2123/site.css%3Fnocustom=true.css"/><link rel="stylesheet" type="text/css" href="../static1.squarespace.com/static/custom-css/514385a9e4b0b5f08d60e84d/514385aae4b0b5f08d60e9ae/0/custom.css"/>
 <!-- End of Squarespace Headers -->
 <style id="archive-fix">
-/* Archive fixes: Squarespace faded #pageWrapper in (opacity 0->1) and locked
-   body scroll via JS that's now stripped. Restore visibility + kill the
-   orphaned spinner. Scroll/layout overrides are scoped to NON-gallery pages;
-   the gallery homepage stays full-bleed & unscrolled like the original. */
+/* Type: Typekit (proxima-nova) was stripped; remap it to self-hosted Montserrat
+   (its free near-twin) so the nav/UI matches the live site. */
+@font-face{font-family:"proxima-nova";font-weight:400;font-style:normal;font-display:swap;src:url("/sites/loveletters/lovelettersfromnola.com/fonts/montserrat-400.woff2") format("woff2")}
+@font-face{font-family:"proxima-nova";font-weight:600;font-style:normal;font-display:swap;src:url("/sites/loveletters/lovelettersfromnola.com/fonts/montserrat-600.woff2") format("woff2")}
+@font-face{font-family:"proxima-nova";font-weight:700;font-style:normal;font-display:swap;src:url("/sites/loveletters/lovelettersfromnola.com/fonts/montserrat-700.woff2") format("woff2")}
+/* Squarespace faded #pageWrapper in (opacity 0->1) + locked scroll via now-stripped
+   JS. Restore visibility + kill the orphaned spinner. Scroll/layout scoped to
+   non-gallery pages; the gallery homepage stays full-bleed like the original. */
 #pageWrapper{opacity:1 !important}
 #loading-indicator,.sqs-spin{display:none !important}
 body:not(.collection-type-gallery){overflow-x:hidden !important;overflow-y:auto !important;height:auto !important}

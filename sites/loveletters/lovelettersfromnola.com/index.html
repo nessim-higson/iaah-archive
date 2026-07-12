@@ -57,10 +57,14 @@
 <link rel="stylesheet" type="text/css" href="../static1.squarespace.com/static/sitecss/514385a9e4b0b5f08d60e84d/128/50130f5be4b00a22f5c5a82a/514385aae4b0b5f08d60e9ae/2123/site.css%3Fnocustom=true.css"/><link rel="stylesheet" type="text/css" href="../static1.squarespace.com/static/custom-css/514385a9e4b0b5f08d60e84d/514385aae4b0b5f08d60e9ae/0/custom.css"/>
 <!-- End of Squarespace Headers -->
 <style id="archive-fix">
-/* Archive fixes: Squarespace faded #pageWrapper in (opacity 0->1) and locked
-   body scroll via JS that's now stripped. Restore visibility + kill the
-   orphaned spinner. Scroll/layout overrides are scoped to NON-gallery pages;
-   the gallery homepage stays full-bleed & unscrolled like the original. */
+/* Type: Typekit (proxima-nova) was stripped; remap it to self-hosted Montserrat
+   (its free near-twin) so the nav/UI matches the live site. */
+@font-face{font-family:"proxima-nova";font-weight:400;font-style:normal;font-display:swap;src:url("/sites/loveletters/lovelettersfromnola.com/fonts/montserrat-400.woff2") format("woff2")}
+@font-face{font-family:"proxima-nova";font-weight:600;font-style:normal;font-display:swap;src:url("/sites/loveletters/lovelettersfromnola.com/fonts/montserrat-600.woff2") format("woff2")}
+@font-face{font-family:"proxima-nova";font-weight:700;font-style:normal;font-display:swap;src:url("/sites/loveletters/lovelettersfromnola.com/fonts/montserrat-700.woff2") format("woff2")}
+/* Squarespace faded #pageWrapper in (opacity 0->1) + locked scroll via now-stripped
+   JS. Restore visibility + kill the orphaned spinner. Scroll/layout scoped to
+   non-gallery pages; the gallery homepage stays full-bleed like the original. */
 #pageWrapper{opacity:1 !important}
 #loading-indicator,.sqs-spin{display:none !important}
 body:not(.collection-type-gallery){overflow-x:hidden !important;overflow-y:auto !important;height:auto !important}
@@ -1070,18 +1074,21 @@ document.addEventListener('DOMContentLoaded', function(){
   var cur=0,timer;
   function go(n){cur=(n+urls.length)%urls.length;track.style.transform='translateX(-'+(cur*100)+'vw)';}
   function restart(){clearInterval(timer);timer=setInterval(function(){go(cur+1);},5000);}
-  function arrow(t,dx,left){
+  function arrow(t,dx,side){
     var b=document.createElement('button');
     b.setAttribute('aria-label',dx<0?'Previous':'Next'); b.textContent=t;
-    b.style.cssText='position:absolute;bottom:92px;left:'+left+';width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.6);background:rgba(0,0,0,.25);color:#fff;font:18px/1 sans-serif;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;transition:background .2s';
-    b.onmouseenter=function(){b.style.background='rgba(255,255,255,.22)'};
-    b.onmouseleave=function(){b.style.background='rgba(0,0,0,.25)'};
+    b.style.cssText='position:absolute;top:50%;transform:translateY(-50%);'+side+':24px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.7);background:rgba(0,0,0,.32);color:#fff;font:20px/1 sans-serif;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s ease;pointer-events:none';
     b.onclick=function(){go(cur+dx);restart();};
     return b;
   }
-  stage.appendChild(arrow('\u2039',-1,'calc(50% - 46px)'));
-  stage.appendChild(arrow('\u203a',1,'calc(50% + 6px)'));
-  document.body.appendChild(stage);
+  var la=arrow('\u2039',-1,'left'), ra=arrow('\u203a',1,'right');
+  stage.appendChild(la); stage.appendChild(ra);
+  function show(el){el.style.opacity='1';el.style.pointerEvents='auto';}
+  function hide(el){el.style.opacity='0';el.style.pointerEvents='none';}
+  stage.addEventListener('mousemove',function(e){
+    if(e.clientX < window.innerWidth/2){ show(la); hide(ra); } else { show(ra); hide(la); }
+  });
+  stage.addEventListener('mouseleave',function(){ hide(la); hide(ra); });
   document.addEventListener('keydown',function(e){
     if(e.key==='ArrowLeft'){go(cur-1);restart();} else if(e.key==='ArrowRight'){go(cur+1);restart();}
   });
