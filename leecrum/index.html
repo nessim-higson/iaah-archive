@@ -160,8 +160,12 @@
 	#gate {
 		position: fixed; inset: 0; z-index: 100;
 		background: #000000;
-		transition: opacity 0.9s ease;
+		transition: opacity 0.9s ease, background-color 0.55s ease;
 	}
+	/* on Enter the splash inverts (dark → light) so the masthead reads black,
+	   then fades to reveal the gallery building in — as the 2007 site did */
+	#gate.inverting { background: #efeeec; }
+	#gate.inverting .choices { opacity: 0; transition: opacity 0.35s ease; }
 	#gate.leaving { opacity: 0; pointer-events: none; }
 	#gate .inner { position: absolute; left: 2vw; top: 3vh; }
 	#gate .masthead {
@@ -642,10 +646,13 @@
 	$("apOn").addEventListener("click", () => { gateAutoplay = true; $("apOn").classList.add("picked"); $("apOff").classList.remove("picked"); });
 	$("apOff").addEventListener("click", () => { gateAutoplay = false; $("apOff").classList.add("picked"); $("apOn").classList.remove("picked"); });
 	$("enter").addEventListener("click", () => {
-		$("gate").classList.add("leaving");
-		setTimeout(() => $("gate").remove(), 1000);
+		const gate = $("gate");
+		gate.classList.add("inverting");                 // splash inverts to light
+		buildGallery(cams[curID]);                        // gallery flies in behind it
 		setMusic(true);
-		if (gateAutoplay) slideOn();
+		setTimeout(() => gate.classList.add("leaving"), 620);   // then fade the splash away
+		setTimeout(() => gate.remove(), 1520);
+		if (gateAutoplay) setTimeout(() => slideOn(), 1650);
 	});
 
 	/* ======================================================
@@ -671,13 +678,28 @@
 		requestAnimationFrame(tick);
 	}
 
-	/* boot — createCameras: open on gallery 1 at 55% */
+	/* build-in: fly a gallery in from a random edge, settling at 55% — the
+	   slideInNext / determineDirection choreography, run on Enter (the first
+	   build) as well as manual switches (switchCameras handles those) */
+	function buildGallery(cam) {
+		cam.build();
+		cam.z = 40; cam.r = 0; cam.tar.x = 0; cam.tar.y = 0;
+		focusedId = -1; pan = false;
+		const dir = Math.floor(Math.random() * 4);
+		if (dir === 0)      { cam.x = innerWidth * 2;  cam.y = cy(); }
+		else if (dir === 1) { cam.x = -2500;           cam.y = cy(); }
+		else if (dir === 2) { cam.x = cx();            cam.y = -2500; }
+		else                { cam.x = cx();            cam.y = innerHeight * 2; }
+		dirty = true;
+		tween(cam, ["x", "y", "z"], [cx(), cy(), 55], 2, undefined, 0, () => { pan = true; panSpeed = 0.02; });
+	}
+
+	/* boot — build gallery 1 but hold it off-frame; it flies in on Enter */
 	const start = cams[curID];
 	start.build();
-	start.z = 55; start.x = cx(); start.y = cy();
+	start.z = 0;                    // z<=0.5 → not drawn until Enter flies it in
 	$("curGallery").textContent = start.g.name;
 	for (const b of $("galleryList").children) b.setAttribute("aria-current", b.dataset.slug === start.g.slug);
-	pan = true; panSpeed = 0.02;
 	requestAnimationFrame(tick);
 })();
 </script>
