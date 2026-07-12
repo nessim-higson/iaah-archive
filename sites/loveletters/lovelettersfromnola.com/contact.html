@@ -51,15 +51,15 @@
 <!-- End of Squarespace Headers -->
 <style id="archive-fix">
 /* Archive fixes: Squarespace faded #pageWrapper in (opacity 0->1) and locked
-   body scroll via JS that's now stripped. Restore visibility, scroll, and kill
-   the orphaned loading spinner. Layout overrides scoped to the gallery homepage. */
+   body scroll via JS that's now stripped. Restore visibility + kill the
+   orphaned spinner. Scroll/layout overrides are scoped to NON-gallery pages;
+   the gallery homepage stays full-bleed & unscrolled like the original. */
 #pageWrapper{opacity:1 !important}
 #loading-indicator,.sqs-spin{display:none !important}
-html,body{overflow-x:hidden !important;overflow-y:auto !important;height:auto !important}
-body.collection-type-gallery #page{position:static !important;height:auto !important;min-height:0 !important;overflow:visible !important}
-body.collection-type-gallery #pageWrapper{height:auto !important;overflow:visible !important}
-body.collection-type-gallery #fullscreenBrowser,body.collection-type-gallery .galleryWrapper,body.collection-type-gallery .slideshowWrapper{position:static !important;height:auto !important;width:auto !important;overflow:visible !important}
-body.collection-type-gallery #mainContent{position:static !important;height:auto !important;overflow:visible !important}
+body:not(.collection-type-gallery){overflow-x:hidden !important;overflow-y:auto !important;height:auto !important}
+body:not(.collection-type-gallery) #page{position:static !important;height:auto !important;min-height:0 !important;overflow:visible !important}
+body:not(.collection-type-gallery) #pageWrapper{height:auto !important;overflow:visible !important}
+body:not(.collection-type-gallery) #mainContent{position:static !important;height:auto !important;overflow:visible !important}
 </style>
 </head>
 

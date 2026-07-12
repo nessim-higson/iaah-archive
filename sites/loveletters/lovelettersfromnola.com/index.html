@@ -58,15 +58,15 @@
 <!-- End of Squarespace Headers -->
 <style id="archive-fix">
 /* Archive fixes: Squarespace faded #pageWrapper in (opacity 0->1) and locked
-   body scroll via JS that's now stripped. Restore visibility, scroll, and kill
-   the orphaned loading spinner. Layout overrides scoped to the gallery homepage. */
+   body scroll via JS that's now stripped. Restore visibility + kill the
+   orphaned spinner. Scroll/layout overrides are scoped to NON-gallery pages;
+   the gallery homepage stays full-bleed & unscrolled like the original. */
 #pageWrapper{opacity:1 !important}
 #loading-indicator,.sqs-spin{display:none !important}
-html,body{overflow-x:hidden !important;overflow-y:auto !important;height:auto !important}
-body.collection-type-gallery #page{position:static !important;height:auto !important;min-height:0 !important;overflow:visible !important}
-body.collection-type-gallery #pageWrapper{height:auto !important;overflow:visible !important}
-body.collection-type-gallery #fullscreenBrowser,body.collection-type-gallery .galleryWrapper,body.collection-type-gallery .slideshowWrapper{position:static !important;height:auto !important;width:auto !important;overflow:visible !important}
-body.collection-type-gallery #mainContent{position:static !important;height:auto !important;overflow:visible !important}
+body:not(.collection-type-gallery){overflow-x:hidden !important;overflow-y:auto !important;height:auto !important}
+body:not(.collection-type-gallery) #page{position:static !important;height:auto !important;min-height:0 !important;overflow:visible !important}
+body:not(.collection-type-gallery) #pageWrapper{height:auto !important;overflow:visible !important}
+body:not(.collection-type-gallery) #mainContent{position:static !important;height:auto !important;overflow:visible !important}
 </style>
 </head>
 
@@ -1048,26 +1048,44 @@ body.collection-type-gallery #mainContent{position:static !important;height:auto
 
 <script id="archive-gallery-js">
 document.addEventListener('DOMContentLoaded', function(){
-  var slides = document.querySelectorAll('.slide img, .sqs-gallery img');
-  var urls = [];
-  slides.forEach(function(i){
-    var u = i.getAttribute('data-src') || i.getAttribute('src');
-    if (u && urls.indexOf(u) === -1) urls.push(u);
+  var urls=[];
+  document.querySelectorAll('.slide img, .sqs-gallery img').forEach(function(i){
+    var u=i.getAttribute('data-src')||i.getAttribute('src');
+    if(u && urls.indexOf(u)===-1) urls.push(u);
   });
-  if (!urls.length) return;
-  var main = document.getElementById('mainContent') || document.body;
-  var wrap = document.createElement('div');
-  wrap.id = 'archive-gallery';
-  wrap.setAttribute('style','max-width:1000px;margin:88px auto 64px;padding:0 16px');
+  if(!urls.length) return;
+  var spin=document.getElementById('loading-indicator'); if(spin) spin.style.display='none';
+  var main=document.getElementById('mainContent'); if(main) main.innerHTML='';
+  document.documentElement.style.overflow='hidden'; document.body.style.overflow='hidden';
+  var stage=document.createElement('div'); stage.id='ll-stage';
+  stage.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:#000;overflow:hidden;z-index:1';
+  var track=document.createElement('div');
+  track.style.cssText='position:absolute;top:0;bottom:0;left:0;display:flex;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1);width:'+(urls.length*100)+'vw';
   urls.forEach(function(u){
-    var im = document.createElement('img');
-    im.src = u; im.loading = 'lazy';
-    im.setAttribute('style','display:block;width:100%;height:auto;margin:0 0 5px');
-    wrap.appendChild(im);
+    var c=document.createElement('div');
+    c.style.cssText='width:100vw;height:100%;flex:0 0 100vw;background:#000 center/cover no-repeat;background-image:url("'+u+'")';
+    track.appendChild(c);
   });
-  main.innerHTML = '';
-  main.appendChild(wrap);
-  main.setAttribute('style','position:static;width:auto;height:auto;overflow:visible;min-height:60vh');
+  stage.appendChild(track);
+  var cur=0,timer;
+  function go(n){cur=(n+urls.length)%urls.length;track.style.transform='translateX(-'+(cur*100)+'vw)';}
+  function restart(){clearInterval(timer);timer=setInterval(function(){go(cur+1);},5000);}
+  function arrow(t,dx,left){
+    var b=document.createElement('button');
+    b.setAttribute('aria-label',dx<0?'Previous':'Next'); b.textContent=t;
+    b.style.cssText='position:absolute;bottom:92px;left:'+left+';width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.6);background:rgba(0,0,0,.25);color:#fff;font:18px/1 sans-serif;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;transition:background .2s';
+    b.onmouseenter=function(){b.style.background='rgba(255,255,255,.22)'};
+    b.onmouseleave=function(){b.style.background='rgba(0,0,0,.25)'};
+    b.onclick=function(){go(cur+dx);restart();};
+    return b;
+  }
+  stage.appendChild(arrow('\u2039',-1,'calc(50% - 46px)'));
+  stage.appendChild(arrow('\u203a',1,'calc(50% + 6px)'));
+  document.body.appendChild(stage);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft'){go(cur-1);restart();} else if(e.key==='ArrowRight'){go(cur+1);restart();}
+  });
+  go(0); restart();
 });
 </script>
 </body>
