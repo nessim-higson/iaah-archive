@@ -651,10 +651,10 @@
 		const gate = $("gate");
 		gate.classList.add("inverting");                 // splash inverts to light
 		setMusic(true);
-		setTimeout(() => gate.classList.add("leaving"), 650);   // splash fades away
-		setTimeout(() => buildGallery(cams[curID]), 1250);      // THEN the gallery flies in, in view
-		setTimeout(() => gate.remove(), 1600);
-		if (gateAutoplay) setTimeout(() => slideOn(), 3600);
+		setTimeout(() => gate.classList.add("leaving"), 620);   // splash fades away
+		setTimeout(() => gate.remove(), 1500);
+		setTimeout(() => buildGallery(cams[curID]), 1520);      // then, splash gone, the gallery flies fully in
+		if (gateAutoplay) setTimeout(() => slideOn(), 3700);
 	});
 
 	/* ======================================================
