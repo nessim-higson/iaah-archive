@@ -508,7 +508,7 @@
 			else if (dir === 1) { cam.x = -2500;           cam.y = cy(); tween(oldCam, ["x", "y"], [innerWidth * 2, cy()], 6); }
 			else if (dir === 2) { cam.x = cx(); cam.y = -2500;           tween(oldCam, ["x", "y"], [cx(), innerHeight * 2], 6); }
 			else                { cam.x = cx(); cam.y = innerHeight * 2; tween(oldCam, ["x", "y"], [cx(), -2500], 6); }
-			tween(cam, ["x", "y"], [cx(), cy()], 2, undefined, 0, () => { pan = true; panSpeed = 0.02; });
+			tween(cam, ["x", "y"], [cx(), cy()], 2.4, "easeoutcirc", 0, () => { pan = true; panSpeed = 0.02; });
 		});
 		tween(oldCam.tar, ["x", "y"], [oldCam.tar.x + drift, oldCam.tar.y + drift], 1);
 	}
@@ -693,7 +693,7 @@
 		else if (dir === 2) { cam.x = cx();            cam.y = -2500; }
 		else                { cam.x = cx();            cam.y = innerHeight * 2; }
 		dirty = true;
-		tween(cam, ["x", "y", "z"], [cx(), cy(), 55], 2, undefined, 0, () => { pan = true; panSpeed = 0.02; });
+		tween(cam, ["x", "y", "z"], [cx(), cy(), 55], 2.4, "easeoutcirc", 0, () => { pan = true; panSpeed = 0.02; });
 	}
 
 	/* boot — build gallery 1 but hold it off-frame; it flies in on Enter */
