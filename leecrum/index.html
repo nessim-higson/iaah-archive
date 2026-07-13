@@ -359,10 +359,13 @@
 			for (const i of cam.order) {
 				const p = cam.g.photos[i];
 				if (!p._img || !p._img.complete || !p._img.naturalWidth) continue;
+				const bp = p._bp === undefined ? 1 : p._bp;   // per-photo build-in progress
+				if (bp <= 0.002) continue;                     // not arrived yet
 				ctx.save();
+				if (bp < 1) ctx.globalAlpha = bp;              // fade in
 				ctx.translate(p.x, p.y);
 				if (p.rotation) ctx.rotate(p.rotation * RAD);
-				const s = p.scale / 100;
+				const s = p.scale / 100 * (bp < 1 ? 0.7 + 0.3 * bp : 1);   // grow in
 				ctx.scale(s, s);
 				ctx.drawImage(p._img, -p.w / 2, -p.h / 2, p.w, p.h);
 				ctx.restore();
@@ -501,14 +504,14 @@
 		$("contactBtn").setAttribute("aria-current", cam.g.slug === "contact");
 		const drift = Math.round(Math.random() * 50);
 		tween(oldCam, ["z", "r"], [30, 0], 1, "easeoutcirc", 0, () => {
-			cam.z = 40; cam.r = 0; cam.tar.x = 0; cam.tar.y = 0;
+			// fling the old wall off-screen, then assemble the new one photo by photo
 			const dir = Math.floor(Math.random() * 4);
 			stopTween(oldCam);
-			if (dir === 0)      { cam.x = innerWidth * 2;  cam.y = cy(); tween(oldCam, ["x", "y"], [-2500, cy()], 6); }
-			else if (dir === 1) { cam.x = -2500;           cam.y = cy(); tween(oldCam, ["x", "y"], [innerWidth * 2, cy()], 6); }
-			else if (dir === 2) { cam.x = cx(); cam.y = -2500;           tween(oldCam, ["x", "y"], [cx(), innerHeight * 2], 6); }
-			else                { cam.x = cx(); cam.y = innerHeight * 2; tween(oldCam, ["x", "y"], [cx(), -2500], 6); }
-			tween(cam, ["x", "y"], [cx(), cy()], 2.4, "easeoutcirc", 0, () => { pan = true; panSpeed = 0.02; });
+			if (dir === 0)      tween(oldCam, ["x", "y"], [-2500, cy()], 6);
+			else if (dir === 1) tween(oldCam, ["x", "y"], [innerWidth * 2, cy()], 6);
+			else if (dir === 2) tween(oldCam, ["x", "y"], [cx(), innerHeight * 2], 6);
+			else                tween(oldCam, ["x", "y"], [cx(), -2500], 6);
+			buildGallery(cam);
 		});
 		tween(oldCam.tar, ["x", "y"], [oldCam.tar.x + drift, oldCam.tar.y + drift], 1);
 	}
@@ -685,15 +688,18 @@
 	   build) as well as manual switches (switchCameras handles those) */
 	function buildGallery(cam) {
 		cam.build();
-		cam.z = 40; cam.r = 0; cam.tar.x = 0; cam.tar.y = 0;
-		focusedId = -1; pan = false;
-		const dir = Math.floor(Math.random() * 4);
-		if (dir === 0)      { cam.x = innerWidth * 2;  cam.y = cy(); }
-		else if (dir === 1) { cam.x = -2500;           cam.y = cy(); }
-		else if (dir === 2) { cam.x = cx();            cam.y = -2500; }
-		else                { cam.x = cx();            cam.y = innerHeight * 2; }
+		cam.z = 55; cam.r = 0; cam.x = cx(); cam.y = cy(); cam.tar.x = 0; cam.tar.y = 0;
+		focusedId = -1;
+		// each photo arrives on its own — random delay + duration = different speeds,
+		// so the wall assembles piece by piece rather than sliding in as one block
+		for (const i of cam.order) {
+			const p = cam.g.photos[i];
+			stopTween(p);
+			p._bp = 0;
+			tween(p, ["_bp"], [1], 0.55 + Math.random() * 0.95, "easeoutexpo", Math.random() * 1.7);
+		}
+		pan = true; panSpeed = 0.02;
 		dirty = true;
-		tween(cam, ["x", "y", "z"], [cx(), cy(), 55], 2.4, "easeoutcirc", 0, () => { pan = true; panSpeed = 0.02; });
 	}
 
 	/* boot — build gallery 1 but hold it off-frame; it flies in on Enter */
