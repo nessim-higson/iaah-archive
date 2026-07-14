@@ -14,3 +14,29 @@
 /sites/2004-refresh/new/work/tcm1.jpg /sites/2004-refresh/new/work/TCM1.jpg 301
 /sites/2004-refresh/new/work/tcm2.jpg /sites/2004-refresh/new/work/TCM2.jpg 301
 /sites/2004-refresh/new/work/tcm3.jpg /sites/2004-refresh/new/work/TCM3.jpg 301
+
+# Version shortcuts: type archive.iamalwayshungry.com/V1 (through /V7), either case
+/V1   /sites/2002-first/     302
+/v1   /sites/2002-first/     302
+/V1/  /sites/2002-first/     302
+/v1/  /sites/2002-first/     302
+/V2   /sites/2003-temp/      302
+/v2   /sites/2003-temp/      302
+/V2/  /sites/2003-temp/      302
+/v2/  /sites/2003-temp/      302
+/V3   /sites/2004-refresh/   302
+/v3   /sites/2004-refresh/   302
+/V3/  /sites/2004-refresh/   302
+/v3/  /sites/2004-refresh/   302
+/V4   /sites/2005-fall/      302
+/v4   /sites/2005-fall/      302
+/V4/  /sites/2005-fall/      302
+/v4/  /sites/2005-fall/      302
+/V5   /sites/v5/             302
+/v5   /sites/v5/             302
+/V5/  /sites/v5/             302
+/v5/  /sites/v5/             302
+/V7   /sites/v7/             302
+/v7   /sites/v7/             302
+/V7/  /sites/v7/             302
+/v7/  /sites/v7/             302
